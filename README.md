@@ -1,4 +1,4 @@
-## quick-start-base
+## quick-start-base [![](https://jitpack.io/v/appreciated/quick-start-base.svg)](https://jitpack.io/#appreciated/quick-start-base)
 ### Description
 >Plain Vaadin applications do not have normal web page navigation as they usually run on a single page, as all Ajax applications do. (https://vaadin.com/docs/-/part/framework/advanced/advanced-navigator.html)
 
