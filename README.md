@@ -1,4 +1,4 @@
-## vaadin-quickstart-base
+## quick-start-base
 ### Description
 >Plain Vaadin applications do not have normal web page navigation as they usually run on a single page, as all Ajax applications do. (https://vaadin.com/docs/-/part/framework/advanced/advanced-navigator.html)
 
