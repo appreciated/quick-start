@@ -2,17 +2,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<version>0.5</version>
-	<groupId>github.com.appreciated</groupId>
-	<artifactId>quick-start-base</artifactId>
+	<groupId>com.github.appreciated</groupId>
+        <artifactId>quick-start-base</artifactId>
+        <version>0.5</version>
 	<name>quick-start-base</name>
 	<packaging>jar</packaging>
-
   	<properties>
     		<maven.compiler.source>1.8</maven.compiler.source>
     		<maven.compiler.target>1.8</maven.compiler.target>
   	</properties>
-
 	<dependencies>
 		<!-- Versions for these are configured in the parent POM -->
 		<dependency>
