@@ -3,18 +3,17 @@ package com.github.appreciated.quickstart.base.navigation;
 import com.github.appreciated.quickstart.base.interfaces.LoginNavigable;
 import com.github.appreciated.quickstart.base.interfaces.Navigable;
 import com.github.appreciated.quickstart.base.interfaces.WebsiteNavigationInterface;
-import com.vaadin.ui.Button;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.AbstractMap;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by appreciated on 01.01.2017.
  */
-public abstract class WebsiteDefinition {
+public class WebsiteDefinition {
 
     private Class<? extends WebsiteNavigationInterface> defaultClass;
     private Class<? extends WebsiteNavigationInterface> mobileClass;
@@ -23,6 +22,10 @@ public abstract class WebsiteDefinition {
     private WebsiteNavigationInterface defaultView;
     private WebsiteNavigationInterface mobileView;
     private LoginNavigable loginNavigable;
+    private String title;
+    private List<AbstractMap.SimpleEntry<String, Boolean>> configuration = new ArrayList<>();
+    private List<Navigable> navigationElements = new ArrayList<>();
+    private Class<? extends Navigable> defaultPage;
 
     public WebsiteDefinition() {
     }
@@ -42,44 +45,29 @@ public abstract class WebsiteDefinition {
         this.loginClass = loginClass;
     }
 
-    public WebsiteDefinition withDesktop(Class<? extends WebsiteNavigationInterface> desktopClass) {
+    public WebsiteDefinition withDefaultDesign(Class<? extends WebsiteNavigationInterface> desktopClass) {
         this.defaultClass = desktopClass;
         return this;
     }
 
-    public WebsiteDefinition withMobile(Class<? extends WebsiteNavigationInterface> mobileClass) {
+    public WebsiteDefinition withMobileDesign(Class<? extends WebsiteNavigationInterface> mobileClass) {
         this.mobileClass = mobileClass;
         return this;
     }
 
-    public WebsiteDefinition withLogin(Class<? extends LoginNavigable> loginClass) {
+    public WebsiteDefinition withLoginDesign(Class<? extends LoginNavigable> loginClass) {
         this.loginClass = loginClass;
         return this;
     }
 
-    public abstract String getTitle();
-
-    public abstract List<AbstractMap.SimpleEntry<Button, Navigable>> getButtons();
-
-    public abstract List<AbstractMap.SimpleEntry<String, Boolean>> getConfiguration();
-
-    public AbstractMap.SimpleEntry<Button, Navigable> getButton(Button button, Navigable navigable) {
-        return new AbstractMap.SimpleEntry<Button, Navigable>(button, navigable);
+    public WebsiteDefinition withNavigation(Navigable navigable) {
+        navigationElements.add(navigable);
+        return this;
     }
 
-    public List<AbstractMap.SimpleEntry<Button, Navigable>> getButtons(AbstractMap.SimpleEntry<Button, Navigable>... buttons) {
-        return Arrays.asList(buttons);
+    public Class<? extends Navigable> getDefaultPage() {
+        return defaultPage;
     }
-
-    public AbstractMap.SimpleEntry<String, Boolean> getConfiguration(String key, boolean value) {
-        return new AbstractMap.SimpleEntry<String, Boolean>(key, new Boolean(value));
-    }
-
-    public List<AbstractMap.SimpleEntry<String, Boolean>> getConfigurations(AbstractMap.SimpleEntry<String, Boolean>... properties) {
-        return Arrays.asList(properties);
-    }
-
-    public abstract Class<? extends Navigable> getStartNavigable();
 
     public WebsiteNavigationInterface getDefaultView() {
         return defaultView;
@@ -123,8 +111,36 @@ public abstract class WebsiteDefinition {
             e.printStackTrace();
         } catch (InvocationTargetException e) {
             e.getCause().printStackTrace();
-            //e.printStackTrace();
+            e.printStackTrace();
         }
         return null;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public WebsiteDefinition withDefaultPage(Class<? extends Navigable> defaultPage) {
+        this.defaultPage = defaultPage;
+        return this;
+    }
+
+    public WebsiteDefinition withTitle(String title) {
+        this.title = title;
+        return this;
+    }
+
+    public WebsiteDefinition withConfiguration(String key, boolean value) {
+        configuration.add(new AbstractMap.SimpleEntry<String, Boolean>(key, new Boolean(value)));
+        return this;
+    }
+
+    public List<AbstractMap.SimpleEntry<String, Boolean>> getConfiguration() {
+        return configuration;
+        //return Arrays.asList(properties);
+    }
+
+    public List<Navigable> getNavigationElements() {
+        return navigationElements;
     }
 }

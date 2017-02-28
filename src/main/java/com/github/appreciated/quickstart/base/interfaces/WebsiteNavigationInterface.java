@@ -12,7 +12,7 @@ public interface WebsiteNavigationInterface {
 
     public WebsiteNavigator getNavigation();
 
-    public default WebsiteDefinition getConfiguration(){
+    public default WebsiteDefinition getDefinition(){
        return  ((WebsiteUI)UI.getCurrent()).getWebsiteDefinition();
     };
 
