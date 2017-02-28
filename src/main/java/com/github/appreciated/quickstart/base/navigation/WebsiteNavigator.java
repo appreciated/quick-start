@@ -1,26 +1,25 @@
 package com.github.appreciated.quickstart.base.navigation;
 
-import com.github.appreciated.quickstart.base.components.DownloadButton;
-import com.github.appreciated.quickstart.base.components.UploadButton;
 import com.github.appreciated.quickstart.base.container.NavigablePagerView;
 import com.github.appreciated.quickstart.base.container.NavigationContainerView;
 import com.github.appreciated.quickstart.base.interfaces.*;
-import com.vaadin.server.FontAwesome;
-import com.vaadin.server.Resource;
+import com.vaadin.navigator.Navigator;
 import com.vaadin.ui.*;
 
 import javax.xml.ws.Holder;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.*;
+import java.util.AbstractMap;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by appreciated on 10.12.2016.
  * <p>
  * <p>
- * The Navigation stores the instances of all the elements the were already called once and allows the programmer to only use one method
+ * The WebsiteNavigator stores the instances of all the elements the were already called once and allows the programmer to only use one method
  */
-public class Navigation {
+public class WebsiteNavigator extends Navigator {
 
     private final Component navigatorView;
     private final boolean isMobile;
@@ -44,13 +43,13 @@ public class Navigation {
      * @param contextButtonContainer
      * @param smallContextButtonContainer
      */
-    public Navigation(Component navigatorView, Button contextButton, HorizontalLayout holder, AbstractComponentContainer contextButtonContainer, AbstractComponentContainer smallContextButtonContainer) {
+    public WebsiteNavigator(Component navigatorView, Button contextButton, HorizontalLayout holder, AbstractComponentContainer contextButtonContainer, AbstractComponentContainer smallContextButtonContainer) {
         this.contextButton = contextButton;
         this.holder = holder;
         this.navigatorView = navigatorView;
         this.contextButtonContainer = contextButtonContainer;
         this.smallContextButtonContainer = smallContextButtonContainer;
-        isMobile = NavigationUI.isMobile();
+        isMobile = WebsiteUI.isMobile();
     }
 
     public void addNavigation(Button tab, Navigable navigation) {
@@ -59,14 +58,7 @@ public class Navigation {
     }
 
     public void navigateTo(Component tab, Navigable navigableComponent) {
-        if (navigableComponent instanceof ContextNavigable) {
-            initContextButtons((ContextNavigable) navigableComponent);
-        } else {
-            setStyle(contextButtonContainer, "display-none", true);
-            setStyle(smallContextButtonContainer, "display-none", true);
-        }
-
-        if (currentTab != tab) {
+         if (currentTab != tab) {
             refreshTab(tab);
             if (navigableComponent instanceof PagerNavigable) {
                 navigateTo((PagerNavigable) navigableComponent);
@@ -76,55 +68,6 @@ public class Navigation {
                 navigateTo(navigableComponent);
             }
         }
-    }
-
-    private void initContextButtons(ContextNavigable navigable) {
-        smallContextButtonContainer.removeAllComponents();
-        List<Action> contextIcons = navigable.getContextIcons();
-        List<HashMap.SimpleEntry<Resource, Component>> generatedButtons = new ArrayList<>();
-
-        if (contextIcons.size() > 1) {
-            this.isExpandButton = true;
-            contextButton.setIcon(FontAwesome.ELLIPSIS_V);
-            contextIcons.stream().forEach(action -> {
-                Component buttonComponent = null;
-                switch (action.getActionType()) {
-                    case DOWNLOAD:
-                        buttonComponent = new DownloadButton(action);
-                        ((DownloadButton) buttonComponent).addClickListener(clickEvent -> navigable.onContextButtonClicked(action.getResource()));
-                        break;
-                    case BUTTON:
-                        Button button = new Button(action.getResource());
-                        button.addClickListener(clickEvent -> navigable.onContextButtonClicked(action.getResource()));
-                        button.addStyleName("small-context-button");
-                        buttonComponent = button;
-                        break;
-                    case UPLOAD:
-                        buttonComponent = new UploadButton(action);
-                        break;
-                }
-                smallContextButtonContainer.addComponent(buttonComponent);
-                generatedButtons.add(new AbstractMap.SimpleEntry<>(action.getResource(), buttonComponent));
-            });
-        } else {
-            this.isExpandButton = false;
-            contextButton.setIcon(contextIcons.get(0).getResource());
-            generatedButtons.add(new AbstractMap.SimpleEntry<>(contextIcons.get(0).getResource(), contextButton));
-        }
-        setStyle(contextButtonContainer, "display-none", false);
-
-        if (clickListener != null) {
-            contextButton.removeClickListener(clickListener);
-        }
-        clickListener = (Button.ClickListener) clickEvent -> {
-            if (smallContextButtonContainer != null && !isExpandButton) {
-                contextButtonListener.onContextButtonClick(contextButton.getIcon());
-            } else if (isExpandButton) {
-                toggleStyle(smallContextButtonContainer, "display-none");
-            }
-        };
-        contextButton.addClickListener(clickListener);
-        navigable.generatedButtons(generatedButtons);
     }
 
     public void refreshTab(Component tab) {
@@ -189,11 +132,11 @@ public class Navigation {
     }
 
     public static void next() {
-        ((NavigationUI) UI.getCurrent()).getNavigation().nextPagerView();
+        ((WebsiteUI) UI.getCurrent()).getNavigation().nextPagerView();
     }
 
     public static void last() {
-        ((NavigationUI) UI.getCurrent()).getNavigation().lastPagerView();
+        ((WebsiteUI) UI.getCurrent()).getNavigation().lastPagerView();
     }
 
     public void nextPagerView() {

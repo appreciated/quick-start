@@ -5,7 +5,7 @@ import com.github.appreciated.quickstart.base.interfaces.ContainerdNavigable;
 import com.github.appreciated.quickstart.base.interfaces.Navigable;
 import com.github.appreciated.quickstart.base.interfaces.PagerNavigable;
 import com.github.appreciated.quickstart.base.listeners.LayoutLeftClickListener;
-import com.vaadin.shared.ui.label.ContentMode;
+import com.vaadin.shared.ui.ContentMode;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;

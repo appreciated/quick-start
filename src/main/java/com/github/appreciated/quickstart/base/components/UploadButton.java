@@ -20,7 +20,7 @@ public class UploadButton extends AbsoluteLayout  {
         Upload upload = new Upload();
         upload.setSizeFull();
         upload.addStyleName("transparent");
-        upload.setImmediate(true);
+        upload.setImmediateMode(true);
         upload.setButtonCaption(action.getName());
         action.getUpload().createUploadButton(upload);
         addComponents(button, upload);
