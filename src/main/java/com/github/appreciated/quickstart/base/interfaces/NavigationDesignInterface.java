@@ -1,10 +1,13 @@
 package com.github.appreciated.quickstart.base.interfaces;
 
+import com.github.appreciated.quickstart.base.navigation.Action;
 import com.github.appreciated.quickstart.base.navigation.WebsiteDescriptor;
 import com.github.appreciated.quickstart.base.navigation.WebsiteNavigator;
 import com.github.appreciated.quickstart.base.navigation.WebsiteUI;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.UI;
+
+import java.util.List;
 
 /**
  * Created by appreciated on 10.12.2016.
@@ -20,4 +23,8 @@ public interface NavigationDesignInterface extends Component {
     public void disableLogout();
 
     public void setCurrentContainerLabel(String label);
+
+    public void setCurrentActions(ContextNavigable actions);
+
+    public void setCurrentSearchNavigable(SearchNavigable navigable);
 }

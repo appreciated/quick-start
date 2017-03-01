@@ -1,6 +1,7 @@
 package com.github.appreciated.quickstart.base.components;
 
 import com.github.appreciated.quickstart.base.navigation.Action;
+import com.github.appreciated.quickstart.base.navigation.WebsiteUI;
 import com.vaadin.ui.AbsoluteLayout;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Upload;
@@ -11,7 +12,7 @@ import com.vaadin.ui.Upload;
 public class UploadButton extends AbsoluteLayout  {
 
     public UploadButton(Action action){
-        addStyleName("small-context-button");
+        addStyleName( WebsiteUI.isMobile() ? "mobile-context-button" : "tab");
         setWidth("50px");
         setHeight("50px");
         Button button = new Button();

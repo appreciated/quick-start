@@ -21,4 +21,9 @@ public interface Navigable extends Component {
         Description annotation = this.getClass().getAnnotation(Description.class);
         return resourceHolder.value;
     }
+
+    default void setNavigationIcon(Resource resource) {
+        resourceHolder.value = resource;
+    }
+
 }

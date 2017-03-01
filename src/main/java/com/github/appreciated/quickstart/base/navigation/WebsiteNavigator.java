@@ -23,15 +23,12 @@ public class WebsiteNavigator extends Navigator {
 
     private final NavigationDesignInterface navigatorView;
     private final boolean isMobile;
-    private ContextButtonClickListener contextButtonListener;
     private MenuBar.MenuItem currentTab = null;
     private HorizontalLayout holder = null;
 
     Map<Class<? extends Navigable>, Map.Entry<Navigable, MenuBar.MenuItem>> navigationElements = new HashMap<>();
     private Component currentComponent;
     private OnNavigateListener listener;
-    private boolean isExpandButton = false;
-    private Button.ClickListener clickListener;
 
     /**
      * @param navigatorView The Component in which the User can navigate
@@ -47,20 +44,22 @@ public class WebsiteNavigator extends Navigator {
         navigationElements.put(navigation.getClass(), new AbstractMap.SimpleEntry<>(navigation, item));
         item.setCommand(menuItem -> {
             navigateTo(item, navigation);
-            navigatorView.setCurrentContainerLabel(navigation.getNavigationName());
         });
     }
 
     public void navigateTo(MenuBar.MenuItem item, Navigable navigableComponent) {
         if (currentTab != item) {
             refreshTab(item);
-            if (navigableComponent instanceof PagerNavigable) {
-                navigateTo((PagerNavigable) navigableComponent);
-            } else if (navigableComponent instanceof ContaineredNavigable) {
-                navigateTo((ContaineredNavigable) navigableComponent);
-            } else {
-                navigateTo(navigableComponent);
-            }
+        }
+        navigatorView.setCurrentSearchNavigable(navigableComponent instanceof SearchNavigable ? (SearchNavigable) navigableComponent : null);
+        navigatorView.setCurrentActions(navigableComponent instanceof ContextNavigable ? (ContextNavigable) navigableComponent : null);
+        navigatorView.setCurrentContainerLabel(navigableComponent.getNavigationName());
+        if (navigableComponent instanceof PagerNavigable) {
+            navigateTo((PagerNavigable) navigableComponent);
+        } else if (navigableComponent instanceof ContaineredNavigable) {
+            navigateTo((ContaineredNavigable) navigableComponent);
+        } else {
+            navigateTo(navigableComponent);
         }
     }
 

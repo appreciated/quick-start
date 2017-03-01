@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by appreciated on 11.12.2016.
  */
-public interface ContextNavigable {
+public interface ContextNavigable extends Navigable {
 
 
     /**
@@ -17,7 +17,7 @@ public interface ContextNavigable {
      *
      * @return
      */
-    public List<Action> getContextIcons();
+    public List<Action> getContextActions();
 
     public void onContextButtonClicked(Resource resource);
 
