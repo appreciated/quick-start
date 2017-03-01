@@ -59,7 +59,6 @@ public class NavigablePagerView extends NavigationPagerDesign {
         if (navigable instanceof ContaineredNavigable) {
             NavigationContainerDesign container = new NavigationContainerDesign();
             container.content.addComponent(navigable);
-            container.container_title.setVisible(false);
             content.removeAllComponents();
             content.addComponent(container);
         } else {

@@ -23,14 +23,11 @@ public class WebsiteNavigator extends Navigator {
 
     private final Component navigatorView;
     private final boolean isMobile;
-    private AbstractComponentContainer contextButtonContainer;
-    private AbstractComponentContainer smallContextButtonContainer;
     private ContextButtonClickListener contextButtonListener;
-    private Component currentTab = null;
-    private Button contextButton = null;
+    private MenuBar.MenuItem currentTab = null;
     private HorizontalLayout holder = null;
 
-    Map<Class<? extends Navigable>, Map.Entry<Navigable, Component>> navigationElements = new HashMap<>();
+    Map<Class<? extends Navigable>, Map.Entry<Navigable, MenuBar.MenuItem>> navigationElements = new HashMap<>();
     private Component currentComponent;
     private OnNavigateListener listener;
     private boolean isExpandButton = false;
@@ -38,28 +35,22 @@ public class WebsiteNavigator extends Navigator {
 
     /**
      * @param navigatorView               The Component in which the User can navigate
-     * @param contextButton               The Button Component which holds the main
      * @param holder
-     * @param contextButtonContainer
-     * @param smallContextButtonContainer
      */
-    public WebsiteNavigator(Component navigatorView, Button contextButton, HorizontalLayout holder, AbstractComponentContainer contextButtonContainer, AbstractComponentContainer smallContextButtonContainer) {
-        this.contextButton = contextButton;
+    public WebsiteNavigator(Component navigatorView,  HorizontalLayout holder) {
         this.holder = holder;
         this.navigatorView = navigatorView;
-        this.contextButtonContainer = contextButtonContainer;
-        this.smallContextButtonContainer = smallContextButtonContainer;
         isMobile = WebsiteUI.isMobile();
     }
 
-    public void addNavigation(Button tab, Navigable navigation) {
-        navigationElements.put(navigation.getClass(), new AbstractMap.SimpleEntry<>(navigation, tab));
-        tab.addClickListener(event -> navigateTo(tab, navigation));
+    public void addNavigation(MenuBar.MenuItem item, Navigable navigation) {
+        navigationElements.put(navigation.getClass(), new AbstractMap.SimpleEntry<>(navigation, item));
+        item.setCommand(menuItem -> navigateTo(item, navigation));
     }
 
-    public void navigateTo(Component tab, Navigable navigableComponent) {
-         if (currentTab != tab) {
-            refreshTab(tab);
+    public void navigateTo(MenuBar.MenuItem item, Navigable navigableComponent) {
+        if (currentTab != item) {
+            refreshTab(item);
             if (navigableComponent instanceof PagerNavigable) {
                 navigateTo((PagerNavigable) navigableComponent);
             } else if (navigableComponent instanceof ContaineredNavigable) {
@@ -70,22 +61,20 @@ public class WebsiteNavigator extends Navigator {
         }
     }
 
-    public void refreshTab(Component tab) {
+    public void refreshTab(MenuBar.MenuItem item) {
         String style = isMobile ? "mobile-tab-active" : "tab-active";
-
-        if (tab != null) {
-            tab.addStyleName(style);
+        if (item != null) {
+            item.setStyleName(style);
             if (currentTab != null) {
-                currentTab.removeStyleName(style);
+                currentTab.setStyleName(style);
             }
-            currentTab = tab;
+            currentTab = item;
         }
     }
 
     public void navigateTo(ContaineredNavigable component) {
         NavigationContainerView container = new NavigationContainerView();
         container.getContentHolder().addComponent(component);
-        container.getLabelHolder().setVisible(false);
         addComponent(container);
     }
 
@@ -104,7 +93,7 @@ public class WebsiteNavigator extends Navigator {
         currentComponent = component;
         holder.addComponent(currentComponent);
         holder.setSizeFull();
-        holder.setComponentAlignment(currentComponent,Alignment.MIDDLE_CENTER);
+        holder.setComponentAlignment(currentComponent, Alignment.MIDDLE_CENTER);
     }
 
     public void navigateTo(Class<? extends Navigable> classKey) {

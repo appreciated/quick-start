@@ -8,12 +8,6 @@ import com.vaadin.ui.Label;
  */
 public class NavigationContainerView extends NavigationContainerDesign {
 
-    public Label getContainerLabel() {
-        return container_title;
-    }
-    public HorizontalLayout getLabelHolder() {
-        return labelHolder;
-    }
     public HorizontalLayout getContentHolder() {
         return content;
     }

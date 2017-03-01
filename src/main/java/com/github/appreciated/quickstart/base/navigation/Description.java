@@ -1,5 +1,8 @@
 package com.github.appreciated.quickstart.base.navigation;
 
+import com.vaadin.icons.VaadinIcons;
+import com.vaadin.server.Resource;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 

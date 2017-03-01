@@ -2,7 +2,7 @@ package com.github.appreciated.quickstart.base.navigation;
 
 import com.github.appreciated.quickstart.base.interfaces.LoginNavigable;
 import com.github.appreciated.quickstart.base.interfaces.Navigable;
-import com.github.appreciated.quickstart.base.interfaces.WebsiteNavigationInterface;
+import com.github.appreciated.quickstart.base.interfaces.NavigationDesignInterface;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -15,12 +15,12 @@ import java.util.List;
  */
 public class WebsiteDescriptor {
 
-    private Class<? extends WebsiteNavigationInterface> defaultClass;
-    private Class<? extends WebsiteNavigationInterface> mobileClass;
+    private Class<? extends NavigationDesignInterface> defaultClass;
+    private Class<? extends NavigationDesignInterface> mobileClass;
     private Class<? extends LoginNavigable> loginClass;
 
-    private WebsiteNavigationInterface defaultView;
-    private WebsiteNavigationInterface mobileView;
+    private NavigationDesignInterface defaultView;
+    private NavigationDesignInterface mobileView;
     private LoginNavigable loginNavigable;
     private String title;
     private List<AbstractMap.SimpleEntry<String, Boolean>> configuration = new ArrayList<>();
@@ -30,27 +30,27 @@ public class WebsiteDescriptor {
     public WebsiteDescriptor() {
     }
 
-    public WebsiteDescriptor(Class<? extends WebsiteNavigationInterface> defaultClass) {
+    public WebsiteDescriptor(Class<? extends NavigationDesignInterface> defaultClass) {
         this.defaultClass = defaultClass;
     }
 
-    public WebsiteDescriptor(Class<? extends WebsiteNavigationInterface> defaultClass, Class<? extends WebsiteNavigationInterface> mobileClass) {
+    public WebsiteDescriptor(Class<? extends NavigationDesignInterface> defaultClass, Class<? extends NavigationDesignInterface> mobileClass) {
         this.defaultClass = defaultClass;
         this.mobileClass = mobileClass;
     }
 
-    public WebsiteDescriptor(Class<? extends WebsiteNavigationInterface> defaultClass, Class<? extends WebsiteNavigationInterface> mobileClass, Class<? extends LoginNavigable> loginClass) {
+    public WebsiteDescriptor(Class<? extends NavigationDesignInterface> defaultClass, Class<? extends NavigationDesignInterface> mobileClass, Class<? extends LoginNavigable> loginClass) {
         this.defaultClass = defaultClass;
         this.mobileClass = mobileClass;
         this.loginClass = loginClass;
     }
 
-    public WebsiteDescriptor withDefaultDesign(Class<? extends WebsiteNavigationInterface> desktopClass) {
+    public WebsiteDescriptor withDefaultDesign(Class<? extends NavigationDesignInterface> desktopClass) {
         this.defaultClass = desktopClass;
         return this;
     }
 
-    public WebsiteDescriptor withMobileDesign(Class<? extends WebsiteNavigationInterface> mobileClass) {
+    public WebsiteDescriptor withMobileDesign(Class<? extends NavigationDesignInterface> mobileClass) {
         this.mobileClass = mobileClass;
         return this;
     }
@@ -69,19 +69,19 @@ public class WebsiteDescriptor {
         return defaultPage;
     }
 
-    public WebsiteNavigationInterface getDefaultView() {
+    public NavigationDesignInterface getDefaultView() {
         return defaultView;
     }
 
-    public void setDefaultView(WebsiteNavigationInterface defaultView) {
+    public void setDefaultView(NavigationDesignInterface defaultView) {
         this.defaultView = defaultView;
     }
 
-    public WebsiteNavigationInterface getMobileView() {
+    public NavigationDesignInterface getMobileView() {
         return mobileView;
     }
 
-    public void setMobileView(WebsiteNavigationInterface mobileView) {
+    public void setMobileView(NavigationDesignInterface mobileView) {
         this.mobileView = mobileView;
     }
 
@@ -94,8 +94,8 @@ public class WebsiteDescriptor {
     }
 
     public void instanciateClasses() {
-        defaultView = (WebsiteNavigationInterface) createInstance(defaultClass);
-        mobileView = (WebsiteNavigationInterface) createInstance(mobileClass);
+        defaultView = (NavigationDesignInterface) createInstance(defaultClass);
+        mobileView = (NavigationDesignInterface) createInstance(mobileClass);
         loginNavigable = (LoginNavigable) createInstance(loginClass);
     }
 

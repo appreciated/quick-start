@@ -8,7 +8,7 @@ import com.vaadin.ui.UI;
 /**
  * Created by appreciated on 10.12.2016.
  */
-public interface WebsiteNavigationInterface {
+public interface NavigationDesignInterface {
 
     public WebsiteNavigator getNavigation();
 

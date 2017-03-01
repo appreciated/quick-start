@@ -4,7 +4,7 @@ package com.github.appreciated.quickstart.base.navigation;
 import com.github.appreciated.quickstart.base.exception.InvalidWebsiteDefinitionException;
 import com.github.appreciated.quickstart.base.interfaces.LoginNavigable;
 import com.github.appreciated.quickstart.base.interfaces.Navigable;
-import com.github.appreciated.quickstart.base.interfaces.WebsiteNavigationInterface;
+import com.github.appreciated.quickstart.base.interfaces.NavigationDesignInterface;
 import com.vaadin.annotations.Push;
 import com.vaadin.annotations.Viewport;
 import com.vaadin.server.VaadinRequest;
@@ -18,9 +18,9 @@ import com.vaadin.ui.UI;
 @Viewport("user-scalable=no,initial-scale=1.0")
 public abstract class WebsiteUI extends UI {
 
-    private WebsiteNavigationInterface navigation;
-    private WebsiteNavigationInterface mobileNavigationView;
-    private WebsiteNavigationInterface defaultNavigationView;
+    private NavigationDesignInterface navigation;
+    private NavigationDesignInterface mobileNavigationView;
+    private NavigationDesignInterface defaultNavigationView;
     private LoginNavigable loginNavigable;
     private WebsiteDescriptor websiteDescriptor;
 
@@ -74,7 +74,7 @@ public abstract class WebsiteUI extends UI {
         return get().navigation.getNavigation();
     }
 
-    public static WebsiteNavigationInterface getNavigationView() {
+    public static NavigationDesignInterface getNavigationView() {
         return get().navigation;
     }
 
@@ -87,11 +87,11 @@ public abstract class WebsiteUI extends UI {
         return browser.isAndroid() || browser.isIOS() || browser.isWindowsPhone();
     }
 
-    public void setMobileNavigationView(WebsiteNavigationInterface mobileNavigationView) {
+    public void setMobileNavigationView(NavigationDesignInterface mobileNavigationView) {
         this.mobileNavigationView = mobileNavigationView;
     }
 
-    public void setDefaultNavigationView(WebsiteNavigationInterface defaultNavigationView) {
+    public void setDefaultNavigationView(NavigationDesignInterface defaultNavigationView) {
         this.defaultNavigationView = defaultNavigationView;
     }
 
