@@ -12,7 +12,7 @@ public class QuickNotification {
         show(message, message, com.vaadin.ui.Notification.Type.TRAY_NOTIFICATION);
     }
 
-    public static void showMessageHumanized(String title, String message) {
+    public static void showMessage(String title, String message) {
         show(title, message, Notification.Type.HUMANIZED_MESSAGE);
     }
 

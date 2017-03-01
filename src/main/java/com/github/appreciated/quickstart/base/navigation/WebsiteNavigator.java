@@ -21,7 +21,7 @@ import java.util.Map;
  */
 public class WebsiteNavigator extends Navigator {
 
-    private final Component navigatorView;
+    private final NavigationDesignInterface navigatorView;
     private final boolean isMobile;
     private ContextButtonClickListener contextButtonListener;
     private MenuBar.MenuItem currentTab = null;
@@ -34,10 +34,10 @@ public class WebsiteNavigator extends Navigator {
     private Button.ClickListener clickListener;
 
     /**
-     * @param navigatorView               The Component in which the User can navigate
+     * @param navigatorView The Component in which the User can navigate
      * @param holder
      */
-    public WebsiteNavigator(Component navigatorView,  HorizontalLayout holder) {
+    public WebsiteNavigator(NavigationDesignInterface navigatorView, HorizontalLayout holder) {
         this.holder = holder;
         this.navigatorView = navigatorView;
         isMobile = WebsiteUI.isMobile();
@@ -45,7 +45,10 @@ public class WebsiteNavigator extends Navigator {
 
     public void addNavigation(MenuBar.MenuItem item, Navigable navigation) {
         navigationElements.put(navigation.getClass(), new AbstractMap.SimpleEntry<>(navigation, item));
-        item.setCommand(menuItem -> navigateTo(item, navigation));
+        item.setCommand(menuItem -> {
+            navigateTo(item, navigation);
+            navigatorView.setCurrentContainerLabel(navigation.getNavigationName());
+        });
     }
 
     public void navigateTo(MenuBar.MenuItem item, Navigable navigableComponent) {
@@ -118,7 +121,7 @@ public class WebsiteNavigator extends Navigator {
         }
     }
 
-    public Component getNavigatorView() {
+    public NavigationDesignInterface getNavigationDesign() {
         return navigatorView;
     }
 

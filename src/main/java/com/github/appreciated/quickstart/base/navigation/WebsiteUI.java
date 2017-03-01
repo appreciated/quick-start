@@ -63,7 +63,7 @@ public abstract class WebsiteUI extends UI {
         if (loginNavigable == null) {
             navigation.disableLogout();
         }
-        setContent(navigation.getNavigation().getNavigatorView());
+        setContent(navigation.getNavigation().getNavigationDesign());
     }
 
     public static WebsiteUI get() {

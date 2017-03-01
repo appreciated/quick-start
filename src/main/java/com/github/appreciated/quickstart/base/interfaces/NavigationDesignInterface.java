@@ -3,12 +3,13 @@ package com.github.appreciated.quickstart.base.interfaces;
 import com.github.appreciated.quickstart.base.navigation.WebsiteDescriptor;
 import com.github.appreciated.quickstart.base.navigation.WebsiteNavigator;
 import com.github.appreciated.quickstart.base.navigation.WebsiteUI;
+import com.vaadin.ui.Component;
 import com.vaadin.ui.UI;
 
 /**
  * Created by appreciated on 10.12.2016.
  */
-public interface NavigationDesignInterface {
+public interface NavigationDesignInterface extends Component {
 
     public WebsiteNavigator getNavigation();
 
@@ -18,4 +19,5 @@ public interface NavigationDesignInterface {
 
     public void disableLogout();
 
+    public void setCurrentContainerLabel(String label);
 }
