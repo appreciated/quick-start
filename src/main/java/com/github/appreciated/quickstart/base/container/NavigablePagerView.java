@@ -1,7 +1,7 @@
 package com.github.appreciated.quickstart.base.container;
 
 
-import com.github.appreciated.quickstart.base.interfaces.ContainerdNavigable;
+import com.github.appreciated.quickstart.base.interfaces.ContaineredNavigable;
 import com.github.appreciated.quickstart.base.interfaces.Navigable;
 import com.github.appreciated.quickstart.base.interfaces.PagerNavigable;
 import com.github.appreciated.quickstart.base.listeners.LayoutLeftClickListener;
@@ -56,7 +56,7 @@ public class NavigablePagerView extends NavigationPagerDesign {
         int index = navigables.indexOf(navigable);
         last.setVisible(index != 0);
         next.setVisible(index != navigables.size() - 1);
-        if (navigable instanceof ContainerdNavigable) {
+        if (navigable instanceof ContaineredNavigable) {
             NavigationContainerDesign container = new NavigationContainerDesign();
             container.content.addComponent(navigable);
             container.container_title.setVisible(false);

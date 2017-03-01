@@ -22,17 +22,17 @@ public abstract class WebsiteUI extends UI {
     private WebsiteNavigationInterface mobileNavigationView;
     private WebsiteNavigationInterface defaultNavigationView;
     private LoginNavigable loginNavigable;
-    private WebsiteDefinition websiteDefinition;
+    private WebsiteDescriptor websiteDescriptor;
 
     @Override
     public void init(VaadinRequest vaadinRequest) {
-        websiteDefinition = initWebsiteDefinition();
+        websiteDescriptor = initWebsiteDefinition();
         setLocale(vaadinRequest.getLocale());
-        getPage().setTitle(websiteDefinition.getTitle());
-        websiteDefinition.instanciateClasses();
-        defaultNavigationView = websiteDefinition.getDefaultView();
-        mobileNavigationView = websiteDefinition.getMobileView();
-        loginNavigable = websiteDefinition.getLoginNavigable();
+        getPage().setTitle(websiteDescriptor.getTitle());
+        websiteDescriptor.instanciateClasses();
+        defaultNavigationView = websiteDescriptor.getDefaultView();
+        mobileNavigationView = websiteDescriptor.getMobileView();
+        loginNavigable = websiteDescriptor.getLoginNavigable();
         try {
             if (loginNavigable != null && !loginNavigable.getAccessControl().isUserSignedIn()) {
                 loginNavigable.setAuthenticationListener(() -> {
@@ -99,9 +99,9 @@ public abstract class WebsiteUI extends UI {
         this.loginNavigable = loginNavigable;
     }
 
-    public abstract WebsiteDefinition initWebsiteDefinition();
+    public abstract WebsiteDescriptor initWebsiteDefinition();
 
-    public WebsiteDefinition getWebsiteDefinition() {
-        return websiteDefinition;
+    public WebsiteDescriptor getWebsiteDescriptor() {
+        return websiteDescriptor;
     }
 }

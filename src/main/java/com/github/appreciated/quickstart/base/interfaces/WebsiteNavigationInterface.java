@@ -1,6 +1,6 @@
 package com.github.appreciated.quickstart.base.interfaces;
 
-import com.github.appreciated.quickstart.base.navigation.WebsiteDefinition;
+import com.github.appreciated.quickstart.base.navigation.WebsiteDescriptor;
 import com.github.appreciated.quickstart.base.navigation.WebsiteNavigator;
 import com.github.appreciated.quickstart.base.navigation.WebsiteUI;
 import com.vaadin.ui.UI;
@@ -12,8 +12,8 @@ public interface WebsiteNavigationInterface {
 
     public WebsiteNavigator getNavigation();
 
-    public default WebsiteDefinition getDefinition(){
-       return  ((WebsiteUI)UI.getCurrent()).getWebsiteDefinition();
+    public default WebsiteDescriptor getDefinition(){
+       return  ((WebsiteUI)UI.getCurrent()).getWebsiteDescriptor();
     };
 
     public void disableLogout();

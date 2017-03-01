@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Created by appreciated on 01.01.2017.
  */
-public class WebsiteDefinition {
+public class WebsiteDescriptor {
 
     private Class<? extends WebsiteNavigationInterface> defaultClass;
     private Class<? extends WebsiteNavigationInterface> mobileClass;
@@ -27,40 +27,40 @@ public class WebsiteDefinition {
     private List<Navigable> navigationElements = new ArrayList<>();
     private Class<? extends Navigable> defaultPage;
 
-    public WebsiteDefinition() {
+    public WebsiteDescriptor() {
     }
 
-    public WebsiteDefinition(Class<? extends WebsiteNavigationInterface> defaultClass) {
+    public WebsiteDescriptor(Class<? extends WebsiteNavigationInterface> defaultClass) {
         this.defaultClass = defaultClass;
     }
 
-    public WebsiteDefinition(Class<? extends WebsiteNavigationInterface> defaultClass, Class<? extends WebsiteNavigationInterface> mobileClass) {
+    public WebsiteDescriptor(Class<? extends WebsiteNavigationInterface> defaultClass, Class<? extends WebsiteNavigationInterface> mobileClass) {
         this.defaultClass = defaultClass;
         this.mobileClass = mobileClass;
     }
 
-    public WebsiteDefinition(Class<? extends WebsiteNavigationInterface> defaultClass, Class<? extends WebsiteNavigationInterface> mobileClass, Class<? extends LoginNavigable> loginClass) {
+    public WebsiteDescriptor(Class<? extends WebsiteNavigationInterface> defaultClass, Class<? extends WebsiteNavigationInterface> mobileClass, Class<? extends LoginNavigable> loginClass) {
         this.defaultClass = defaultClass;
         this.mobileClass = mobileClass;
         this.loginClass = loginClass;
     }
 
-    public WebsiteDefinition withDefaultDesign(Class<? extends WebsiteNavigationInterface> desktopClass) {
+    public WebsiteDescriptor withDefaultDesign(Class<? extends WebsiteNavigationInterface> desktopClass) {
         this.defaultClass = desktopClass;
         return this;
     }
 
-    public WebsiteDefinition withMobileDesign(Class<? extends WebsiteNavigationInterface> mobileClass) {
+    public WebsiteDescriptor withMobileDesign(Class<? extends WebsiteNavigationInterface> mobileClass) {
         this.mobileClass = mobileClass;
         return this;
     }
 
-    public WebsiteDefinition withLoginDesign(Class<? extends LoginNavigable> loginClass) {
+    public WebsiteDescriptor withLoginDesign(Class<? extends LoginNavigable> loginClass) {
         this.loginClass = loginClass;
         return this;
     }
 
-    public WebsiteDefinition withNavigation(Navigable navigable) {
+    public WebsiteDescriptor withNavigation(Navigable navigable) {
         navigationElements.add(navigable);
         return this;
     }
@@ -120,17 +120,17 @@ public class WebsiteDefinition {
         return title;
     }
 
-    public WebsiteDefinition withDefaultPage(Class<? extends Navigable> defaultPage) {
+    public WebsiteDescriptor withDefaultPage(Class<? extends Navigable> defaultPage) {
         this.defaultPage = defaultPage;
         return this;
     }
 
-    public WebsiteDefinition withTitle(String title) {
+    public WebsiteDescriptor withTitle(String title) {
         this.title = title;
         return this;
     }
 
-    public WebsiteDefinition withConfiguration(String key, boolean value) {
+    public WebsiteDescriptor withConfiguration(String key, boolean value) {
         configuration.add(new AbstractMap.SimpleEntry<String, Boolean>(key, new Boolean(value)));
         return this;
     }

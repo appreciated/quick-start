@@ -62,8 +62,8 @@ public class WebsiteNavigator extends Navigator {
             refreshTab(tab);
             if (navigableComponent instanceof PagerNavigable) {
                 navigateTo((PagerNavigable) navigableComponent);
-            } else if (navigableComponent instanceof ContainerdNavigable) {
-                navigateTo((ContainerdNavigable) navigableComponent);
+            } else if (navigableComponent instanceof ContaineredNavigable) {
+                navigateTo((ContaineredNavigable) navigableComponent);
             } else {
                 navigateTo(navigableComponent);
             }
@@ -82,7 +82,7 @@ public class WebsiteNavigator extends Navigator {
         }
     }
 
-    public void navigateTo(ContainerdNavigable component) {
+    public void navigateTo(ContaineredNavigable component) {
         NavigationContainerView container = new NavigationContainerView();
         container.getContentHolder().addComponent(component);
         container.getLabelHolder().setVisible(false);
@@ -103,6 +103,8 @@ public class WebsiteNavigator extends Navigator {
         onNavigate();
         currentComponent = component;
         holder.addComponent(currentComponent);
+        holder.setSizeFull();
+        holder.setComponentAlignment(currentComponent,Alignment.MIDDLE_CENTER);
     }
 
     public void navigateTo(Class<? extends Navigable> classKey) {
