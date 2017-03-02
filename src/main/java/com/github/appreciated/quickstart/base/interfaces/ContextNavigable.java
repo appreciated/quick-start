@@ -1,9 +1,6 @@
 package com.github.appreciated.quickstart.base.interfaces;
-import com.github.appreciated.quickstart.base.navigation.Action;
-import com.vaadin.server.Resource;
-import com.vaadin.ui.Component;
+import com.github.appreciated.quickstart.base.navigation.actions.Action;
 
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -19,8 +16,5 @@ public interface ContextNavigable extends Navigable {
      */
     public List<Action> getContextActions();
 
-    public void onContextButtonClicked(Resource resource);
-
-    public void generatedButtons(List<HashMap.SimpleEntry<Resource, Component>> buttons);
 
 }

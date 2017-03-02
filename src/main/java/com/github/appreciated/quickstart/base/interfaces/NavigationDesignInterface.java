@@ -1,13 +1,10 @@
 package com.github.appreciated.quickstart.base.interfaces;
 
-import com.github.appreciated.quickstart.base.navigation.Action;
 import com.github.appreciated.quickstart.base.navigation.WebsiteDescriptor;
 import com.github.appreciated.quickstart.base.navigation.WebsiteNavigator;
 import com.github.appreciated.quickstart.base.navigation.WebsiteUI;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.UI;
-
-import java.util.List;
 
 /**
  * Created by appreciated on 10.12.2016.

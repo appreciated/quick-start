@@ -1,30 +1,26 @@
 package com.github.appreciated.quickstart.base.components;
 
-import com.github.appreciated.quickstart.base.navigation.Action;
+import com.github.appreciated.quickstart.base.navigation.actions.Action;
 import com.github.appreciated.quickstart.base.navigation.WebsiteUI;
-import com.vaadin.ui.AbsoluteLayout;
-import com.vaadin.ui.Button;
+import com.github.appreciated.quickstart.base.navigation.actions.UploadAction;
+import com.vaadin.server.Resource;
 import com.vaadin.ui.Upload;
 
 /**
  * Created by appreciated on 26.12.2016.
  */
-public class UploadButton extends AbsoluteLayout  {
+public class UploadButton extends Upload  {
 
-    public UploadButton(Action action){
-        addStyleName( WebsiteUI.isMobile() ? "mobile-context-button" : "tab");
-        setWidth("50px");
-        setHeight("50px");
-        Button button = new Button();
-        button.setSizeFull();
-        button.setIcon(action.getResource());
-        Upload upload = new Upload();
-        upload.setSizeFull();
-        upload.addStyleName("transparent");
-        upload.setImmediateMode(true);
-        upload.setButtonCaption(action.getName());
-        action.getUpload().createUploadButton(upload);
-        addComponents(button, upload);
+    public UploadButton(String caption, Resource icon, UploadAction action){
+        if (WebsiteUI.isMobile()) {
+            addStyleName("mobile-context-button");
+        } else {
+            addStyleName("tab");
+        }
+        setImmediateMode(true);
+        setIcon(icon);
+        setButtonCaption(action.getName());
+        action.getUpload().createUploadButton(this);
     }
 
 }
