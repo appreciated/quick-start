@@ -1,7 +1,6 @@
 package com.github.appreciated.quickstart.base.components;
 
-import com.github.appreciated.quickstart.base.navigation.actions.Action;
-import com.github.appreciated.quickstart.base.navigation.WebsiteUI;
+import com.github.appreciated.quickstart.base.navigation.WebApplicationUI;
 import com.github.appreciated.quickstart.base.navigation.actions.UploadAction;
 import com.vaadin.server.Resource;
 import com.vaadin.ui.Upload;
@@ -12,7 +11,7 @@ import com.vaadin.ui.Upload;
 public class UploadButton extends Upload  {
 
     public UploadButton(String caption, Resource icon, UploadAction action){
-        if (WebsiteUI.isMobile()) {
+        if (WebApplicationUI.isMobile()) {
             addStyleName("mobile-context-button");
         } else {
             addStyleName("tab");

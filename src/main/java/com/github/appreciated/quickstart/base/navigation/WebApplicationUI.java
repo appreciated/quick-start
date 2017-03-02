@@ -16,17 +16,17 @@ import com.vaadin.ui.UI;
  */
 @Push
 @Viewport("user-scalable=no,initial-scale=1.0")
-public abstract class WebsiteUI extends UI {
+public abstract class WebApplicationUI extends UI {
 
     private NavigationDesignInterface navigation;
     private NavigationDesignInterface mobileNavigationView;
     private NavigationDesignInterface defaultNavigationView;
     private LoginNavigable loginNavigable;
-    private WebsiteDescriptor websiteDescriptor;
+    private WebAppDescription websiteDescriptor;
 
     @Override
     public void init(VaadinRequest vaadinRequest) {
-        websiteDescriptor = initWebsiteDefinition();
+        websiteDescriptor = initWebAppDescription();
         setLocale(vaadinRequest.getLocale());
         getPage().setTitle(websiteDescriptor.getTitle());
         websiteDescriptor.instanciateClasses();
@@ -66,8 +66,8 @@ public abstract class WebsiteUI extends UI {
         setContent(navigation.getNavigation().getNavigationDesign());
     }
 
-    public static WebsiteUI get() {
-        return (WebsiteUI) UI.getCurrent();
+    public static WebApplicationUI get() {
+        return (WebApplicationUI) UI.getCurrent();
     }
 
     public static WebsiteNavigator getNavigation() {
@@ -99,9 +99,9 @@ public abstract class WebsiteUI extends UI {
         this.loginNavigable = loginNavigable;
     }
 
-    public abstract WebsiteDescriptor initWebsiteDefinition();
+    public abstract WebAppDescription initWebAppDescription();
 
-    public WebsiteDescriptor getWebsiteDescriptor() {
+    public WebAppDescription getWebsiteDescriptor() {
         return websiteDescriptor;
     }
 }

@@ -37,7 +37,7 @@ public class WebsiteNavigator extends Navigator {
     public WebsiteNavigator(NavigationDesignInterface navigatorView, HorizontalLayout holder) {
         this.holder = holder;
         this.navigatorView = navigatorView;
-        isMobile = WebsiteUI.isMobile();
+        isMobile = WebApplicationUI.isMobile();
     }
 
     public void addNavigation(MenuBar.MenuItem item, Navigable navigation) {
@@ -49,32 +49,21 @@ public class WebsiteNavigator extends Navigator {
 
     public void navigateTo(MenuBar.MenuItem item, Navigable navigableComponent) {
         if (currentTab != item) {
-            refreshTab(item);
-        }
-        navigatorView.setCurrentSearchNavigable(navigableComponent instanceof SearchNavigable ? (SearchNavigable) navigableComponent : null);
-        navigatorView.setCurrentActions(navigableComponent instanceof ContextNavigable ? (ContextNavigable) navigableComponent : null);
-        navigatorView.setCurrentContainerLabel(navigableComponent.getNavigationName());
-        if (navigableComponent instanceof PagerNavigable) {
-            navigateTo((PagerNavigable) navigableComponent);
-        } else if (navigableComponent instanceof ContaineredNavigable) {
-            navigateTo((ContaineredNavigable) navigableComponent);
-        } else {
-            navigateTo(navigableComponent);
-        }
-    }
-
-    public void refreshTab(MenuBar.MenuItem item) {
-        String style = isMobile ? "mobile-tab-active" : "tab-active";
-        if (item != null) {
-            item.setStyleName(style);
-            if (currentTab != null) {
-                currentTab.setStyleName(style);
-            }
             currentTab = item;
+            navigatorView.setCurrentSearchNavigable(navigableComponent instanceof SearchNavigable ? (SearchNavigable) navigableComponent : null);
+            navigatorView.setCurrentActions(navigableComponent instanceof ContextNavigable ? (ContextNavigable) navigableComponent : null);
+            navigatorView.setCurrentContainerLabel(navigableComponent.getNavigationName());
+            if (navigableComponent instanceof PagerNavigable) {
+                navigateTo((PagerNavigable) navigableComponent);
+            } else if (navigableComponent instanceof ContainerNavigable) {
+                navigateTo((ContainerNavigable) navigableComponent);
+            } else {
+                navigateTo(navigableComponent);
+            }
         }
     }
 
-    public void navigateTo(ContaineredNavigable component) {
+    public void navigateTo(ContainerNavigable component) {
         NavigationContainerView container = new NavigationContainerView();
         container.getContentHolder().addComponent(component);
         addComponent(container);
@@ -125,11 +114,11 @@ public class WebsiteNavigator extends Navigator {
     }
 
     public static void next() {
-        ((WebsiteUI) UI.getCurrent()).getNavigation().nextPagerView();
+        ((WebApplicationUI) UI.getCurrent()).getNavigation().nextPagerView();
     }
 
     public static void last() {
-        ((WebsiteUI) UI.getCurrent()).getNavigation().lastPagerView();
+        ((WebApplicationUI) UI.getCurrent()).getNavigation().lastPagerView();
     }
 
     public void nextPagerView() {

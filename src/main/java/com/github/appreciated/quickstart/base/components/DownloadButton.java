@@ -1,6 +1,6 @@
 package com.github.appreciated.quickstart.base.components;
 
-import com.github.appreciated.quickstart.base.navigation.WebsiteUI;
+import com.github.appreciated.quickstart.base.navigation.WebApplicationUI;
 import com.github.appreciated.quickstart.base.navigation.actions.DownloadAction;
 import com.vaadin.server.Resource;
 import com.vaadin.ui.Button;
@@ -12,7 +12,7 @@ public class DownloadButton extends Button {
 
     public DownloadButton(String caption, Resource icon, DownloadAction action) {
         setIcon(action.getResource());
-        if (WebsiteUI.isMobile()) {
+        if (WebApplicationUI.isMobile()) {
             addStyleName("mobile-context-button");
         } else {
             addStyleName("tab");

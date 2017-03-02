@@ -1,8 +1,8 @@
 package com.github.appreciated.quickstart.base.interfaces;
 
-import com.github.appreciated.quickstart.base.navigation.WebsiteDescriptor;
+import com.github.appreciated.quickstart.base.navigation.WebAppDescription;
 import com.github.appreciated.quickstart.base.navigation.WebsiteNavigator;
-import com.github.appreciated.quickstart.base.navigation.WebsiteUI;
+import com.github.appreciated.quickstart.base.navigation.WebApplicationUI;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.UI;
 
@@ -13,8 +13,8 @@ public interface NavigationDesignInterface extends Component {
 
     public WebsiteNavigator getNavigation();
 
-    public default WebsiteDescriptor getDefinition(){
-       return  ((WebsiteUI)UI.getCurrent()).getWebsiteDescriptor();
+    public default WebAppDescription getDefinition(){
+       return  ((WebApplicationUI)UI.getCurrent()).getWebsiteDescriptor();
     };
 
     public void disableLogout();
