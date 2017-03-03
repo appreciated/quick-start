@@ -100,18 +100,26 @@ public class WebAppDescription {
     }
 
     private Object createInstance(Class instanceClass) {
-        try {
-            Constructor<?> constructor = instanceClass.getConstructor();
-            return constructor.newInstance();
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.getCause().printStackTrace();
-            e.printStackTrace();
+        if (instanceClass != null) {
+            try {
+                Constructor<?> constructor = instanceClass.getConstructor();
+                return constructor.newInstance();
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+                e.getCause().printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+                e.getCause().printStackTrace();
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+                e.getCause().printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.getCause().printStackTrace();
+                e.printStackTrace();
+            } catch (NullPointerException e) {
+                e.getCause().printStackTrace();
+                e.printStackTrace();
+            }
         }
         return null;
     }
