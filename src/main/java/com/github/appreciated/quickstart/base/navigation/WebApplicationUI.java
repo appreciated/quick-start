@@ -25,7 +25,7 @@ public abstract class WebApplicationUI extends UI {
     private WebAppDescription websiteDescriptor;
 
     @Override
-    public void init(VaadinRequest vaadinRequest) {
+    public final void init(VaadinRequest vaadinRequest) {
         websiteDescriptor = initWebAppDescription();
         setLocale(vaadinRequest.getLocale());
         getPage().setTitle(websiteDescriptor.getTitle());
