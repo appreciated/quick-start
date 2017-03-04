@@ -5,24 +5,27 @@ This Project is still under construction! You can already use it for Experiments
 ### Description
 >Plain Vaadin applications do not have normal web page navigation as they usually run on a single page, as all Ajax applications do. (https://vaadin.com/docs/-/part/framework/advanced/advanced-navigator.html)
 
-This Library is for Webapplication which aim to look like modern Webapplications with Navigation.  
+This Library is for Webapplications which aim to look like modern Websites with Navigation.  
 It comes with a component which allows to archive something similar to the Vaadin Navigator Component (https://vaadin.com/docs/-/part/framework/advanced/advanced-navigator.html). 
 
-The purpose of this Library is to quickly create Applications which require one of the following functionalitiys:
+The purpose is to quickly create Applications which require one or multiple of the following functionalitiys:
 - Multipage Website
 - "Responsive" Navigation (Desktop and/or Mobile)
 - Login
-- Registration
-- Access Management 
+- Registration (Not yet there)
+- Access Management (A basic example is given which you can ofcourse replace by your own code)
 
-The Advantage is when using this Library is that different Designs allow you to change the look very easily, while keeping the functionality. If the given Designs are not sufficent just fork one of mine and create your own, you might even consider to give me a link then I can list it here. 
+The Library won't do any database "stuff" you will still need to write the user data back to the database.  
 
-This Library only offers the API how the Designs are to be implemented and some basic Functionality for the Navigation functionality (which also might be replaced by the Navigator) for the Designs, the Designs allow you to archive total different looks.
+Also when using this Library properly you can change the look of your application very easily by just switching the design, while keeping all of your functionality in place. 
+If the given Designs are not sufficent just fork one of mine and create your own, you might even consider to give me a link then I can list it here. 
+
+This Library offers a API for the Designs which then decide on their own how to represent the data you give them on instanciation.
+Also this Library comes with some basic functionality for the navigation (might be replaced by the Navigator).
 
 Design Overview:
 
 Additionally it comes with:  
-- CircularProgressBar (Will be moved to a seperate Repositiory)
 - Component Printing (This function is limited to the visible html)
 - Simplyfied (but more abstracted) Dialog (Window) Creation (with Negative / Postive Buttons)
 - Component Pager (Might be replaced by https://vaadin.com/directory#!addon/carousel, because it offers mature especially swiping)
@@ -34,4 +37,7 @@ Also is comes with more abstracted versions of the following components
 
 ### Description
 How do I use it? 
+Take a look on the quick-start-material Project.
+
+...
 
