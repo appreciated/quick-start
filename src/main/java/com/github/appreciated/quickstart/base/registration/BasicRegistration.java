@@ -7,8 +7,9 @@ import com.github.appreciated.quickstart.base.navigation.RegistrationControl;
  */
 public class BasicRegistration implements RegistrationControl<BasicUser> {
     @Override
-    public void onUserDataEntered(BasicUser user) {
-        System.out.println("onUserDataEntered:" + user.toString());
+    public RegistrationResult checkUserRegistrationValidity(BasicUser user) {
+        System.out.println("checkUserRegistrationValidity:" + user.toString());
+        return new RegistrationResult(true);
     }
 
     public BasicUser getUser() {

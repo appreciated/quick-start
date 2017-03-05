@@ -3,6 +3,7 @@ package com.github.appreciated.quickstart.base.navigation;
 
 import com.github.appreciated.quickstart.base.registration.Field;
 import com.github.appreciated.quickstart.base.registration.FieldPropertySet;
+import com.github.appreciated.quickstart.base.registration.RegistrationResult;
 import com.vaadin.data.Binder;
 import com.vaadin.data.HasValue;
 import com.vaadin.ui.TextField;
@@ -17,7 +18,7 @@ import java.util.stream.Stream;
  * Created by Johannes on 05.03.2017.
  */
 public interface RegistrationControl<T> {
-    void onUserDataEntered(T user);
+    RegistrationResult checkUserRegistrationValidity(T user);
 
     default Stream<java.lang.reflect.Field> getAttributes() {
         return Arrays.stream(getUser().getClass().getDeclaredFields()).filter(field -> field.isAnnotationPresent(Field.class));
