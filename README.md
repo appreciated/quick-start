@@ -35,10 +35,3 @@ Additionally it comes with:
 Also is comes with more abstracted versions of the following components
 - Upload 
 - Download
-
-### Description
-How do I use it? 
-Take a look on the quick-start-material Project.
-
-...
-
