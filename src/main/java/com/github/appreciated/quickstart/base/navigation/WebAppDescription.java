@@ -1,8 +1,10 @@
 package com.github.appreciated.quickstart.base.navigation;
 
+import com.github.appreciated.quickstart.base.exception.InvalidWebsiteDefinitionException;
 import com.github.appreciated.quickstart.base.interfaces.LoginNavigable;
 import com.github.appreciated.quickstart.base.interfaces.Navigable;
 import com.github.appreciated.quickstart.base.interfaces.NavigationDesignInterface;
+import com.github.appreciated.quickstart.base.login.AccessControl;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -27,6 +29,8 @@ public class WebAppDescription {
     private List<AbstractMap.SimpleEntry<String, Boolean>> configuration = new ArrayList<>();
     private List<Navigable> navigationElements = new ArrayList<>();
     private Class<? extends Navigable> defaultPage;
+    private AccessControl accessControl;
+    private RegistrationControl registrationControl;
 
     public WebAppDescription() {
     }
@@ -46,7 +50,7 @@ public class WebAppDescription {
         this.loginClass = loginClass;
     }
 
-    public WebAppDescription withDefaultDesign(Class<? extends NavigationDesignInterface> desktopClass) {
+    public WebAppDescription withDesign(Class<? extends NavigationDesignInterface> desktopClass) {
         this.defaultClass = desktopClass;
         return this;
     }
@@ -56,7 +60,7 @@ public class WebAppDescription {
         return this;
     }
 
-    public WebAppDescription withLoginDesign(Class<? extends LoginNavigable> loginClass) {
+    public WebAppDescription withLoginPage(Class<? extends LoginNavigable> loginClass) {
         this.loginClass = loginClass;
         return this;
     }
@@ -94,31 +98,22 @@ public class WebAppDescription {
         this.loginNavigable = loginNavigable;
     }
 
-    public void instanciateClasses() {
-        defaultView = (NavigationDesignInterface) createInstance(defaultClass);
-        mobileView = (NavigationDesignInterface) createInstance(mobileClass);
-        loginNavigable = (LoginNavigable) createInstance(loginClass);
-    }
-
     private Object createInstance(Class instanceClass) {
         if (instanceClass != null) {
             try {
-                Constructor<?> constructor = instanceClass.getConstructor();
-                return constructor.newInstance();
+                return instanceClass.getConstructor().newInstance();
             } catch (NoSuchMethodException e) {
                 e.printStackTrace();
                 e.getCause().printStackTrace();
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
                 e.getCause().printStackTrace();
-            } catch (InstantiationException e) {
-                e.printStackTrace();
-                e.getCause().printStackTrace();
             } catch (InvocationTargetException e) {
                 e.getCause().printStackTrace();
                 e.printStackTrace();
+            } catch (InstantiationException e) {
+                e.printStackTrace();
             } catch (NullPointerException e) {
-                e.getCause().printStackTrace();
                 e.printStackTrace();
             }
         }
@@ -146,10 +141,49 @@ public class WebAppDescription {
 
     public Stream<AbstractMap.SimpleEntry<String, Boolean>> getConfiguration() {
         return configuration.stream();
-        //return Arrays.asList(properties);
     }
 
     public Stream<Navigable> getNavigationElements() {
         return navigationElements.stream();
+    }
+
+    public WebAppDescription withLogin(AccessControl accessControl) {
+        this.accessControl = accessControl;
+        return this;
+    }
+
+    public AccessControl getAccessControl() {
+        return accessControl;
+    }
+
+    public WebAppDescription init() throws InvalidWebsiteDefinitionException {
+        if (defaultClass == null) {
+            throw new InvalidWebsiteDefinitionException("No defaultNavigationView defined!");
+        }
+        if (defaultPage == null) {
+            throw new InvalidWebsiteDefinitionException("No defaultPage defined!");
+        }
+        if (loginClass != null && accessControl == null) {
+            throw new InvalidWebsiteDefinitionException("No accessControl defined!");
+        }
+        if (title == null) {
+            throw new InvalidWebsiteDefinitionException("No title defined!");
+        }
+        defaultView = (NavigationDesignInterface) createInstance(defaultClass);
+        mobileView = (NavigationDesignInterface) createInstance(mobileClass);
+        loginNavigable = (LoginNavigable) createInstance(loginClass);
+        loginNavigable.initTitle(title);
+        loginNavigable.initRegistrationControl(registrationControl);
+        loginNavigable.initWithAccessControl(accessControl);
+        return this;
+    }
+
+    public WebAppDescription withRegistration(RegistrationControl registrationControl) {
+        this.registrationControl = registrationControl;
+        return this;
+    }
+
+    public RegistrationControl getRegistrationControl() {
+        return registrationControl;
     }
 }

@@ -40,7 +40,7 @@ public class WebsiteNavigator extends Navigator {
         this.holder = navigatorView.getHolder();
         this.navigatorView = navigatorView;
         isMobile = WebApplicationUI.isMobile();
-        navigateTo(WebApplicationUI.get().getWebsiteDescription().getDefaultPage());
+        navigateTo(WebApplicationUI.getWebsiteDescription().getDefaultPage());
     }
 
     public ActionListener addNavigation(Navigable navigation) {

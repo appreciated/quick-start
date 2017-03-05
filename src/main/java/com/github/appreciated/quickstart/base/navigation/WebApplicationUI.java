@@ -27,22 +27,15 @@ public abstract class WebApplicationUI extends UI {
 
     @Override
     public final void init(VaadinRequest vaadinRequest) {
-        websiteDescription = initWebAppDescription();
-        setLocale(vaadinRequest.getLocale());
-        getPage().setTitle(websiteDescription.getTitle());
-        websiteDescription.instanciateClasses();
-        defaultNavigationView = websiteDescription.getDefaultView();
-        mobileNavigationView = websiteDescription.getMobileView();
-        loginNavigable = websiteDescription.getLoginNavigable();
         try {
-            if (loginNavigable != null && !loginNavigable.getAccessControl().isUserSignedIn()) {
-                loginNavigable.setAuthenticationListener(() -> {
-                    try {
-                        showMainView();
-                    } catch (InvalidWebsiteDefinitionException e) {
-                        e.printStackTrace();
-                    }
-                });
+            websiteDescription = initWebAppDescription().init();
+            setLocale(vaadinRequest.getLocale());
+            getPage().setTitle(websiteDescription.getTitle());
+            defaultNavigationView = websiteDescription.getDefaultView();
+            mobileNavigationView = websiteDescription.getMobileView();
+            loginNavigable = websiteDescription.getLoginNavigable();
+            if (loginNavigable != null && !getWebsiteDescription().getAccessControl().isUserSignedIn()) {
+                loginNavigable.setAuthenticationListener(() -> showMainView());
                 setContent(loginNavigable);
             } else {
                 showMainView();
@@ -52,10 +45,7 @@ public abstract class WebApplicationUI extends UI {
         }
     }
 
-    protected void showMainView() throws InvalidWebsiteDefinitionException {
-        if (defaultNavigationView == null) {
-            throw new InvalidWebsiteDefinitionException("No defaultNavigationView defined");
-        }
+    protected void showMainView() {
         if (mobileNavigationView != null && isMobile()) {
             navigation = mobileNavigationView;
         } else {
@@ -107,7 +97,7 @@ public abstract class WebApplicationUI extends UI {
 
     public abstract WebAppDescription initWebAppDescription();
 
-    public WebAppDescription getWebsiteDescription() {
-        return websiteDescription;
+    public static WebAppDescription getWebsiteDescription() {
+        return get().websiteDescription;
     }
 }

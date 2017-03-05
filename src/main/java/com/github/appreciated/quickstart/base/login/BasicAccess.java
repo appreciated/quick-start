@@ -5,7 +5,7 @@ package com.github.appreciated.quickstart.base.login;
  * accepts any string as a password, and considers the user "admin" as the only
  * administrator.
  */
-public class BasicAccessControl implements AccessControl {
+public class BasicAccess implements AccessControl {
 
     @Override
     public boolean signIn(String username, String password) {
