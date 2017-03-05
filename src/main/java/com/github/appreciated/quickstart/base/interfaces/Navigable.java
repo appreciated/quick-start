@@ -1,6 +1,7 @@
 package com.github.appreciated.quickstart.base.interfaces;
 
 import com.github.appreciated.quickstart.base.navigation.Description;
+import com.github.appreciated.quickstart.base.navigation.WebApplicationUI;
 import com.vaadin.server.Resource;
 import com.vaadin.ui.Component;
 
@@ -26,4 +27,7 @@ public interface Navigable extends Component {
         resourceHolder.value = resource;
     }
 
+    default void navigateTo() {
+        WebApplicationUI.getNavigation().navigateTo(this);
+    }
 }

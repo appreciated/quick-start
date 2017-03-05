@@ -10,7 +10,7 @@ import com.vaadin.ui.Button;
  */
 public class DownloadButton extends Button {
 
-    public DownloadButton(String caption, Resource icon, DownloadAction action) {
+    public DownloadButton(DownloadAction action) {
         setIcon(action.getResource());
         if (WebApplicationUI.isMobile()) {
             addStyleName("mobile-context-button");
@@ -18,7 +18,7 @@ public class DownloadButton extends Button {
             addStyleName("tab");
         }
         action.getDownload().createDownloadButton(this);
-        setCaption(caption);
-        setIcon(icon);
+        setCaption(action.getName());
+        setIcon(action.getResource());
     }
 }

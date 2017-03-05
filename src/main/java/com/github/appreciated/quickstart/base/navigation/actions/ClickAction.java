@@ -27,4 +27,5 @@ public class ClickAction extends Action {
     public ActionListener getListener() {
         return listener;
     }
+
 }

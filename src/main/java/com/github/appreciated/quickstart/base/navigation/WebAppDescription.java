@@ -9,6 +9,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * Created by appreciated on 01.01.2017.
@@ -143,12 +144,12 @@ public class WebAppDescription {
         return this;
     }
 
-    public List<AbstractMap.SimpleEntry<String, Boolean>> getConfiguration() {
-        return configuration;
+    public Stream<AbstractMap.SimpleEntry<String, Boolean>> getConfiguration() {
+        return configuration.stream();
         //return Arrays.asList(properties);
     }
 
-    public List<Navigable> getNavigationElements() {
-        return navigationElements;
+    public Stream<Navigable> getNavigationElements() {
+        return navigationElements.stream();
     }
 }

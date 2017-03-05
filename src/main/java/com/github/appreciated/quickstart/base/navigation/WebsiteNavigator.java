@@ -4,12 +4,15 @@ import com.github.appreciated.quickstart.base.container.NavigablePagerView;
 import com.github.appreciated.quickstart.base.container.NavigationContainerView;
 import com.github.appreciated.quickstart.base.interfaces.*;
 import com.vaadin.navigator.Navigator;
-import com.vaadin.ui.*;
+import com.vaadin.ui.AbstractOrderedLayout;
+import com.vaadin.ui.Alignment;
+import com.vaadin.ui.Component;
+import com.vaadin.ui.UI;
 
 import javax.xml.ws.Holder;
+import java.awt.event.ActionListener;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.AbstractMap;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,33 +26,31 @@ public class WebsiteNavigator extends Navigator {
 
     private final NavigationDesignInterface navigatorView;
     private final boolean isMobile;
-    private MenuBar.MenuItem currentTab = null;
-    private HorizontalLayout holder = null;
+    private Navigable currentView = null;
+    private AbstractOrderedLayout holder = null;
 
-    Map<Class<? extends Navigable>, Map.Entry<Navigable, MenuBar.MenuItem>> navigationElements = new HashMap<>();
+    Map<Class<? extends Navigable>, Navigable> navigationElements = new HashMap<>();
     private Component currentComponent;
     private OnNavigateListener listener;
 
     /**
      * @param navigatorView The Component in which the User can navigate
-     * @param holder
      */
-    public WebsiteNavigator(NavigationDesignInterface navigatorView, HorizontalLayout holder) {
-        this.holder = holder;
+    public WebsiteNavigator(NavigationDesignInterface navigatorView) {
+        this.holder = navigatorView.getHolder();
         this.navigatorView = navigatorView;
         isMobile = WebApplicationUI.isMobile();
+        navigateTo(WebApplicationUI.get().getWebsiteDescription().getDefaultPage());
     }
 
-    public void addNavigation(MenuBar.MenuItem item, Navigable navigation) {
-        navigationElements.put(navigation.getClass(), new AbstractMap.SimpleEntry<>(navigation, item));
-        item.setCommand(menuItem -> {
-            navigateTo(item, navigation);
-        });
+    public ActionListener addNavigation(Navigable navigation) {
+        navigationElements.put(navigation.getClass(), navigation);
+        return e -> navigateTo(navigation);
     }
 
-    public void navigateTo(MenuBar.MenuItem item, Navigable navigableComponent) {
-        if (currentTab != item) {
-            currentTab = item;
+    public void navigateTo(Navigable navigableComponent) {
+        if (currentView != navigableComponent) {
+            currentView = navigableComponent;
             navigatorView.setCurrentSearchNavigable(navigableComponent instanceof SearchNavigable ? (SearchNavigable) navigableComponent : null);
             navigatorView.setCurrentActions(navigableComponent instanceof ContextNavigable ? (ContextNavigable) navigableComponent : null);
             navigatorView.setCurrentContainerLabel(navigableComponent.getNavigationName());
@@ -58,7 +59,7 @@ public class WebsiteNavigator extends Navigator {
             } else if (navigableComponent instanceof ContainerNavigable) {
                 navigateTo((ContainerNavigable) navigableComponent);
             } else {
-                navigateTo(navigableComponent);
+                addComponent(navigableComponent);
             }
         }
     }
@@ -74,10 +75,6 @@ public class WebsiteNavigator extends Navigator {
         addComponent(pager);
     }
 
-    public void navigateTo(Navigable component) {
-        addComponent(component);
-    }
-
     public void addComponent(Component component) {
         holder.removeAllComponents();
         onNavigate();
@@ -90,12 +87,12 @@ public class WebsiteNavigator extends Navigator {
     public void navigateTo(Class<? extends Navigable> classKey) {
         Holder<Boolean> found = new Holder<>(new Boolean(false));
         if (navigationElements.containsKey(classKey)) {
-            navigateTo(navigationElements.get(classKey).getValue(), navigationElements.get(classKey).getKey());
+            navigateTo(navigationElements.get(classKey));
         } else {
             try {
                 Constructor<? extends Navigable> constructor = classKey.getConstructor();
                 Navigable instance = constructor.newInstance();
-                navigationElements.put(instance.getClass(), new AbstractMap.SimpleEntry<>(instance, null));
+                navigationElements.put(instance.getClass(), instance);
                 navigateTo(instance);
             } catch (NoSuchMethodException e) {
                 e.printStackTrace();
@@ -143,19 +140,4 @@ public class WebsiteNavigator extends Navigator {
         }
     }
 
-    public static void toggleStyle(Component component, String style) {
-        if (component.getStyleName().contains(style)) {
-            component.removeStyleName(style);
-        } else {
-            component.addStyleName(style);
-        }
-    }
-
-    public static void setStyle(Component component, String style, boolean enabled) {
-        if (!enabled) {
-            component.removeStyleName(style);
-        } else {
-            component.addStyleName(style);
-        }
-    }
 }

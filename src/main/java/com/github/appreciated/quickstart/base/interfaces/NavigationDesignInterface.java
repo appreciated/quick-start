@@ -1,21 +1,33 @@
 package com.github.appreciated.quickstart.base.interfaces;
 
 import com.github.appreciated.quickstart.base.navigation.WebAppDescription;
-import com.github.appreciated.quickstart.base.navigation.WebsiteNavigator;
 import com.github.appreciated.quickstart.base.navigation.WebApplicationUI;
+import com.github.appreciated.quickstart.base.navigation.WebsiteNavigator;
+import com.vaadin.ui.AbstractOrderedLayout;
 import com.vaadin.ui.Component;
-import com.vaadin.ui.UI;
+
+import java.util.AbstractMap;
+import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * Created by appreciated on 10.12.2016.
  */
 public interface NavigationDesignInterface extends Component {
 
-    public WebsiteNavigator getNavigation();
+    public default WebAppDescription getWebAppDescription() {
+        return WebApplicationUI.get().getWebsiteDescription();
+    }
 
-    public default WebAppDescription getDefinition(){
-       return  ((WebApplicationUI)UI.getCurrent()).getWebsiteDescriptor();
-    };
+    public default void initWithConfiguration(Stream<AbstractMap.SimpleEntry<String, Boolean>> configurations) {}
+
+    public void initNavigationElements(Stream<Navigable> navigables);
+
+    public void initUserFunctionality(WebAppDescription description);
+
+    void initWithTitle(String title);
+
+    public AbstractOrderedLayout getHolder();
 
     public void disableLogout();
 
@@ -24,4 +36,6 @@ public interface NavigationDesignInterface extends Component {
     public void setCurrentActions(ContextNavigable actions);
 
     public void setCurrentSearchNavigable(SearchNavigable navigable);
+
+
 }

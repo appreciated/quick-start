@@ -22,17 +22,18 @@ public abstract class WebApplicationUI extends UI {
     private NavigationDesignInterface mobileNavigationView;
     private NavigationDesignInterface defaultNavigationView;
     private LoginNavigable loginNavigable;
-    private WebAppDescription websiteDescriptor;
+    private WebAppDescription websiteDescription;
+    private WebsiteNavigator navigator;
 
     @Override
     public final void init(VaadinRequest vaadinRequest) {
-        websiteDescriptor = initWebAppDescription();
+        websiteDescription = initWebAppDescription();
         setLocale(vaadinRequest.getLocale());
-        getPage().setTitle(websiteDescriptor.getTitle());
-        websiteDescriptor.instanciateClasses();
-        defaultNavigationView = websiteDescriptor.getDefaultView();
-        mobileNavigationView = websiteDescriptor.getMobileView();
-        loginNavigable = websiteDescriptor.getLoginNavigable();
+        getPage().setTitle(websiteDescription.getTitle());
+        websiteDescription.instanciateClasses();
+        defaultNavigationView = websiteDescription.getDefaultView();
+        mobileNavigationView = websiteDescription.getMobileView();
+        loginNavigable = websiteDescription.getLoginNavigable();
         try {
             if (loginNavigable != null && !loginNavigable.getAccessControl().isUserSignedIn()) {
                 loginNavigable.setAuthenticationListener(() -> {
@@ -63,7 +64,12 @@ public abstract class WebApplicationUI extends UI {
         if (loginNavigable == null) {
             navigation.disableLogout();
         }
-        setContent(navigation.getNavigation().getNavigationDesign());
+        navigation.initNavigationElements(getWebsiteDescription().getNavigationElements());
+        navigation.initUserFunctionality(getWebsiteDescription());
+        navigation.initWithTitle(getWebsiteDescription().getTitle());
+        navigation.initWithConfiguration(getWebsiteDescription().getConfiguration());
+        navigator = new WebsiteNavigator(navigation);
+        setContent(navigation);
     }
 
     public static WebApplicationUI get() {
@@ -71,7 +77,7 @@ public abstract class WebApplicationUI extends UI {
     }
 
     public static WebsiteNavigator getNavigation() {
-        return get().navigation.getNavigation();
+        return get().navigator;
     }
 
     public static NavigationDesignInterface getNavigationView() {
@@ -79,7 +85,7 @@ public abstract class WebApplicationUI extends UI {
     }
 
     public static void navigateTo(Class<? extends Navigable> navigable) {
-        get().navigation.getNavigation().navigateTo(navigable);
+        getNavigation().navigateTo(navigable);
     }
 
     public static boolean isMobile() {
@@ -101,7 +107,7 @@ public abstract class WebApplicationUI extends UI {
 
     public abstract WebAppDescription initWebAppDescription();
 
-    public WebAppDescription getWebsiteDescriptor() {
-        return websiteDescriptor;
+    public WebAppDescription getWebsiteDescription() {
+        return websiteDescription;
     }
 }

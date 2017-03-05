@@ -10,14 +10,14 @@ import com.vaadin.ui.Upload;
  */
 public class UploadButton extends Upload  {
 
-    public UploadButton(String caption, Resource icon, UploadAction action){
+    public UploadButton( UploadAction action){
         if (WebApplicationUI.isMobile()) {
             addStyleName("mobile-context-button");
         } else {
             addStyleName("tab");
         }
         setImmediateMode(true);
-        setIcon(icon);
+        setIcon(action.getResource());
         setButtonCaption(action.getName());
         action.getUpload().createUploadButton(this);
     }
