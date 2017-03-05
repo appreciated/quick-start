@@ -24,7 +24,7 @@ This Library offers a API for the Designs which then decide on their own how to 
 Also this Library comes with some basic functionality for the navigation (might be replaced by the Navigator).
 
 Currently availible Designs:
-* [Material Design (with Mobile Support)](https://github.com/appreciated/quick-start-material])
+* [Material Design (with Mobile Support)](https://github.com/appreciated/quick-start-material)
 
 Additionally it comes with:  
 - Component Printing (This function is limited to the visible html)
