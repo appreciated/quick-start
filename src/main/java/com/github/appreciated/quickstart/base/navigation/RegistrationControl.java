@@ -30,7 +30,9 @@ public interface RegistrationControl<T> {
         return fields.map(field -> {
             TextField textField = new TextField();
             textField.setData(field);
-            textField.setCaption(field.getAnnotation(Field.class).caption());
+            Field annotation = field.getAnnotation(Field.class);
+            textField.setCaption(annotation.caption());
+            textField.setRequiredIndicatorVisible(annotation.required());
             return new Pair<HasValue, java.lang.reflect.Field>(textField, field);
         }).collect(Collectors.toList());
     }
