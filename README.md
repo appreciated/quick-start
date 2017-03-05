@@ -12,18 +12,19 @@ The purpose is to quickly create Applications which require one or multiple of t
 - Multipage Website
 - "Responsive" Navigation (Desktop and/or Mobile)
 - Login
-- Registration (Not yet there)
+- Registration
 - Access Management (A basic example is given which you can ofcourse replace by your own code)
 
 The Library won't do any database "stuff" you will still need to write the user data back to the database.  
 
-Also when using this Library properly you can change the look of your application very easily by just switching the design, while keeping all of your functionality in place. 
+The Advantage is when using this Library you can strongly change the look of your application very easily by just switching the design class and the theme, while keeping all of your functionality in place. 
 If the given Designs are not sufficent just fork one of mine and create your own, you might even consider to give me a link then I can list it here. 
 
 This Library offers a API for the Designs which then decide on their own how to represent the data you give them on instanciation.
 Also this Library comes with some basic functionality for the navigation (might be replaced by the Navigator).
 
-Design Overview:
+Currently availible Designs:
+* [Material Design (with Mobile Support)](https://github.com/appreciated/quick-start-material])
 
 Additionally it comes with:  
 - Component Printing (This function is limited to the visible html)
