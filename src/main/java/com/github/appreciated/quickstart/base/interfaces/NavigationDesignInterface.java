@@ -17,8 +17,6 @@ public interface NavigationDesignInterface extends Component {
         return WebApplicationUI.get().getWebsiteDescription();
     }
 
-
-
     public default void initWithConfiguration(Stream<AbstractMap.SimpleEntry<String, Boolean>> configurations) {}
 
     public void initNavigationElements(Stream<Navigable> navigables);

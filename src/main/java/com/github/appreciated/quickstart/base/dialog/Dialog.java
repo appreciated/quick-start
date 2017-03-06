@@ -8,12 +8,10 @@ import com.vaadin.ui.*;
  */
 public abstract class Dialog {
 
-    private final Panel dialogContentPanel;
     private final VerticalLayout wrapper;
     private final Window dialog;
     private final VerticalLayout dialogContentWrapper;
     private HorizontalLayout buttonOrientationWrapper;
-    private HorizontalLayout componentWrapper;
     private HorizontalLayout buttonWrapper = null;
     private Alignment alignment = Alignment.MIDDLE_RIGHT;
 
@@ -28,11 +26,11 @@ public abstract class Dialog {
     public Dialog(String title, Component component, Button... buttons) {
         dialog = new Window(title);
         Button[] buttons1 = buttons;
-        componentWrapper = new HorizontalLayout(component);
+        HorizontalLayout componentWrapper = new HorizontalLayout(component);
         componentWrapper.setId("window-component-wrapper");
         wrapper = new VerticalLayout();
         dialogContentWrapper = new VerticalLayout(componentWrapper);
-        dialogContentPanel = new Panel(dialogContentWrapper);
+        Panel dialogContentPanel = new Panel(dialogContentWrapper);
         wrapper.addComponent(dialogContentPanel);
         if (buttons != null && buttons.length > 0) {
             initDialogButtons(buttons);

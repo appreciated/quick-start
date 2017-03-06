@@ -134,7 +134,7 @@ public class WebAppDescription {
     }
 
     public WebAppDescription withConfiguration(String key, boolean value) {
-        configuration.add(new AbstractMap.SimpleEntry<String, Boolean>(key, new Boolean(value)));
+        configuration.add(new AbstractMap.SimpleEntry<String, Boolean>(key, value));
         return this;
     }
 

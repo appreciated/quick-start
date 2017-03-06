@@ -13,7 +13,7 @@ public class BasicAccess implements AccessControl {
             return false;
 
         CurrentUser.set(username);
-        return (password.equals("Test1234!"));
+        return ("Test1234!".equals(password));
     }
 
     @Override
