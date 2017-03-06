@@ -25,11 +25,10 @@ import java.util.Map;
 public class WebsiteNavigator extends Navigator {
 
     private final NavigationDesignInterface navigatorView;
-    private final boolean isMobile;
     private Navigable currentView = null;
     private AbstractOrderedLayout holder = null;
 
-    Map<Class<? extends Navigable>, Navigable> navigationElements = new HashMap<>();
+    private Map<Class<? extends Navigable>, Navigable> navigationElements = new HashMap<>();
     private Component currentComponent;
     private OnNavigateListener listener;
 
@@ -39,7 +38,6 @@ public class WebsiteNavigator extends Navigator {
     public WebsiteNavigator(NavigationDesignInterface navigatorView) {
         this.holder = navigatorView.getHolder();
         this.navigatorView = navigatorView;
-        isMobile = WebApplicationUI.isMobile();
         navigateTo(WebApplicationUI.getWebsiteDescription().getDefaultPage());
     }
 
@@ -85,7 +83,6 @@ public class WebsiteNavigator extends Navigator {
     }
 
     public void navigateTo(Class<? extends Navigable> classKey) {
-        Holder<Boolean> found = new Holder<>(new Boolean(false));
         if (navigationElements.containsKey(classKey)) {
             navigateTo(navigationElements.get(classKey));
         } else {
