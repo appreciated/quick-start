@@ -1,12 +1,11 @@
 package com.github.appreciated.quickstart.base.navigation;
 
-import com.github.appreciated.quickstart.base.exception.InvalidWebsiteDefinitionException;
+import com.github.appreciated.quickstart.base.exception.InvalidWebDescriptionException;
 import com.github.appreciated.quickstart.base.interfaces.LoginNavigable;
 import com.github.appreciated.quickstart.base.interfaces.Navigable;
 import com.github.appreciated.quickstart.base.interfaces.NavigationDesignInterface;
 import com.github.appreciated.quickstart.base.login.AccessControl;
 
-import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.AbstractMap;
 import java.util.ArrayList;
@@ -156,25 +155,31 @@ public class WebAppDescription {
         return accessControl;
     }
 
-    public WebAppDescription init() throws InvalidWebsiteDefinitionException {
+    public WebAppDescription init() throws InvalidWebDescriptionException {
         if (defaultClass == null) {
-            throw new InvalidWebsiteDefinitionException("No defaultNavigationView defined!");
+            throw new InvalidWebDescriptionException("No defaultNavigationView defined!");
         }
         if (defaultPage == null) {
-            throw new InvalidWebsiteDefinitionException("No defaultPage defined!");
+            throw new InvalidWebDescriptionException("No defaultPage defined!");
         }
         if (loginClass != null && accessControl == null) {
-            throw new InvalidWebsiteDefinitionException("No accessControl defined!");
+            throw new InvalidWebDescriptionException("No accessControl defined!");
         }
         if (title == null) {
-            throw new InvalidWebsiteDefinitionException("No title defined!");
+            throw new InvalidWebDescriptionException("No title defined!");
         }
         defaultView = (NavigationDesignInterface) createInstance(defaultClass);
         mobileView = (NavigationDesignInterface) createInstance(mobileClass);
         loginNavigable = (LoginNavigable) createInstance(loginClass);
         loginNavigable.initTitle(title);
-        loginNavigable.initRegistrationControl(registrationControl);
-        loginNavigable.initWithAccessControl(accessControl);
+        if (accessControl != null) {
+            loginNavigable.initWithAccessControl(accessControl);
+            if (registrationControl == null) {
+                throw new InvalidWebDescriptionException("No registrationControl defined!");
+            } else {
+                loginNavigable.initRegistrationControl(registrationControl);
+            }
+        }
         return this;
     }
 

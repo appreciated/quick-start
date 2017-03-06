@@ -3,8 +3,8 @@ package com.github.appreciated.quickstart.base.exception;
 /**
  * Created by Johannes on 28.02.2017.
  */
-public class InvalidWebsiteDefinitionException extends Throwable {
-    public InvalidWebsiteDefinitionException(String s) {
+public class InvalidWebDescriptionException extends Throwable {
+    public InvalidWebDescriptionException(String s) {
         super(s);
     }
 }
