@@ -1,4 +1,4 @@
-## quick-start-base [![](https://jitpack.io/v/appreciated/quick-start-base.svg)](https://jitpack.io/#appreciated/quick-start-base)
+## quick-start-base [![](https://jitpack.io/v/appreciated/quick-start-base.svg)](https://jitpack.io/#appreciated/quick-start-base) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/d06002d719e84a238f653e7143dd2641)](https://www.codacy.com/app/appreciated/quick-start-base?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=appreciated/quick-start-base&amp;utm_campaign=Badge_Grade)
 
 This Project is still under construction! You can already use it for Experiments but be ready for extensive API changes even in minor versions.
 
