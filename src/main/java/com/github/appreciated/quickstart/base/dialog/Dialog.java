@@ -10,18 +10,16 @@ public abstract class Dialog {
 
     private final Panel dialogContentPanel;
     private final VerticalLayout wrapper;
-
-    public interface DialogListener {
-        void onClick(Window dialog);
-    }
-
     private final Window dialog;
-    private final Button[] buttons;
     private final VerticalLayout dialogContentWrapper;
     private HorizontalLayout buttonOrientationWrapper;
     private HorizontalLayout componentWrapper;
     private HorizontalLayout buttonWrapper = null;
     private Alignment alignment = Alignment.MIDDLE_RIGHT;
+
+    public interface DialogListener {
+        void onClick(Window dialog);
+    }
 
     public Dialog(String title, Component component) {
         this(title, component, null);
@@ -29,7 +27,7 @@ public abstract class Dialog {
 
     public Dialog(String title, Component component, Button... buttons) {
         dialog = new Window(title);
-        this.buttons = buttons;
+        Button[] buttons1 = buttons;
         componentWrapper = new HorizontalLayout(component);
         componentWrapper.setId("window-component-wrapper");
         wrapper = new VerticalLayout();
