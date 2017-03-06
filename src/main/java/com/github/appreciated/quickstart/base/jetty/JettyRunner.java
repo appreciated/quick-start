@@ -51,6 +51,10 @@ public class JettyRunner {
             e.printStackTrace();
         }
     }
+
+    public WebAppContext getContext() {
+        return context;
+    }
 }
 
 
