@@ -2,12 +2,10 @@ package com.github.appreciated.quickstart.base.interfaces;
 
 import com.github.appreciated.quickstart.base.navigation.WebAppDescription;
 import com.github.appreciated.quickstart.base.navigation.WebApplicationUI;
-import com.github.appreciated.quickstart.base.navigation.WebsiteNavigator;
 import com.vaadin.ui.AbstractOrderedLayout;
 import com.vaadin.ui.Component;
 
 import java.util.AbstractMap;
-import java.util.List;
 import java.util.stream.Stream;
 
 /**

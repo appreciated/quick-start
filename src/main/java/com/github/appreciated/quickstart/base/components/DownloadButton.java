@@ -2,7 +2,6 @@ package com.github.appreciated.quickstart.base.components;
 
 import com.github.appreciated.quickstart.base.navigation.WebApplicationUI;
 import com.github.appreciated.quickstart.base.navigation.actions.DownloadAction;
-import com.vaadin.server.Resource;
 import com.vaadin.ui.Button;
 
 /**
