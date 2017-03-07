@@ -16,11 +16,9 @@ import java.util.stream.Stream;
  * Created by appreciated on 01.01.2017.
  */
 public class WebAppDescription {
-
     private Class<? extends NavigationDesignInterface> defaultClass;
     private Class<? extends NavigationDesignInterface> mobileClass;
     private Class<? extends LoginNavigable> loginClass;
-
     private NavigationDesignInterface defaultView;
     private NavigationDesignInterface mobileView;
     private LoginNavigable loginNavigable;
@@ -30,6 +28,7 @@ public class WebAppDescription {
     private Class<? extends Navigable> defaultPage;
     private AccessControl accessControl;
     private RegistrationControl registrationControl;
+    private Navigation navigationDescription;
 
     public WebAppDescription() {
     }
@@ -64,9 +63,8 @@ public class WebAppDescription {
         return this;
     }
 
-    public WebAppDescription withNavigation(Navigable navigable) {
-        navigationElements.add(navigable);
-
+    public WebAppDescription withNavigation(Navigation navigationDescription) {
+        this.navigationDescription = navigationDescription;
         return this;
     }
 
@@ -160,22 +158,25 @@ public class WebAppDescription {
         if (defaultClass == null) {
             throw new InvalidWebDescriptionException("No defaultNavigationView defined!");
         }
-        if (defaultPage == null) {
-            throw new InvalidWebDescriptionException("No defaultPage defined!");
-        }
         if (loginClass != null && accessControl == null) {
             throw new InvalidWebDescriptionException("No accessControl defined!");
         }
         if (title == null) {
             throw new InvalidWebDescriptionException("No title defined!");
         }
-
         for (Navigable navigationElement : navigationElements) {
             if (navigationElement.getNavigationName() == null) {
                 throw new InvalidWebDescriptionException("No navigationName defined!");
             }
         }
+        if (navigationDescription.getNavigables().size() == 0) {
+            throw new InvalidWebDescriptionException("No navigation elements defined defined!");
+        }
+        if (defaultPage == null) {
+            defaultPage = navigationDescription.getNavigables().get(0).getClass();
+        }
 
+        this.navigationElements = navigationDescription.getNavigables();
         defaultView = (NavigationDesignInterface) createInstance(defaultClass);
         mobileView = (NavigationDesignInterface) createInstance(mobileClass);
         loginNavigable = (LoginNavigable) createInstance(loginClass);
@@ -199,4 +200,5 @@ public class WebAppDescription {
     public RegistrationControl getRegistrationControl() {
         return registrationControl;
     }
+
 }
