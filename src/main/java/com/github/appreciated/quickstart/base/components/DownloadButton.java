@@ -15,9 +15,9 @@ public class DownloadButton extends Button {
             addStyleName("mobile-context-button");
         } else {
             addStyleName("tab");
+            setCaption(action.getName());
         }
         action.getDownload().createDownloadButton(this);
-        setCaption(action.getName());
         setIcon(action.getResource());
     }
 }

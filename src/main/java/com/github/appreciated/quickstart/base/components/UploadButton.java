@@ -7,17 +7,24 @@ import com.vaadin.ui.Upload;
 /**
  * Created by appreciated on 26.12.2016.
  */
-public class UploadButton extends Upload  {
+public class UploadButton extends Upload {
 
-    public UploadButton( UploadAction action){
+    public UploadButton(UploadAction action) {
         if (WebApplicationUI.isMobile()) {
-            addStyleName("mobile-context-button");
+            //addStyleName("context-button");
+            setCaption("");
+            setButtonCaption("");
+            setSizeFull();
+            addStyleName("mobile-upload-inline-icon");
         } else {
+            addStyleName("upload-inline-icon");
             addStyleName("tab");
+            setButtonCaption(action.getName());
         }
+
+        getButtonCaption();
         setImmediateMode(true);
         setIcon(action.getResource());
-        setButtonCaption(action.getName());
         action.getUpload().createUploadButton(this);
     }
 

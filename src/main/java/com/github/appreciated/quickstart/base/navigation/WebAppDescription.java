@@ -66,6 +66,7 @@ public class WebAppDescription {
 
     public WebAppDescription withNavigation(Navigable navigable) {
         navigationElements.add(navigable);
+
         return this;
     }
 
@@ -168,6 +169,13 @@ public class WebAppDescription {
         if (title == null) {
             throw new InvalidWebDescriptionException("No title defined!");
         }
+
+        for (Navigable navigationElement : navigationElements) {
+            if (navigationElement.getNavigationName() == null) {
+                throw new InvalidWebDescriptionException("No navigationName defined!");
+            }
+        }
+
         defaultView = (NavigationDesignInterface) createInstance(defaultClass);
         mobileView = (NavigationDesignInterface) createInstance(mobileClass);
         loginNavigable = (LoginNavigable) createInstance(loginClass);
