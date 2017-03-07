@@ -1,8 +1,8 @@
-package com.github.appreciated.quickstart.base.interfaces;
+package com.github.appreciated.quickstart.base.navigation;
 
 /**
  * Created by appreciated on 11.12.2016.
  */
 public interface OnNavigateListener {
-    public void onNavigate();
+    void onNavigate();
 }

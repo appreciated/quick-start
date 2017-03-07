@@ -1,10 +1,10 @@
 package com.github.appreciated.quickstart.base.navigation;
 
 import com.github.appreciated.quickstart.base.exception.InvalidWebDescriptionException;
-import com.github.appreciated.quickstart.base.interfaces.LoginNavigable;
-import com.github.appreciated.quickstart.base.interfaces.Navigable;
-import com.github.appreciated.quickstart.base.interfaces.NavigationDesignInterface;
 import com.github.appreciated.quickstart.base.login.AccessControl;
+import com.github.appreciated.quickstart.base.navigation.interfaces.LoginPage;
+import com.github.appreciated.quickstart.base.navigation.interfaces.NavigationDesignInterface;
+import com.github.appreciated.quickstart.base.navigation.interfaces.Page;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.AbstractMap;
@@ -18,17 +18,17 @@ import java.util.stream.Stream;
 public class WebAppDescription {
     private Class<? extends NavigationDesignInterface> defaultClass;
     private Class<? extends NavigationDesignInterface> mobileClass;
-    private Class<? extends LoginNavigable> loginClass;
+    private Class<? extends LoginPage> loginClass;
     private NavigationDesignInterface defaultView;
     private NavigationDesignInterface mobileView;
-    private LoginNavigable loginNavigable;
+    private LoginPage loginNavigable;
     private String title;
     private List<AbstractMap.SimpleEntry<String, Boolean>> configuration = new ArrayList<>();
-    private List<Navigable> navigationElements = new ArrayList<>();
-    private Class<? extends Navigable> defaultPage;
+    private List<Page> navigationElements = new ArrayList<>();
+    private Class<? extends Page> defaultPage;
     private AccessControl accessControl;
     private RegistrationControl registrationControl;
-    private Navigation navigationDescription;
+    private Pages navigationDescription;
 
     public WebAppDescription() {
     }
@@ -42,7 +42,7 @@ public class WebAppDescription {
         this.mobileClass = mobileClass;
     }
 
-    public WebAppDescription(Class<? extends NavigationDesignInterface> defaultClass, Class<? extends NavigationDesignInterface> mobileClass, Class<? extends LoginNavigable> loginClass) {
+    public WebAppDescription(Class<? extends NavigationDesignInterface> defaultClass, Class<? extends NavigationDesignInterface> mobileClass, Class<? extends LoginPage> loginClass) {
         this.defaultClass = defaultClass;
         this.mobileClass = mobileClass;
         this.loginClass = loginClass;
@@ -58,17 +58,17 @@ public class WebAppDescription {
         return this;
     }
 
-    public WebAppDescription withLoginPage(Class<? extends LoginNavigable> loginClass) {
+    public WebAppDescription withLoginPage(Class<? extends LoginPage> loginClass) {
         this.loginClass = loginClass;
         return this;
     }
 
-    public WebAppDescription withNavigation(Navigation navigationDescription) {
+    public WebAppDescription withSubpages(Pages navigationDescription) {
         this.navigationDescription = navigationDescription;
         return this;
     }
 
-    public Class<? extends Navigable> getDefaultPage() {
+    public Class<? extends Page> getDefaultPage() {
         return defaultPage;
     }
 
@@ -88,11 +88,11 @@ public class WebAppDescription {
         this.mobileView = mobileView;
     }
 
-    public LoginNavigable getLoginNavigable() {
+    public LoginPage getLoginNavigable() {
         return loginNavigable;
     }
 
-    public void setLoginNavigable(LoginNavigable loginNavigable) {
+    public void setLoginNavigable(LoginPage loginNavigable) {
         this.loginNavigable = loginNavigable;
     }
 
@@ -122,7 +122,7 @@ public class WebAppDescription {
         return title;
     }
 
-    public WebAppDescription withDefaultPage(Class<? extends Navigable> defaultPage) {
+    public WebAppDescription withDefaultPage(Class<? extends Page> defaultPage) {
         this.defaultPage = defaultPage;
         return this;
     }
@@ -141,7 +141,7 @@ public class WebAppDescription {
         return configuration.stream();
     }
 
-    public Stream<Navigable> getNavigationElements() {
+    public Stream<Page> getNavigationElements() {
         return navigationElements.stream();
     }
 
@@ -164,22 +164,22 @@ public class WebAppDescription {
         if (title == null) {
             throw new InvalidWebDescriptionException("No title defined!");
         }
-        for (Navigable navigationElement : navigationElements) {
+        for (Page navigationElement : navigationElements) {
             if (navigationElement.getNavigationName() == null) {
                 throw new InvalidWebDescriptionException("No navigationName defined!");
             }
         }
-        if (navigationDescription.getNavigables().size() == 0) {
+        if (navigationDescription.getPages().size() == 0) {
             throw new InvalidWebDescriptionException("No navigation elements defined defined!");
         }
         if (defaultPage == null) {
-            defaultPage = navigationDescription.getNavigables().get(0).getClass();
+            defaultPage = navigationDescription.getPages().get(0).getClass();
         }
 
-        this.navigationElements = navigationDescription.getNavigables();
+        this.navigationElements = navigationDescription.getPages();
         defaultView = (NavigationDesignInterface) createInstance(defaultClass);
         mobileView = (NavigationDesignInterface) createInstance(mobileClass);
-        loginNavigable = (LoginNavigable) createInstance(loginClass);
+        loginNavigable = (LoginPage) createInstance(loginClass);
         loginNavigable.initTitle(title);
         if (accessControl != null) {
             loginNavigable.initWithAccessControl(accessControl);

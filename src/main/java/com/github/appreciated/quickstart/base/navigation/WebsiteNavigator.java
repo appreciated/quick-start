@@ -2,14 +2,13 @@ package com.github.appreciated.quickstart.base.navigation;
 
 import com.github.appreciated.quickstart.base.container.NavigablePagerView;
 import com.github.appreciated.quickstart.base.container.NavigationContainerView;
-import com.github.appreciated.quickstart.base.interfaces.*;
+import com.github.appreciated.quickstart.base.navigation.interfaces.*;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.ui.AbstractOrderedLayout;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.UI;
 
-import javax.xml.ws.Holder;
 import java.awt.event.ActionListener;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -25,10 +24,10 @@ import java.util.Map;
 public class WebsiteNavigator extends Navigator {
 
     private final NavigationDesignInterface navigatorView;
-    private Navigable currentView = null;
+    private Page currentView = null;
     private AbstractOrderedLayout holder = null;
 
-    private Map<Class<? extends Navigable>, Navigable> navigationElements = new HashMap<>();
+    private Map<Class<? extends Page>, Page> navigationElements = new HashMap<>();
     private Component currentComponent;
     private OnNavigateListener listener;
 
@@ -41,34 +40,34 @@ public class WebsiteNavigator extends Navigator {
         navigateTo(WebApplicationUI.getWebsiteDescription().getDefaultPage());
     }
 
-    public ActionListener addNavigation(Navigable navigation) {
+    public ActionListener addNavigation(Page navigation) {
         navigationElements.put(navigation.getClass(), navigation);
         return e -> navigateTo(navigation);
     }
 
-    public void navigateTo(Navigable navigableComponent) {
-        if (currentView != navigableComponent) {
-            currentView = navigableComponent;
-            navigatorView.setCurrentSearchNavigable(navigableComponent instanceof SearchNavigable ? (SearchNavigable) navigableComponent : null);
-            navigatorView.setCurrentActions(navigableComponent instanceof ContextNavigable ? (ContextNavigable) navigableComponent : null);
-            navigatorView.setCurrentContainerLabel(navigableComponent.getNavigationName());
-            if (navigableComponent instanceof PagerNavigable) {
-                navigateTo((PagerNavigable) navigableComponent);
-            } else if (navigableComponent instanceof ContainerNavigable) {
-                navigateTo((ContainerNavigable) navigableComponent);
+    public void navigateTo(Page pageComponent) {
+        if (currentView != pageComponent) {
+            currentView = pageComponent;
+            navigatorView.setCurrentSearchNavigable(pageComponent instanceof HasSearch ? (HasSearch) pageComponent : null);
+            navigatorView.setCurrentActions(pageComponent instanceof HasContextButtons ? (HasContextButtons) pageComponent : null);
+            navigatorView.setCurrentContainerLabel(pageComponent.getNavigationName());
+            if (pageComponent instanceof Pager) {
+                navigateTo((Pager) pageComponent);
+            } else if (pageComponent instanceof ContainerPage) {
+                navigateTo((ContainerPage) pageComponent);
             } else {
-                addComponent(navigableComponent);
+                addComponent(pageComponent);
             }
         }
     }
 
-    public void navigateTo(ContainerNavigable component) {
+    public void navigateTo(ContainerPage component) {
         NavigationContainerView container = new NavigationContainerView();
         container.getContentHolder().addComponent(component);
         addComponent(container);
     }
 
-    public void navigateTo(PagerNavigable component) {
+    public void navigateTo(Pager component) {
         NavigablePagerView pager = new NavigablePagerView(component);
         addComponent(pager);
     }
@@ -82,13 +81,13 @@ public class WebsiteNavigator extends Navigator {
         holder.setComponentAlignment(currentComponent, Alignment.MIDDLE_CENTER);
     }
 
-    public void navigateTo(Class<? extends Navigable> classKey) {
+    public void navigateTo(Class<? extends Page> classKey) {
         if (navigationElements.containsKey(classKey)) {
             navigateTo(navigationElements.get(classKey));
         } else {
             try {
-                Constructor<? extends Navigable> constructor = classKey.getConstructor();
-                Navigable instance = constructor.newInstance();
+                Constructor<? extends Page> constructor = classKey.getConstructor();
+                Page instance = constructor.newInstance();
                 navigationElements.put(instance.getClass(), instance);
                 navigateTo(instance);
             } catch (NoSuchMethodException e) {

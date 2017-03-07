@@ -2,9 +2,9 @@ package com.github.appreciated.quickstart.base.navigation;
 
 
 import com.github.appreciated.quickstart.base.exception.InvalidWebDescriptionException;
-import com.github.appreciated.quickstart.base.interfaces.LoginNavigable;
-import com.github.appreciated.quickstart.base.interfaces.Navigable;
-import com.github.appreciated.quickstart.base.interfaces.NavigationDesignInterface;
+import com.github.appreciated.quickstart.base.navigation.interfaces.LoginPage;
+import com.github.appreciated.quickstart.base.navigation.interfaces.NavigationDesignInterface;
+import com.github.appreciated.quickstart.base.navigation.interfaces.Page;
 import com.vaadin.annotations.Push;
 import com.vaadin.annotations.Viewport;
 import com.vaadin.server.VaadinRequest;
@@ -21,7 +21,7 @@ public abstract class WebApplicationUI extends UI {
     private NavigationDesignInterface navigation;
     private NavigationDesignInterface mobileNavigationView;
     private NavigationDesignInterface defaultNavigationView;
-    private LoginNavigable loginNavigable;
+    private LoginPage loginNavigable;
     private WebAppDescription websiteDescription;
     private WebsiteNavigator navigator;
 
@@ -74,7 +74,7 @@ public abstract class WebApplicationUI extends UI {
         return get().navigation;
     }
 
-    public static void navigateTo(Class<? extends Navigable> navigable) {
+    public static void navigateTo(Class<? extends Page> navigable) {
         getNavigation().navigateTo(navigable);
     }
 
@@ -91,7 +91,7 @@ public abstract class WebApplicationUI extends UI {
         this.defaultNavigationView = defaultNavigationView;
     }
 
-    public void setLoginNavigable(LoginNavigable loginNavigable) {
+    public void setLoginNavigable(LoginPage loginNavigable) {
         this.loginNavigable = loginNavigable;
     }
 

@@ -1,10 +1,10 @@
 package com.github.appreciated.quickstart.base.container;
 
 
-import com.github.appreciated.quickstart.base.interfaces.ContainerNavigable;
-import com.github.appreciated.quickstart.base.interfaces.Navigable;
-import com.github.appreciated.quickstart.base.interfaces.PagerNavigable;
 import com.github.appreciated.quickstart.base.listeners.LayoutLeftClickListener;
+import com.github.appreciated.quickstart.base.navigation.interfaces.ContainerPage;
+import com.github.appreciated.quickstart.base.navigation.interfaces.Page;
+import com.github.appreciated.quickstart.base.navigation.interfaces.Pager;
 import com.vaadin.shared.ui.ContentMode;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.HorizontalLayout;
@@ -19,63 +19,63 @@ import java.util.Map;
  */
 public class NavigablePagerView extends NavigationPagerDesign {
 
-    private final List<Navigable> navigables;
-    private PagerNavigable navigatable;
+    private final List<Page> pages;
+    private Pager navigatable;
 
-    private final Map<Navigable, Label> navigablesMap = new HashMap<>();
+    private final Map<Page, Label> navigablesMap = new HashMap<>();
 
-    private Navigable currentElement;
+    private Page currentElement;
 
-    public NavigablePagerView(PagerNavigable navigatable) {
-        this.navigables = navigatable.getPagingElements();
+    public NavigablePagerView(Pager navigatable) {
+        this.pages = navigatable.getPagingElements();
         this.navigatable = navigatable;
         pagerDots.removeAllComponents();
-        for (Navigable navigable : navigables) {
+        for (Page page : pages) {
             HorizontalLayout layout = new HorizontalLayout();
             layout.setHeight(100, Unit.PERCENTAGE);
             Label label = new Label("<li><a></a></li>", ContentMode.HTML);
             label.setStyleName("pager");
             layout.addComponent(label);
-            layout.addLayoutClickListener(new LayoutLeftClickListener(event -> navigateTo(navigable)));
+            layout.addLayoutClickListener(new LayoutLeftClickListener(event -> navigateTo(page)));
             layout.setComponentAlignment(label, Alignment.MIDDLE_CENTER);
             pagerDots.addComponent(layout);
-            navigablesMap.put(navigable, label);
+            navigablesMap.put(page, label);
         }
         next.addClickListener(event -> next());
         last.addClickListener(event -> last());
-        navigateTo(navigables.get(0));
-        navigablesMap.get(navigables.get(0)).addStyleName("pager-current");
+        navigateTo(pages.get(0));
+        navigablesMap.get(pages.get(0)).addStyleName("pager-current");
     }
 
-    private void navigateTo(Navigable navigable) {
+    private void navigateTo(Page page) {
         if (currentElement != null) {
             navigablesMap.get(currentElement).removeStyleName("pager-current");
         }
-        navigablesMap.get(navigable).addStyleName("pager-current");
-        currentElement = navigable;
-        int index = navigables.indexOf(navigable);
+        navigablesMap.get(page).addStyleName("pager-current");
+        currentElement = page;
+        int index = pages.indexOf(page);
         last.setVisible(index != 0);
-        next.setVisible(index != navigables.size() - 1);
-        if (navigable instanceof ContainerNavigable) {
+        next.setVisible(index != pages.size() - 1);
+        if (page instanceof ContainerPage) {
             NavigationContainerDesign container = new NavigationContainerDesign();
-            container.content.addComponent(navigable);
+            container.content.addComponent(page);
             content.removeAllComponents();
             content.addComponent(container);
         } else {
             content.removeAllComponents();
-            content.addComponent(navigable);
+            content.addComponent(page);
         }
     }
 
     public void next() {
-        if (navigables.indexOf(currentElement) == navigables.size() - 1) {
+        if (pages.indexOf(currentElement) == pages.size() - 1) {
             navigatable.onFinish();
         } else {
-            navigateTo(navigables.get(navigables.indexOf(currentElement) + 1));
+            navigateTo(pages.get(pages.indexOf(currentElement) + 1));
         }
     }
 
     public void last() {
-        navigateTo(navigables.get(navigables.indexOf(currentElement) - 1));
+        navigateTo(pages.get(pages.indexOf(currentElement) - 1));
     }
 }
