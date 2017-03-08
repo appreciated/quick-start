@@ -1,9 +1,9 @@
 package com.github.appreciated.quickstart.base.registration;
 
 /**
- * Created by Johannes on 05.03.2017.
+ * Created by appreciated on 05.03.2017.
  */
-public class BasicUser {
+public class ExampleUser {
     @Field(caption = "Username")
     public String username;
     @Field(caption = "Name")

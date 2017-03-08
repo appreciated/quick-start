@@ -5,7 +5,7 @@ import com.vaadin.server.Resource;
 import java.awt.event.ActionListener;
 
 /**
- * Created by Johannes on 02.03.2017.
+ * Created by appreciated on 02.03.2017.
  */
 public class ClickAction extends Action {
 

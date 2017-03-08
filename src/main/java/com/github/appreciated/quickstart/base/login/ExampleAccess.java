@@ -1,17 +1,15 @@
 package com.github.appreciated.quickstart.base.login;
 
 /**
- * Default mock implementation of {@link AccessControl}. This implementation
- * accepts any string as a password, and considers the user "admin" as the only
+ * Example implementation of {@link AccessControl}. This implementation
+ * accepts any User, but only one password, the user "admin" as the only
  * administrator.
  */
-public class BasicAccess implements AccessControl {
-
+public class ExampleAccess implements AccessControl {
     @Override
     public boolean signIn(String username, String password) {
         if (username == null || username.isEmpty())
             return false;
-
         CurrentUser.set(username);
         return ("Test1234!".equals(password));
     }
@@ -24,11 +22,8 @@ public class BasicAccess implements AccessControl {
     @Override
     public boolean isUserInRole(String role) {
         if ("admin".equals(role)) {
-            // Only the "admin" user is in the "admin" role
             return getPrincipalName().equals("admin");
         }
-
-        // All users are in all non-admin roles
         return true;
     }
 

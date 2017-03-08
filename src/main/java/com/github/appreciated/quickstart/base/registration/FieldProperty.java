@@ -8,7 +8,7 @@ import com.vaadin.server.Setter;
 import java.util.Optional;
 
 /**
- * Created by Johannes on 05.03.2017.
+ * Created by appreciated on 05.03.2017.
  */
 class FieldProperty<T> implements PropertyDefinition<T, Object> {
 

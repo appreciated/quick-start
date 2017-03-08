@@ -3,7 +3,7 @@ package com.github.appreciated.quickstart.base.registration;
 import com.vaadin.server.ErrorMessage;
 
 /**
- * Created by Johannes on 05.03.2017.
+ * Created by appreciated on 05.03.2017.
  */
 public class RegistrationResult {
     private boolean valid;

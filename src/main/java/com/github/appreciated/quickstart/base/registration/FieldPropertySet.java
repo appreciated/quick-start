@@ -10,7 +10,7 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 /**
- * Created by Johannes on 05.03.2017.
+ * Created by appreciated on 05.03.2017.
  */
 public class FieldPropertySet<T> implements PropertySet<T> {
 

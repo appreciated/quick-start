@@ -4,7 +4,7 @@ import com.github.appreciated.quickstart.base.upload.Upload;
 import com.vaadin.server.Resource;
 
 /**
- * Created by Johannes on 02.03.2017.
+ * Created by appreciated on 02.03.2017.
  */
 public class UploadAction extends Action {
 

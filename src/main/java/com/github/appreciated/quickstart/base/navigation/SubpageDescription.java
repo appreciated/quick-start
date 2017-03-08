@@ -4,7 +4,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /**
- * Created by Johannes on 28.02.2017.
+ * Created by appreciated on 28.02.2017.
  */
 @Retention(RetentionPolicy.RUNTIME)
 public @interface SubpageDescription {

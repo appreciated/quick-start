@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Created by Johannes on 07.03.2017.
+ * Created by appreciated on 07.03.2017.
  */
 public class Subpages {
     List<Subpage> subpages = new ArrayList<>();
