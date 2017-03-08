@@ -14,7 +14,7 @@ public interface NavigationDesignInterface extends Component {
 
     default void initWithConfiguration(Stream<AbstractMap.SimpleEntry<String, Boolean>> configurations) {}
 
-    void initNavigationElements(Stream<Page> navigables);
+    void initNavigationElements(Stream<Subpage> pages);
 
     void initUserFunctionality(WebAppDescription description);
 

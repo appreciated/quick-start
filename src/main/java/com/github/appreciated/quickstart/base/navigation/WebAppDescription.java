@@ -4,7 +4,7 @@ import com.github.appreciated.quickstart.base.exception.InvalidWebDescriptionExc
 import com.github.appreciated.quickstart.base.login.AccessControl;
 import com.github.appreciated.quickstart.base.navigation.interfaces.LoginPage;
 import com.github.appreciated.quickstart.base.navigation.interfaces.NavigationDesignInterface;
-import com.github.appreciated.quickstart.base.navigation.interfaces.Page;
+import com.github.appreciated.quickstart.base.navigation.interfaces.Subpage;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.AbstractMap;
@@ -24,11 +24,11 @@ public class WebAppDescription {
     private LoginPage loginNavigable;
     private String title;
     private List<AbstractMap.SimpleEntry<String, Boolean>> configuration = new ArrayList<>();
-    private List<Page> navigationElements = new ArrayList<>();
-    private Class<? extends Page> defaultPage;
+    private List<Subpage> navigationElements = new ArrayList<>();
+    private Class<? extends Subpage> defaultPage;
     private AccessControl accessControl;
     private RegistrationControl registrationControl;
-    private Pages navigationDescription;
+    private Subpages navigationDescription;
 
     public WebAppDescription() {
     }
@@ -63,12 +63,17 @@ public class WebAppDescription {
         return this;
     }
 
-    public WebAppDescription withSubpages(Pages navigationDescription) {
+    public WebAppDescription withSubpages(Subpages navigationDescription) {
         this.navigationDescription = navigationDescription;
         return this;
     }
 
-    public Class<? extends Page> getDefaultPage() {
+    public WebAppDescription withSubpages(Subpage... navigationDescription) {
+        this.navigationDescription = new Subpages(navigationDescription);
+        return this;
+    }
+
+    public Class<? extends Subpage> getDefaultPage() {
         return defaultPage;
     }
 
@@ -122,7 +127,7 @@ public class WebAppDescription {
         return title;
     }
 
-    public WebAppDescription withDefaultPage(Class<? extends Page> defaultPage) {
+    public WebAppDescription withDefaultPage(Class<? extends Subpage> defaultPage) {
         this.defaultPage = defaultPage;
         return this;
     }
@@ -141,7 +146,7 @@ public class WebAppDescription {
         return configuration.stream();
     }
 
-    public Stream<Page> getNavigationElements() {
+    public Stream<Subpage> getSubpages() {
         return navigationElements.stream();
     }
 
@@ -164,19 +169,19 @@ public class WebAppDescription {
         if (title == null) {
             throw new InvalidWebDescriptionException("No title defined!");
         }
-        for (Page navigationElement : navigationElements) {
+        if (navigationDescription.getSubpages().size() == 0) {
+            throw new InvalidWebDescriptionException("No navigation elements defined defined!");
+        }
+        if (defaultPage == null) {
+            defaultPage = navigationDescription.getSubpages().get(0).getClass();
+        }
+        this.navigationElements = navigationDescription.getSubpages();
+        for (Subpage navigationElement : navigationElements) {
             if (navigationElement.getNavigationName() == null) {
                 throw new InvalidWebDescriptionException("No navigationName defined!");
             }
         }
-        if (navigationDescription.getPages().size() == 0) {
-            throw new InvalidWebDescriptionException("No navigation elements defined defined!");
-        }
-        if (defaultPage == null) {
-            defaultPage = navigationDescription.getPages().get(0).getClass();
-        }
 
-        this.navigationElements = navigationDescription.getPages();
         defaultView = (NavigationDesignInterface) createInstance(defaultClass);
         mobileView = (NavigationDesignInterface) createInstance(mobileClass);
         loginNavigable = (LoginPage) createInstance(loginClass);

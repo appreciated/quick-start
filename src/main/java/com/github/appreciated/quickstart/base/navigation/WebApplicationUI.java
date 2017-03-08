@@ -4,7 +4,7 @@ package com.github.appreciated.quickstart.base.navigation;
 import com.github.appreciated.quickstart.base.exception.InvalidWebDescriptionException;
 import com.github.appreciated.quickstart.base.navigation.interfaces.LoginPage;
 import com.github.appreciated.quickstart.base.navigation.interfaces.NavigationDesignInterface;
-import com.github.appreciated.quickstart.base.navigation.interfaces.Page;
+import com.github.appreciated.quickstart.base.navigation.interfaces.Subpage;
 import com.vaadin.annotations.Push;
 import com.vaadin.annotations.Viewport;
 import com.vaadin.server.VaadinRequest;
@@ -54,7 +54,7 @@ public abstract class WebApplicationUI extends UI {
         if (loginNavigable == null) {
             navigation.disableLogout();
         }
-        navigation.initNavigationElements(getWebsiteDescription().getNavigationElements());
+        navigation.initNavigationElements(getWebsiteDescription().getSubpages());
         navigation.initUserFunctionality(getWebsiteDescription());
         navigation.initWithTitle(getWebsiteDescription().getTitle());
         navigation.initWithConfiguration(getWebsiteDescription().getConfiguration());
@@ -74,8 +74,8 @@ public abstract class WebApplicationUI extends UI {
         return get().navigation;
     }
 
-    public static void navigateTo(Class<? extends Page> navigable) {
-        getNavigation().navigateTo(navigable);
+    public static void navigateTo(Class<? extends Subpage> page) {
+        getNavigation().navigateTo(page);
     }
 
     public static boolean isMobile() {

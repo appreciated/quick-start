@@ -6,30 +6,29 @@
   <meta name="vaadin-version" content="8.0.0">
  </head>
  <body>
-  <vaadin-horizontal-layout style-name="fade-in" size-full>
-   <vaadin-horizontal-layout width="50px" height-full>
-    <vaadin-button icon="fonticon://FontAwesome/f060" style-name="borderless x-large bold fade-in" width="50px" plain-text _id="last" :middle></vaadin-button>
+  <vaadin-absolute-layout style-name="absolute-overflow-visible" height="500px">
+   <vaadin-horizontal-layout style-name="fade-in" size-full></vaadin-horizontal-layout>
+   <vaadin-horizontal-layout size-full>
+    <vaadin-horizontal-layout style-name="pager-content" _id="content" :middle :center></vaadin-horizontal-layout>
    </vaadin-horizontal-layout>
-   <vaadin-vertical-layout size-full margin="false" :expand>
-    <vaadin-horizontal-layout style-name="flexbox-center" size-full :expand>
-     <vaadin-horizontal-layout style-name="fade-in" _id="content"></vaadin-horizontal-layout>
-    </vaadin-horizontal-layout>
-    <vaadin-horizontal-layout height="30px" _id="pagerDots" :center>
-     <vaadin-horizontal-layout height-full :middle :center>
-      <vaadin-label style-name="pager pager-current" :middle :center>
-       <li><a></a></li>
-      </vaadin-label>
+   <vaadin-horizontal-layout width-full :bottom="0px">
+    <vaadin-horizontal-layout spacing="false" _id="pagerDots" :middle :center>
+     <vaadin-horizontal-layout spacing="false" height-full :middle :center>
+      <vaadin-button style-name="borderless paging-indicator" height="30px" plain-text>
+        • 
+      </vaadin-button>
+      <vaadin-button style-name="borderless paging-indicator-current" height="30px" plain-text>
+        • 
+      </vaadin-button>
      </vaadin-horizontal-layout>
-     <vaadin-label style-name="pager" :middle :center>
-      <li><a></a></li>
-     </vaadin-label>
-    </vaadin-horizontal-layout>
-   </vaadin-vertical-layout>
-   <vaadin-horizontal-layout width="50px" height-full margin-bottom>
-    <vaadin-horizontal-layout width="50px" :middle :right>
-     <vaadin-button icon="fonticon://FontAwesome/f061" style-name="borderless x-large bold fade-in" width="50px" plain-text _id="next"></vaadin-button>
     </vaadin-horizontal-layout>
    </vaadin-horizontal-layout>
-  </vaadin-horizontal-layout>
+   <vaadin-horizontal-layout width="50px" height-full :top="0px" :bottom="0px" :left="0px">
+    <vaadin-button icon="fonticon://FontAwesome/f060" style-name="pager-left-button borderless fade-in" width="50px" plain-text _id="last" :middle></vaadin-button>
+   </vaadin-horizontal-layout>
+   <vaadin-horizontal-layout height-full :top="0px" :right="0px" :bottom="0px">
+    <vaadin-button icon="fonticon://FontAwesome/f061" style-name="borderless fade-in pager-right-button" width="50px" plain-text _id="next" :middle :right></vaadin-button>
+   </vaadin-horizontal-layout>
+  </vaadin-absolute-layout>
  </body>
 </html>

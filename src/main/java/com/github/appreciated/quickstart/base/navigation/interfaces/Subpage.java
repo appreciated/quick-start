@@ -1,6 +1,6 @@
 package com.github.appreciated.quickstart.base.navigation.interfaces;
 
-import com.github.appreciated.quickstart.base.navigation.Description;
+import com.github.appreciated.quickstart.base.navigation.SubpageDescription;
 import com.github.appreciated.quickstart.base.navigation.WebApplicationUI;
 import com.vaadin.server.Resource;
 import com.vaadin.ui.Component;
@@ -10,11 +10,14 @@ import javax.xml.ws.Holder;
 /**
  * Created by appreciated on 08.12.2016.
  */
-public interface Page extends Component {
+public interface Subpage extends Component {
     Holder<Resource> resourceHolder = new Holder<>();
 
     default String getNavigationName() {
-        Description annotation = this.getClass().getAnnotation(Description.class);
+        SubpageDescription annotation = this.getClass().getAnnotation(SubpageDescription.class);
+        if (annotation == null) {
+            return null;
+        }
         return annotation.name();
     }
 

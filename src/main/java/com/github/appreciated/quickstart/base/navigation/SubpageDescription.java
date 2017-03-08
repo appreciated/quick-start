@@ -7,6 +7,6 @@ import java.lang.annotation.RetentionPolicy;
  * Created by Johannes on 28.02.2017.
  */
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Description {
+public @interface SubpageDescription {
     public String name();
 }
