@@ -29,7 +29,7 @@ Currently availible Designs:
 Additionally it comes with:  
 - Component Printing (This function is limited to the visible html)
 - Simplyfied (but more abstracted) Dialog (Window) Creation (with Negative / Postive Buttons)
-- Component Pager (Might be replaced by https://vaadin.com/directory#!addon/carousel, because it offers mature especially swiping)
+- Component Pager (Might be replaced by https://vaadin.com/directory#!addon/carousel, because it offers mature swiping)
 - Object to String Serialization (easy)
 
 Also is comes with more abstracted versions of the following components
