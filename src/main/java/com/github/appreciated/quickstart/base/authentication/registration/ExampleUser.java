@@ -1,4 +1,4 @@
-package com.github.appreciated.quickstart.base.registration;
+package com.github.appreciated.quickstart.base.authentication.registration;
 
 /**
  * Created by appreciated on 05.03.2017.

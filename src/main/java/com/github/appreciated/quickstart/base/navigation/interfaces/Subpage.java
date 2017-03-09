@@ -29,6 +29,10 @@ public interface Subpage extends Component {
         resourceHolder.value = resource;
     }
 
+    default boolean showTitle() {
+        return true;
+    }
+
     default void navigateTo() {
         WebApplicationUI.getNavigation().navigateTo(this);
     }

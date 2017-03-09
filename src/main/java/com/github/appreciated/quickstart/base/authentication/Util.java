@@ -1,4 +1,4 @@
-package com.github.appreciated.quickstart.base.vaadin;
+package com.github.appreciated.quickstart.base.authentication;
 
 import com.vaadin.server.Page;
 import com.vaadin.server.VaadinSession;

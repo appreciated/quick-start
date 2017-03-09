@@ -1,7 +1,7 @@
 package com.github.appreciated.quickstart.base.navigation;
 
-import com.github.appreciated.quickstart.base.container.NavigationContainerView;
-import com.github.appreciated.quickstart.base.container.Pager;
+import com.github.appreciated.quickstart.base.navigation.container.NavigationContainerView;
+import com.github.appreciated.quickstart.base.navigation.container.Pager;
 import com.github.appreciated.quickstart.base.navigation.interfaces.*;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.ui.AbstractOrderedLayout;
@@ -49,7 +49,7 @@ public class WebsiteNavigator extends Navigator {
         if (currentView != subpageComponent) {
             currentView = subpageComponent;
             navigatorView.setCurrentSearchNavigable(subpageComponent instanceof HasSearch ? (HasSearch) subpageComponent : null);
-            navigatorView.setCurrentActions(subpageComponent instanceof HasContextButtons ? (HasContextButtons) subpageComponent : null);
+            navigatorView.setCurrentActions(subpageComponent instanceof HasContextActions ? (HasContextActions) subpageComponent : null);
             navigatorView.setCurrentContainerLabel(subpageComponent.getNavigationName());
             if (subpageComponent instanceof ContainerSubpage) {
                 navigateTo((ContainerSubpage) subpageComponent);
@@ -67,6 +67,7 @@ public class WebsiteNavigator extends Navigator {
 
 
     public void setComponent(Component component) {
+        navigatorView.allowPercentagePageHeight(component instanceof HasPercentageHeight);
         holder.removeAllComponents();
         onNavigate();
         currentComponent = component;

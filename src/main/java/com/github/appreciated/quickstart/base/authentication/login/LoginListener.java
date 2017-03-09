@@ -1,4 +1,4 @@
-package com.github.appreciated.quickstart.base.interfaces;
+package com.github.appreciated.quickstart.base.authentication.login;
 
 import java.io.Serializable;
 

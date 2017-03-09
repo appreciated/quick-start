@@ -1,4 +1,4 @@
-package com.github.appreciated.quickstart.base.registration;
+package com.github.appreciated.quickstart.base.authentication.registration;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

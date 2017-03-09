@@ -1,4 +1,4 @@
-package com.github.appreciated.quickstart.base.container;
+package com.github.appreciated.quickstart.base.navigation.container;
 
 import com.vaadin.ui.HorizontalLayout;
 

@@ -1,4 +1,4 @@
-package com.github.appreciated.quickstart.base.registration;
+package com.github.appreciated.quickstart.base.authentication.registration;
 
 import com.vaadin.server.ErrorMessage;
 

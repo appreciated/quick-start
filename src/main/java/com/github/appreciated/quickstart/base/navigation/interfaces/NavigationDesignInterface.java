@@ -5,6 +5,7 @@ import com.vaadin.ui.AbstractOrderedLayout;
 import com.vaadin.ui.Component;
 
 import java.util.AbstractMap;
+import java.util.List;
 import java.util.stream.Stream;
 
 /**
@@ -18,6 +19,8 @@ public interface NavigationDesignInterface extends Component {
 
     void initUserFunctionality(WebAppDescription description);
 
+    void initCustomMenuElements(List<Component> components);
+
     void initWithTitle(String title);
 
     AbstractOrderedLayout getHolder();
@@ -26,7 +29,11 @@ public interface NavigationDesignInterface extends Component {
 
     void setCurrentContainerLabel(String label);
 
-    void setCurrentActions(HasContextButtons actions);
+    void setCurrentActions(HasContextActions actions);
+
+    void allowPercentagePageHeight(boolean allow);
+
+    default void setPageTitleVisibility(boolean hide) {}
 
     void setCurrentSearchNavigable(HasSearch navigable);
 }

@@ -1,7 +1,7 @@
 package com.github.appreciated.quickstart.base.navigation;
 
 
-import com.github.appreciated.quickstart.base.exception.InvalidWebDescriptionException;
+import com.github.appreciated.quickstart.base.navigation.exception.InvalidWebDescriptionException;
 import com.github.appreciated.quickstart.base.navigation.interfaces.LoginPage;
 import com.github.appreciated.quickstart.base.navigation.interfaces.NavigationDesignInterface;
 import com.github.appreciated.quickstart.base.navigation.interfaces.Subpage;

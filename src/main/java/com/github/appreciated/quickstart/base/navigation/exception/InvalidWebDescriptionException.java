@@ -1,4 +1,4 @@
-package com.github.appreciated.quickstart.base.exception;
+package com.github.appreciated.quickstart.base.navigation.exception;
 
 /**
  * Created by appreciated on 28.02.2017.

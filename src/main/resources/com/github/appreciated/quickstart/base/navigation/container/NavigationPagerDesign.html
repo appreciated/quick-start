@@ -6,10 +6,12 @@
   <meta name="vaadin-version" content="8.0.0">
  </head>
  <body>
-  <vaadin-absolute-layout style-name="absolute-overflow-visible" height="500px">
+  <vaadin-absolute-layout style-name="absolute-overflow-visible">
    <vaadin-horizontal-layout style-name="fade-in" size-full></vaadin-horizontal-layout>
    <vaadin-horizontal-layout size-full>
-    <vaadin-horizontal-layout style-name="pager-content" _id="content" :middle :center></vaadin-horizontal-layout>
+    <vaadin-horizontal-layout size-full>
+     <vaadin-horizontal-layout style-name="pager-content" _id="content" :middle :center></vaadin-horizontal-layout>
+    </vaadin-horizontal-layout>
    </vaadin-horizontal-layout>
    <vaadin-horizontal-layout width-full :bottom="0px">
     <vaadin-horizontal-layout spacing="false" _id="pagerDots" :middle :center>

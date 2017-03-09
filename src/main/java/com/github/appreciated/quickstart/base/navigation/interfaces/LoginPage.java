@@ -1,7 +1,7 @@
 package com.github.appreciated.quickstart.base.navigation.interfaces;
 
-import com.github.appreciated.quickstart.base.interfaces.LoginListener;
-import com.github.appreciated.quickstart.base.login.AccessControl;
+import com.github.appreciated.quickstart.base.authentication.login.AccessControl;
+import com.github.appreciated.quickstart.base.authentication.login.LoginListener;
 import com.github.appreciated.quickstart.base.navigation.RegistrationControl;
 import com.vaadin.ui.Component;
 

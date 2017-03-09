@@ -1,4 +1,4 @@
-package com.github.appreciated.quickstart.base.login;
+package com.github.appreciated.quickstart.base.authentication.login;
 
 /**
  * Example implementation of {@link AccessControl}. This implementation
