@@ -1,9 +1,9 @@
 package com.github.appreciated.quickstart.base.navigation.container;
 
 
-import com.github.appreciated.quickstart.base.navigation.Subpages;
 import com.github.appreciated.quickstart.base.navigation.interfaces.ContainerSubpage;
 import com.github.appreciated.quickstart.base.navigation.interfaces.HasPercentageHeight;
+import com.github.appreciated.quickstart.base.navigation.interfaces.HasSubpages;
 import com.github.appreciated.quickstart.base.navigation.interfaces.Subpage;
 import com.vaadin.ui.Button;
 
@@ -14,7 +14,7 @@ import java.util.Map;
 /**
  * Created by appreciated on 09.12.2016.
  */
-public abstract class Pager extends NavigationPagerDesign implements Subpage, HasPercentageHeight {
+public abstract class Pager extends NavigationPagerDesign implements Subpage, HasPercentageHeight, HasSubpages {
 
     private final List<Subpage> subpages;
 
@@ -68,8 +68,6 @@ public abstract class Pager extends NavigationPagerDesign implements Subpage, Ha
     public void last() {
         setNewPage(subpages.get(subpages.indexOf(currentPage) - 1));
     }
-
-    public abstract Subpages getPagingElements();
 
     public void onFinish() {
     }
