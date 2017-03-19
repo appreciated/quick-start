@@ -1,44 +1,49 @@
 package com.github.appreciated.quickstart.base.components;
 
 import com.github.appreciated.quickstart.base.listeners.LayoutLeftClickListener;
-import com.github.appreciated.quickstart.base.navigation.interfaces.HasSubpages;
+import com.github.appreciated.quickstart.base.navigation.interfaces.Finishable;
+import com.github.appreciated.quickstart.base.navigation.interfaces.HasFinishableSubpages;
 import com.github.appreciated.quickstart.base.navigation.interfaces.Subpage;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.HorizontalLayout;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
 
 /**
  * Created by appreciated on 09.03.2017.
  */
 public class ProgressStepView extends HorizontalLayout {
 
-    private final List<Subpage> pages;
+    private final List<Finishable> pages;
     private boolean navigateable;
     private NavigationListener navigationListener;
-    List<ProgressStepDesign> stepperViews = new ArrayList<>();
+    LinkedList<ProgressStepDesign> stepperViews = new LinkedList<>();
+    private ListIterator<ProgressStepDesign> currentStepperIterator;
+    private ProgressStepDesign currentDesign;
 
-    public ProgressStepView(HasSubpages pager) {
-        this.pages = pager.getPagingElements().getSubpages();
+    public ProgressStepView(HasFinishableSubpages pager, boolean navigatable) {
+        this.pages = pager.getPagingElements();
         for (int i = 0; i < pages.size(); i++) {
             ProgressStepDesign view = new ProgressStepDesign();
+            if (navigateable) {
+                view.addStyleName("v-button");
+            }
             stepperViews.add(view);
             view.stepNumber.setValue(String.valueOf(i + 1));
             view.stepName.setValue(pages.get(i).getNavigationName());
             int finalI = i;
-            view.addLayoutClickListener(new LayoutLeftClickListener(clickEvent -> {
-                stepperViews.forEach(stepperView -> stepperView.removeStyleName("stepper-wrapper-active"));
-                view.addStyleName("stepper-wrapper-active");
-                onNavigate(pages.get(finalI));
-            }));
+            if (navigateable) {
+                view.addLayoutClickListener(new LayoutLeftClickListener(clickEvent -> {
+                    view.addStyleName("stepper-wrapper-active");
+                    onNavigate(pages.get(finalI));
+                }));
+            }
             this.addComponent(view);
         }
-        stepperViews.get(0).addStyleName("stepper-wrapper-active");
-    }
-
-    public void setNavigatable(boolean navigatable) {
-        this.navigateable = navigatable;
+        currentStepperIterator = stepperViews.listIterator(1);
+        setActiveStepper(stepperViews.getFirst());
     }
 
     private void onNavigate(Subpage subpage) {
@@ -47,11 +52,36 @@ public class ProgressStepView extends HorizontalLayout {
         }
     }
 
+    public void previous() {
+        if (currentStepperIterator.hasPrevious()) {
+            setActiveStepper(currentStepperIterator.previous());
+        }
+    }
+
+    public void next() {
+        if (currentStepperIterator.hasNext()) {
+            setActiveStepper(currentStepperIterator.next());
+        } else {
+            navigationListener.onDone();
+        }
+    }
+
+    private void setActiveStepper(ProgressStepDesign design) {
+        if (navigateable) {
+            stepperViews.forEach(components1 -> components1.removeStyleName("stepper-wrapper-active"));
+        }
+        currentDesign = design;
+        design.addStyleName("stepper-wrapper-active");
+        onNavigate(pages.get(stepperViews.indexOf(currentDesign)));
+    }
+
     public void setNavigationListener(NavigationListener navigationListener) {
         this.navigationListener = navigationListener;
     }
 
     public interface NavigationListener {
         void onNavigate(Component next);
+
+        void onDone();
     }
 }

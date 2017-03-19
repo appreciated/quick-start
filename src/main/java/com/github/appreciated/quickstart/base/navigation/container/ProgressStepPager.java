@@ -3,10 +3,7 @@ package com.github.appreciated.quickstart.base.navigation.container;
 import com.github.appreciated.quickstart.base.components.ProgressStepView;
 import com.github.appreciated.quickstart.base.navigation.actions.Action;
 import com.github.appreciated.quickstart.base.navigation.actions.CustomAction;
-import com.github.appreciated.quickstart.base.navigation.interfaces.ContainerSubpage;
-import com.github.appreciated.quickstart.base.navigation.interfaces.HasContextActions;
-import com.github.appreciated.quickstart.base.navigation.interfaces.HasSubpages;
-import com.github.appreciated.quickstart.base.navigation.interfaces.Subpage;
+import com.github.appreciated.quickstart.base.navigation.interfaces.*;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.VerticalLayout;
 
@@ -16,20 +13,17 @@ import java.util.List;
 /**
  * Created by appreciated on 09.03.2017.
  */
-public abstract class ProgressStepPager extends VerticalLayout implements Subpage, HasContextActions, HasSubpages, ProgressStepView.NavigationListener {
+public abstract class ProgressStepPager extends VerticalLayout implements Subpage, HasContextActions, HasFinishableSubpages, ProgressStepView.NavigationListener, Finishable.FinishListener {
 
     private final ProgressStepView progressStepView;
-    private final List<Subpage> pages;
+    private final List<Finishable> pages;
     private final Subpage currentPage;
 
     public ProgressStepPager() {
-        progressStepView = new ProgressStepView(this);
-        progressStepView.setNavigatable(isNavigatable());
-        if (isNavigatable()) {
-            progressStepView.setNavigationListener(this);
-        }
-
-        this.pages = getPagingElements().getSubpages();
+        progressStepView = new ProgressStepView(this, isNavigatable());
+        progressStepView.setNavigationListener(this);
+        this.pages = getPagingElements();
+        pages.stream().forEach(subpage -> subpage.setFinishListener(this));
         this.currentPage = pages.get(0);
         setNewContent(currentPage);
     }
@@ -72,17 +66,15 @@ public abstract class ProgressStepPager extends VerticalLayout implements Subpag
     }
 
     public void next() {
-        int next = pages.indexOf(currentPage) + 1;
-        if (next < pages.size()) {
-            setNewContent(pages.get(next));
-        }
+        progressStepView.next();
     }
 
-    public void last() {
-        int last = pages.indexOf(currentPage) - 1;
-        if (last >= 0) {
-            setNewContent(pages.get(last));
-        }
+    public void previous() {
+        progressStepView.previous();
     }
 
+    @Override
+    public void onFinish() {
+        progressStepView.next();
+    }
 }
