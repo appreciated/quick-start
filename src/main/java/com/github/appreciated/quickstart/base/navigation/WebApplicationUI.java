@@ -57,7 +57,7 @@ public abstract class WebApplicationUI extends UI {
         navigation.initNavigationElements(getWebsiteDescription().getSubpages());
         navigation.initUserFunctionality(getWebsiteDescription());
         navigation.initWithTitle(getWebsiteDescription().getTitle());
-        navigation.initWithConfiguration(getWebsiteDescription().getConfiguration());
+        navigation.initWithConfiguration(getWebsiteDescription().getConfiguration().stream());
         navigator = new WebsiteNavigator(navigation);
         setContent(navigation);
     }
@@ -95,7 +95,7 @@ public abstract class WebApplicationUI extends UI {
         this.loginNavigable = loginNavigable;
     }
 
-    public abstract WebAppDescription initWebAppDescription();
+    public abstract WebAppDescription initWebAppDescription() throws InvalidWebDescriptionException;
 
     public static WebAppDescription getWebsiteDescription() {
         return get().websiteDescription;

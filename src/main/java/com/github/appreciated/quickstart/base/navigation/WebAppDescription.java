@@ -30,49 +30,6 @@ public class WebAppDescription {
     private RegistrationControl registrationControl;
     private Subpages navigationDescription;
 
-    public WebAppDescription() {
-    }
-
-    public WebAppDescription(Class<? extends NavigationDesignInterface> defaultClass) {
-        this.defaultClass = defaultClass;
-    }
-
-    public WebAppDescription(Class<? extends NavigationDesignInterface> defaultClass, Class<? extends NavigationDesignInterface> mobileClass) {
-        this.defaultClass = defaultClass;
-        this.mobileClass = mobileClass;
-    }
-
-    public WebAppDescription(Class<? extends NavigationDesignInterface> defaultClass, Class<? extends NavigationDesignInterface> mobileClass, Class<? extends LoginPage> loginClass) {
-        this.defaultClass = defaultClass;
-        this.mobileClass = mobileClass;
-        this.loginClass = loginClass;
-    }
-
-    public WebAppDescription withDesign(Class<? extends NavigationDesignInterface> desktopClass) {
-        this.defaultClass = desktopClass;
-        return this;
-    }
-
-    public WebAppDescription withMobileDesign(Class<? extends NavigationDesignInterface> mobileClass) {
-        this.mobileClass = mobileClass;
-        return this;
-    }
-
-    public WebAppDescription withLoginPage(Class<? extends LoginPage> loginClass) {
-        this.loginClass = loginClass;
-        return this;
-    }
-
-    public WebAppDescription withSubpages(Subpages navigationDescription) {
-        this.navigationDescription = navigationDescription;
-        return this;
-    }
-
-    public WebAppDescription withSubpages(Subpage... navigationDescription) {
-        this.navigationDescription = new Subpages(navigationDescription);
-        return this;
-    }
-
     public Class<? extends Subpage> getDefaultPage() {
         return defaultPage;
     }
@@ -81,24 +38,12 @@ public class WebAppDescription {
         return defaultView;
     }
 
-    public void setDefaultView(NavigationDesignInterface defaultView) {
-        this.defaultView = defaultView;
-    }
-
     public NavigationDesignInterface getMobileView() {
         return mobileView;
     }
 
-    public void setMobileView(NavigationDesignInterface mobileView) {
-        this.mobileView = mobileView;
-    }
-
     public LoginPage getLoginNavigable() {
         return loginNavigable;
-    }
-
-    public void setLoginNavigable(LoginPage loginNavigable) {
-        this.loginNavigable = loginNavigable;
     }
 
     private Object createInstance(Class instanceClass) {
@@ -127,33 +72,15 @@ public class WebAppDescription {
         return title;
     }
 
-    public WebAppDescription withDefaultPage(Class<? extends Subpage> defaultPage) {
-        this.defaultPage = defaultPage;
-        return this;
-    }
 
-    public WebAppDescription withTitle(String title) {
-        this.title = title;
-        return this;
-    }
-
-    public WebAppDescription withConfiguration(String key, boolean value) {
-        configuration.add(new AbstractMap.SimpleEntry<String, Boolean>(key, value));
-        return this;
-    }
-
-    public Stream<AbstractMap.SimpleEntry<String, Boolean>> getConfiguration() {
-        return configuration.stream();
+    public List<AbstractMap.SimpleEntry<String, Boolean>> getConfiguration() {
+        return configuration;
     }
 
     public Stream<Subpage> getSubpages() {
         return navigationElements.stream();
     }
 
-    public WebAppDescription withLogin(AccessControl accessControl) {
-        this.accessControl = accessControl;
-        return this;
-    }
 
     public AccessControl getAccessControl() {
         return accessControl;
@@ -197,13 +124,39 @@ public class WebAppDescription {
         return this;
     }
 
-    public WebAppDescription withRegistration(RegistrationControl registrationControl) {
-        this.registrationControl = registrationControl;
-        return this;
-    }
-
     public RegistrationControl getRegistrationControl() {
         return registrationControl;
     }
 
+    public void setDefaultClass(Class<? extends NavigationDesignInterface> defaultClass) {
+        this.defaultClass = defaultClass;
+    }
+
+    public void setMobileClass(Class<? extends NavigationDesignInterface> mobileClass) {
+        this.mobileClass = mobileClass;
+    }
+
+    public void setLoginClass(Class<? extends LoginPage> loginClass) {
+        this.loginClass = loginClass;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setDefaultPage(Class<? extends Subpage> defaultPage) {
+        this.defaultPage = defaultPage;
+    }
+
+    public void setAccessControl(AccessControl accessControl) {
+        this.accessControl = accessControl;
+    }
+
+    public void setRegistrationControl(RegistrationControl registrationControl) {
+        this.registrationControl = registrationControl;
+    }
+
+    public void setNavigationDescription(Subpages navigationDescription) {
+        this.navigationDescription = navigationDescription;
+    }
 }
