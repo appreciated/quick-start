@@ -8,7 +8,7 @@ import com.vaadin.ui.HorizontalLayout;
 public class NavigationContainerView extends NavigationContainerDesign {
 
     public HorizontalLayout getContentHolder() {
-        return content;
+        return this;
     }
 
 }

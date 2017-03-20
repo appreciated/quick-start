@@ -25,6 +25,7 @@ public abstract class ProgressStepPager extends VerticalLayout implements Subpag
         pages.stream().forEach(subpage -> subpage.setFinishListener(this));
         setNewContent(pages.get(0));
         progressStepView.reInit();
+        setMargin(false);
     }
 
     @Override

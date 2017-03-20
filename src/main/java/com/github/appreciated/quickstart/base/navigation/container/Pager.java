@@ -49,7 +49,7 @@ public abstract class Pager extends NavigationPagerDesign implements Subpage, Ha
         next.setVisible(index != subpages.size() - 1);
         if (subpage instanceof ContainerSubpage) {
             NavigationContainerDesign container = new NavigationContainerDesign();
-            container.content.addComponent(subpage);
+            container.addComponent(subpage);
             content.removeAllComponents();
             content.addComponent(container);
         } else {
