@@ -17,15 +17,14 @@ public abstract class ProgressStepPager extends VerticalLayout implements Subpag
 
     private final ProgressStepView progressStepView;
     private final List<Finishable> pages;
-    private final Subpage currentPage;
 
     public ProgressStepPager() {
         progressStepView = new ProgressStepView(this, isNavigatable());
         progressStepView.setNavigationListener(this);
         this.pages = getPagingElements();
         pages.stream().forEach(subpage -> subpage.setFinishListener(this));
-        this.currentPage = pages.get(0);
-        setNewContent(currentPage);
+        setNewContent(pages.get(0));
+        progressStepView.reInit();
     }
 
     @Override

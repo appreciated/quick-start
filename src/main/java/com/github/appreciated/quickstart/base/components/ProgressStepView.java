@@ -42,6 +42,8 @@ public class ProgressStepView extends HorizontalLayout {
             }
             this.addComponent(view);
         }
+        addStyleName("stepper-view");
+        setSpacing(true);
         currentStepperIterator = stepperViews.listIterator(1);
         setActiveStepper(stepperViews.getFirst());
     }
@@ -77,6 +79,10 @@ public class ProgressStepView extends HorizontalLayout {
 
     public void setNavigationListener(NavigationListener navigationListener) {
         this.navigationListener = navigationListener;
+    }
+
+    public void reInit() {
+        setActiveStepper(stepperViews.getFirst());
     }
 
     public interface NavigationListener {
