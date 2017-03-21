@@ -8,29 +8,28 @@ This Project is still under construction! You can already use it for Experiments
 This Library is for Webapplications which aim to look like modern Websites with Navigation.  
 It comes with a component which allows to archive something similar to the Vaadin Navigator Component (https://vaadin.com/docs/-/part/framework/advanced/advanced-navigator.html). 
 
-The purpose is to quickly create Applications which require one or multiple of the following functionalitiys:
+The purpose is to create faster Applications which require one or multiple of the following functionalities:
 - Multipage Website
-- "Responsive" Navigation (Desktop and/or Mobile)
-- Login
-- Registration
-- Access Management (A basic example is given which you can ofcourse replace by your own code)
+- Seperate apperance for mobile and desktop
+- Login (and Registration)
+- Seperate Login Page or on Menubar 
+- (TODO) Access Management (A basic example is given which you can ofcourse replace by your own code)
+- (TODO) HTML5 History API
 
-The Library won't do any database "stuff" you will still need to write the user data back to the database.  
+The Library won't do any database "stuff" you will still need to write the data back to the database.  
 
-The Advantage is when using this Library you can strongly change the look of your application very easily by just switching the design class and the theme, while keeping all of your functionality in place. 
-If the given Designs are not sufficent just fork one of mine and create your own, you might even consider to give me a link then I can list it here. 
+Antoher Advantage of this Library due to a loose coupling of design and your application logic the look of your application can be changed very easily by just switching the "Design". If the given Designs are not sufficent just fork one and fit them to your needs, you might even consider to give me a link then I can list them here. 
 
 This Library offers a API for the Designs which then decide on their own how to represent the data you give them on instanciation.
 Also this Library comes with some basic functionality for the navigation (might be replaced by the Navigator).
 
-Currently availible Designs:
+Currently available Designs:
 * [Material Design (with Mobile Support)](https://github.com/appreciated/quick-start-material)
 
-Additionally it comes with:  
+Additionally this Library comes with:  
 - Component Printing (This function is limited to the visible html)
 - Simplyfied (but more abstracted) Dialog (Window) Creation (with Negative / Postive Buttons)
-- Component Pager (Might be replaced by https://vaadin.com/directory#!addon/carousel, because it offers mature swiping)
-- Object to String Serialization (easy)
+- Component Pager (Might be replaced by https://vaadin.com/directory#!addon/carousel, because it offers swiping)
 
 Also is comes with more abstracted versions of the following components
 - Upload 
