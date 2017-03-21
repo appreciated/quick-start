@@ -1,5 +1,6 @@
 package com.github.appreciated.quickstart.base.dialog;
 
+import com.vaadin.server.Page;
 import com.vaadin.server.Sizeable;
 import com.vaadin.ui.*;
 
@@ -40,6 +41,9 @@ public abstract class Dialog {
             initDialogButtons(buttons);
         }
         dialog.setContent(wrapper);
+        dialog.addAttachListener(attachEvent -> {
+            Page.getCurrent().addBrowserWindowResizeListener(browserWindowResizeEvent -> dialog.center());
+        });
     }
 
     private void initDialogButtons(Button... buttons) {
