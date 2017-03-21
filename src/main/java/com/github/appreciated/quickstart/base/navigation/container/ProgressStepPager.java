@@ -4,6 +4,7 @@ import com.github.appreciated.quickstart.base.components.ProgressStepView;
 import com.github.appreciated.quickstart.base.navigation.actions.Action;
 import com.github.appreciated.quickstart.base.navigation.actions.CustomAction;
 import com.github.appreciated.quickstart.base.navigation.interfaces.*;
+import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.VerticalLayout;
 
@@ -30,7 +31,7 @@ public abstract class ProgressStepPager extends VerticalLayout implements Subpag
             public boolean isMobileCompliant() {
                 return false;
             }
-        });
+        }.withAlignment(Alignment.MIDDLE_CENTER));
     }
 
     @Override
