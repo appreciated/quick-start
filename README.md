@@ -27,10 +27,8 @@ Currently available Designs:
 * [Material Design (with Mobile Support)](https://github.com/appreciated/quick-start-material)
 
 Additionally this Library comes with:  
-- Component Printing (This function is limited to the visible html)
-- Simplyfied (but more abstracted) Dialog (Window) Creation (with Negative / Postive Buttons)
-- Component Pager (Might be replaced by https://vaadin.com/directory#!addon/carousel, because it offers swiping)
-
-Also is comes with more abstracted versions of the following components
-- Upload 
-- Download
+- component printing (This function is limited to the visible html)
+- simplyfied (but more abstracted) Dialog (Window) Creation (with Negative / Postive Buttons)
+- component pager (Might be replaced by https://vaadin.com/directory#!addon/carousel, because it offers swiping)
+- progress stepper
+- abstracted versions of Upload and Download
