@@ -28,7 +28,7 @@ public abstract class WebApplicationUI extends UI {
     @Override
     public final void init(VaadinRequest vaadinRequest) {
         try {
-            websiteDescription = initWebAppDescription().init();
+            websiteDescription = initWebAppDescription().init(isMobile());
             setLocale(vaadinRequest.getLocale());
             getPage().setTitle(websiteDescription.getTitle());
             defaultNavigationView = websiteDescription.getDefaultView();
@@ -54,12 +54,15 @@ public abstract class WebApplicationUI extends UI {
         if (loginNavigable == null) {
             navigation.disableLogout();
         }
+        navigator = new WebsiteNavigator(navigation);
+        navigator.initNavigationElements(getWebsiteDescription().getSubpages());
         navigation.initNavigationElements(getWebsiteDescription().getSubpages());
         navigation.initUserFunctionality(getWebsiteDescription());
         navigation.initWithTitle(getWebsiteDescription().getTitle());
         navigation.initWithConfiguration(getWebsiteDescription().getConfiguration().stream());
-        navigator = new WebsiteNavigator(navigation);
+        navigator.navigateToDefaultPage();
         setContent(navigation);
+
     }
 
     public static WebApplicationUI get() {

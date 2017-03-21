@@ -17,15 +17,27 @@ public abstract class ProgressStepPager extends VerticalLayout implements Subpag
 
     private final ProgressStepView progressStepView;
     private final List<Finishable> pages;
+    private final List<Action> actions;
 
     public ProgressStepPager() {
         progressStepView = new ProgressStepView(this, isNavigatable());
         progressStepView.setNavigationListener(this);
         this.pages = getPagingElements();
         pages.stream().forEach(subpage -> subpage.setFinishListener(this));
-        setNewContent(pages.get(0));
-        progressStepView.reInit();
         setMargin(false);
+        actions = Arrays.asList(new CustomAction(progressStepView) {
+            @Override
+            public boolean isMobileCompliant() {
+                return false;
+            }
+        });
+    }
+
+    @Override
+    public void attach() {
+        super.attach();
+        progressStepView.setNavigationListener(this);
+        setNewContent(progressStepView.getCurrent());
     }
 
     @Override
@@ -40,12 +52,7 @@ public abstract class ProgressStepPager extends VerticalLayout implements Subpag
 
     @Override
     public List<Action> getContextActions() {
-        return Arrays.asList(new CustomAction(progressStepView) {
-            @Override
-            public boolean isMobileCompliant() {
-                return false;
-            }
-        });
+        return actions;
     }
 
     public boolean isNavigatable() {

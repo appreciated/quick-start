@@ -72,8 +72,14 @@ public class ProgressStepView extends HorizontalLayout {
         if (navigateable) {
             stepperViews.forEach(components1 -> components1.removeStyleName("stepper-wrapper-active"));
         }
+
+        for (ProgressStepDesign stepperView : stepperViews) {
+            stepperView.addStyleName("stepper-wrapper-active");
+            if (stepperView == design) {
+                break;
+            }
+        }
         currentDesign = design;
-        design.addStyleName("stepper-wrapper-active");
         onNavigate(pages.get(stepperViews.indexOf(currentDesign)));
     }
 
@@ -83,6 +89,10 @@ public class ProgressStepView extends HorizontalLayout {
 
     public void reInit() {
         setActiveStepper(stepperViews.getFirst());
+    }
+
+    public Finishable getCurrent() {
+        return pages.get(stepperViews.indexOf(currentDesign));
     }
 
     public interface NavigationListener {

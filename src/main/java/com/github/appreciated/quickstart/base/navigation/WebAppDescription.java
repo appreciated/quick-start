@@ -86,7 +86,7 @@ public class WebAppDescription {
         return accessControl;
     }
 
-    public WebAppDescription init() throws InvalidWebDescriptionException {
+    public WebAppDescription init(boolean isMobile) throws InvalidWebDescriptionException {
         if (defaultClass == null) {
             throw new InvalidWebDescriptionException("No defaultNavigationView defined!");
         }
@@ -100,7 +100,7 @@ public class WebAppDescription {
             throw new InvalidWebDescriptionException("No navigation elements defined defined!");
         }
         if (defaultPage == null) {
-            defaultPage = navigationDescription.getSubpages().get(0).getClass();
+            defaultPage = navigationDescription.getSubpages().getFirst().getClass();
         }
         this.navigationElements = navigationDescription.getSubpages();
         for (Subpage navigationElement : navigationElements) {
@@ -108,9 +108,11 @@ public class WebAppDescription {
                 throw new InvalidWebDescriptionException("No navigationName defined!");
             }
         }
-
-        defaultView = (NavigationDesignInterface) createInstance(defaultClass);
-        mobileView = (NavigationDesignInterface) createInstance(mobileClass);
+        if (!isMobile) {
+            defaultView = (NavigationDesignInterface) createInstance(defaultClass);
+        } else {
+            mobileView = (NavigationDesignInterface) createInstance(mobileClass);
+        }
         loginNavigable = (LoginPage) createInstance(loginClass);
         if (loginNavigable != null) {
             loginNavigable.initTitle(title);

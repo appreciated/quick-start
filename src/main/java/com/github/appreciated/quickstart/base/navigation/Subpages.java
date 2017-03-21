@@ -2,15 +2,14 @@ package com.github.appreciated.quickstart.base.navigation;
 
 import com.github.appreciated.quickstart.base.navigation.interfaces.Subpage;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+import java.util.LinkedList;
 
 /**
  * Created by appreciated on 07.03.2017.
  */
 public class Subpages {
-    List<Subpage> subpages = new ArrayList<>();
+    LinkedList<Subpage> subpages = new LinkedList<>();
 
     public Subpages(Subpage... subpages) {
         this.subpages.addAll(Arrays.asList(subpages));
@@ -22,7 +21,7 @@ public class Subpages {
     }
 
 
-    public List<Subpage> getSubpages() {
+    public LinkedList<Subpage> getSubpages() {
         return subpages;
     }
 }

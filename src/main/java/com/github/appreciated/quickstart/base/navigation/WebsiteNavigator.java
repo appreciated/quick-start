@@ -9,11 +9,9 @@ import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.UI;
 
-import java.awt.event.ActionListener;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Stream;
 
 /**
  * Created by appreciated on 10.12.2016.
@@ -37,12 +35,14 @@ public class WebsiteNavigator extends Navigator {
     public WebsiteNavigator(NavigationDesignInterface navigatorView) {
         this.holder = navigatorView.getHolder();
         this.navigatorView = navigatorView;
+    }
+
+    public void navigateToDefaultPage(){
         navigateTo(WebApplicationUI.getWebsiteDescription().getDefaultPage());
     }
 
-    public ActionListener addNavigation(Subpage navigation) {
+    public void addNavigation(Subpage navigation) {
         navigationElements.put(navigation.getClass(), navigation);
-        return e -> navigateTo(navigation);
     }
 
     public void navigateTo(Subpage subpageComponent) {
@@ -66,7 +66,6 @@ public class WebsiteNavigator extends Navigator {
         setComponent(container);
     }
 
-
     public void setComponent(Component component) {
         navigatorView.allowPercentagePageHeight(component instanceof HasPercentageHeight);
         holder.removeAllComponents();
@@ -78,24 +77,8 @@ public class WebsiteNavigator extends Navigator {
     }
 
     public void navigateTo(Class<? extends Subpage> classKey) {
-        if (navigationElements.containsKey(classKey)) {
-            navigateTo(navigationElements.get(classKey));
-        } else {
-            try {
-                Constructor<? extends Subpage> constructor = classKey.getConstructor();
-                Subpage instance = constructor.newInstance();
-                navigationElements.put(instance.getClass(), instance);
-                navigateTo(instance);
-            } catch (NoSuchMethodException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (InstantiationException e) {
-                e.printStackTrace();
-            } catch (InvocationTargetException e) {
-                e.printStackTrace();
-            }
-        }
+        Subpage page = navigationElements.get(classKey);
+        navigateTo(page);
     }
 
     public NavigationDesignInterface getNavigationDesign() {
@@ -132,4 +115,7 @@ public class WebsiteNavigator extends Navigator {
         }
     }
 
+    public void initNavigationElements(Stream<Subpage> subpages) {
+        subpages.forEach(subpage -> addNavigation(subpage));
+    }
 }
