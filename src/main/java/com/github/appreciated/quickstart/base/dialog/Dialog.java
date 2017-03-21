@@ -11,6 +11,7 @@ public abstract class Dialog {
     private final VerticalLayout wrapper;
     private final Window dialog;
     private final VerticalLayout dialogContentWrapper;
+    private final Component content;
     private HorizontalLayout buttonOrientationWrapper;
     private HorizontalLayout buttonWrapper = null;
     private Alignment alignment = Alignment.MIDDLE_RIGHT;
@@ -26,11 +27,14 @@ public abstract class Dialog {
     public Dialog(String title, Component component, Button... buttons) {
         dialog = new Window(title);
         Button[] buttons1 = buttons;
-        HorizontalLayout componentWrapper = new HorizontalLayout(component);
+        content = component;
+        HorizontalLayout componentWrapper = new HorizontalLayout(content);
         componentWrapper.setId("window-component-wrapper");
         wrapper = new VerticalLayout();
+        wrapper.setMargin(false);
         dialogContentWrapper = new VerticalLayout(componentWrapper);
         Panel dialogContentPanel = new Panel(dialogContentWrapper);
+        dialogContentPanel.addStyleName("borderless");
         wrapper.addComponent(dialogContentPanel);
         if (buttons != null && buttons.length > 0) {
             initDialogButtons(buttons);
@@ -117,6 +121,10 @@ public abstract class Dialog {
 
     public Window getWindow() {
         return dialog;
+    }
+
+    public Component getContent() {
+        return content;
     }
 
     public VerticalLayout getDialogContentWrapper() {

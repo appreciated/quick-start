@@ -112,13 +112,24 @@ public class WebAppDescription {
         defaultView = (NavigationDesignInterface) createInstance(defaultClass);
         mobileView = (NavigationDesignInterface) createInstance(mobileClass);
         loginNavigable = (LoginPage) createInstance(loginClass);
-        loginNavigable.initTitle(title);
+        if (loginNavigable != null) {
+            loginNavigable.initTitle(title);
+        }
         if (accessControl != null) {
-            loginNavigable.initWithAccessControl(accessControl);
+            if (loginNavigable != null) {
+                loginNavigable.initWithAccessControl(accessControl);
+            } else {
+                defaultView.initWithAccessControl(accessControl);
+            }
             if (registrationControl == null) {
                 throw new InvalidWebDescriptionException("No registrationControl defined!");
             } else {
-                loginNavigable.initRegistrationControl(registrationControl);
+                if (loginNavigable != null) {
+                    loginNavigable.initRegistrationControl(registrationControl);
+                } else {
+                    defaultView.initRegistrationControl(registrationControl);
+                }
+
             }
         }
         return this;

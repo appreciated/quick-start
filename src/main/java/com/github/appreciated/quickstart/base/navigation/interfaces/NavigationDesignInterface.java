@@ -1,5 +1,7 @@
 package com.github.appreciated.quickstart.base.navigation.interfaces;
 
+import com.github.appreciated.quickstart.base.authentication.login.AccessControl;
+import com.github.appreciated.quickstart.base.navigation.RegistrationControl;
 import com.github.appreciated.quickstart.base.navigation.WebAppDescription;
 import com.vaadin.ui.AbstractOrderedLayout;
 import com.vaadin.ui.Component;
@@ -36,4 +38,8 @@ public interface NavigationDesignInterface extends Component {
     default void setPageTitleVisibility(boolean hide) {}
 
     void setCurrentSearchNavigable(HasSearch navigable);
+
+    void initWithAccessControl(AccessControl accessControl);
+
+    void initRegistrationControl(RegistrationControl registrationControl);
 }

@@ -35,7 +35,7 @@ public abstract class WebApplicationUI extends UI {
             mobileNavigationView = websiteDescription.getMobileView();
             loginNavigable = websiteDescription.getLoginNavigable();
             if (loginNavigable != null && !getWebsiteDescription().getAccessControl().isUserSignedIn()) {
-                loginNavigable.setAuthenticationListener(() -> showMainView());
+                loginNavigable.initWithLoginListener(() -> showMainView());
                 setContent(loginNavigable);
             } else {
                 showMainView();
@@ -99,5 +99,9 @@ public abstract class WebApplicationUI extends UI {
 
     public static WebAppDescription getWebsiteDescription() {
         return get().websiteDescription;
+    }
+
+    public static boolean isUserSignedIn() {
+        return getWebsiteDescription().getAccessControl().isUserSignedIn();
     }
 }
