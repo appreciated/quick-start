@@ -1,6 +1,5 @@
 package com.github.appreciated.quickstart.base.navigation;
 
-
 import com.github.appreciated.quickstart.base.authentication.registration.Field;
 import com.github.appreciated.quickstart.base.authentication.registration.FieldPropertySet;
 import com.github.appreciated.quickstart.base.authentication.registration.RegistrationResult;
@@ -9,9 +8,9 @@ import com.vaadin.data.HasValue;
 import com.vaadin.data.ValidationResult;
 import com.vaadin.data.Validator;
 import com.vaadin.ui.TextField;
-import javafx.util.Pair;
 
 import javax.xml.ws.Holder;
+import java.util.AbstractMap;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,7 +28,7 @@ public interface RegistrationControl<T> {
 
     T getUser();
 
-    default List<Pair<HasValue, java.lang.reflect.Field>> getFields() {
+    default List<AbstractMap.SimpleEntry<HasValue, java.lang.reflect.Field>> getFields() {
         Stream<java.lang.reflect.Field> fields = getAttributes(getUser());
         return fields.map(field -> {
             TextField textField = new TextField();
@@ -37,11 +36,11 @@ public interface RegistrationControl<T> {
             Field annotation = field.getAnnotation(Field.class);
             textField.setCaption(annotation.caption());
             textField.setRequiredIndicatorVisible(annotation.required());
-            return new Pair<HasValue, java.lang.reflect.Field>(textField, field);
+            return new AbstractMap.SimpleEntry<HasValue, java.lang.reflect.Field>(textField, field);
         }).collect(Collectors.toList());
     }
 
-    default Binder<T> getBinderForFields(List<Pair<HasValue, java.lang.reflect.Field>> components) {
+    default Binder<T> getBinderForFields(List<AbstractMap.SimpleEntry<HasValue, java.lang.reflect.Field>> components) {
         Binder<T> binder = new Binder<T>().withPropertySet(new FieldPropertySet<T>((Class<T>) getUser().getClass()));
         binder.setBean(getUser());
 

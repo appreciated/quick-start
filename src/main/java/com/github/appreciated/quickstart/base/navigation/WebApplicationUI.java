@@ -1,6 +1,7 @@
 package com.github.appreciated.quickstart.base.navigation;
 
 
+import com.github.appreciated.quickstart.base.authentication.login.CurrentUser;
 import com.github.appreciated.quickstart.base.navigation.exception.InvalidWebDescriptionException;
 import com.github.appreciated.quickstart.base.navigation.interfaces.LoginPage;
 import com.github.appreciated.quickstart.base.navigation.interfaces.NavigationDesignInterface;
@@ -24,6 +25,10 @@ public abstract class WebApplicationUI extends UI {
     private LoginPage loginNavigable;
     private WebAppDescription websiteDescription;
     private WebsiteNavigator navigator;
+
+    public static String getUsername() {
+        return CurrentUser.get();
+    }
 
     @Override
     public final void init(VaadinRequest vaadinRequest) {
@@ -62,7 +67,6 @@ public abstract class WebApplicationUI extends UI {
         navigation.initWithConfiguration(getWebsiteDescription().getConfiguration().stream());
         navigator.navigateToDefaultPage();
         setContent(navigation);
-
     }
 
     public static WebApplicationUI get() {
