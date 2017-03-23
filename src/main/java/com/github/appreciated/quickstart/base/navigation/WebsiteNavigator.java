@@ -4,6 +4,7 @@ import com.github.appreciated.quickstart.base.navigation.container.NavigationCon
 import com.github.appreciated.quickstart.base.navigation.container.Pager;
 import com.github.appreciated.quickstart.base.navigation.interfaces.*;
 import com.vaadin.navigator.Navigator;
+import com.vaadin.server.Sizeable;
 import com.vaadin.ui.AbstractOrderedLayout;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Component;
@@ -37,7 +38,7 @@ public class WebsiteNavigator extends Navigator {
         this.navigatorView = navigatorView;
     }
 
-    public void navigateToDefaultPage(){
+    public void navigateToDefaultPage() {
         navigateTo(WebApplicationUI.getWebsiteDescription().getDefaultPage());
     }
 
@@ -72,7 +73,11 @@ public class WebsiteNavigator extends Navigator {
         onNavigate();
         currentComponent = component;
         holder.addComponent(currentComponent);
-        holder.setSizeFull();
+        if (!WebApplicationUI.isMobile()) {
+            holder.setSizeFull();
+        } else {
+            holder.setWidth(100, Sizeable.Unit.PERCENTAGE);
+        }
         holder.setComponentAlignment(currentComponent, Alignment.MIDDLE_CENTER);
     }
 
