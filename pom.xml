@@ -7,7 +7,7 @@
     <version>0.7.2</version>
     <packaging>jar</packaging>
     <properties>
-        <vaadin.version>8.0.3</vaadin.version>
+        <vaadin.version>8.0.4</vaadin.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
