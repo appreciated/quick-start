@@ -2,6 +2,7 @@ package com.github.appreciated.quickstart.base.navigation;
 
 
 import com.github.appreciated.quickstart.base.authentication.login.CurrentUser;
+import com.github.appreciated.quickstart.base.error.ErrorPageDesign;
 import com.github.appreciated.quickstart.base.navigation.exception.InvalidWebDescriptionException;
 import com.github.appreciated.quickstart.base.navigation.interfaces.LoginPage;
 import com.github.appreciated.quickstart.base.navigation.interfaces.NavigationDesignInterface;
@@ -45,8 +46,9 @@ public abstract class WebApplicationUI extends UI {
             } else {
                 showMainView();
             }
-        } catch (InvalidWebDescriptionException e) {
+        } catch (Exception e) {
             e.printStackTrace();
+            setContent(new ErrorPageDesign());
         }
     }
 

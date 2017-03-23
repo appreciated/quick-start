@@ -46,24 +46,9 @@ public class WebAppDescription {
         return loginNavigable;
     }
 
-    private Object createInstance(Class instanceClass) {
+    private Object createInstance(Class instanceClass) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         if (instanceClass != null) {
-            try {
-                return instanceClass.getConstructor().newInstance();
-            } catch (NoSuchMethodException e) {
-                e.printStackTrace();
-                e.getCause().printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-                e.getCause().printStackTrace();
-            } catch (InvocationTargetException e) {
-                e.getCause().printStackTrace();
-                e.printStackTrace();
-            } catch (InstantiationException e) {
-                e.printStackTrace();
-            } catch (NullPointerException e) {
-                e.printStackTrace();
-            }
+            return instanceClass.getConstructor().newInstance();
         }
         return null;
     }
@@ -86,7 +71,7 @@ public class WebAppDescription {
         return accessControl;
     }
 
-    public WebAppDescription init(boolean isMobile) throws InvalidWebDescriptionException {
+    public WebAppDescription init(boolean isMobile) throws InvalidWebDescriptionException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         if (defaultClass == null) {
             throw new InvalidWebDescriptionException("No defaultNavigationView defined!");
         }
