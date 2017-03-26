@@ -10,6 +10,7 @@ import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.UI;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Stream;
@@ -82,7 +83,23 @@ public class WebsiteNavigator extends Navigator {
     }
 
     public void navigateTo(Class<? extends Subpage> classKey) {
-        Subpage page = navigationElements.get(classKey);
+        Subpage page = null;
+        if (navigationElements.containsKey(classKey)) {
+            page = navigationElements.get(classKey);
+        } else {
+            try {
+                Subpage instance = classKey.getConstructor().newInstance();
+                navigationElements.put(classKey, instance);
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            }
+        }
         navigateTo(page);
     }
 

@@ -16,13 +16,20 @@ public abstract class CustomAction extends Action {
     public CustomAction(Component component) {
         super(null, null);
         this.desktopComponent = component;
+        alignment = Alignment.TOP_LEFT;
     }
 
     public Component getMobileComponent() {
         return mobileComponent;
     }
 
-    public abstract boolean isMobileCompliant();
+    /**
+     * Override if you Design if the component can be added to it on the mobile design
+     * @return
+     */
+    public boolean isMobileCompliant() {
+        return false;
+    }
 
     public Component getDesktopComponent() {
         return desktopComponent;
@@ -39,5 +46,9 @@ public abstract class CustomAction extends Action {
     public Action withAlignment(Alignment alignment) {
         this.alignment = alignment;
         return this;
+    }
+
+    public void setMobileComponent(Component mobileComponent) {
+        this.mobileComponent = mobileComponent;
     }
 }
