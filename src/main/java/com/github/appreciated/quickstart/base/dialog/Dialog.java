@@ -14,7 +14,7 @@ public abstract class Dialog {
     private final VerticalLayout dialogContentWrapper;
     private final Component content;
     private HorizontalLayout buttonOrientationWrapper;
-    private HorizontalLayout buttonWrapper = null;
+    private HorizontalLayout buttonWrapper;
     private Alignment alignment = Alignment.MIDDLE_RIGHT;
 
     public interface DialogListener {
@@ -33,6 +33,7 @@ public abstract class Dialog {
         componentWrapper.setId("window-component-wrapper");
         wrapper = new VerticalLayout();
         wrapper.setMargin(false);
+        wrapper.setSpacing(false);
         dialogContentWrapper = new VerticalLayout(componentWrapper);
         Panel dialogContentPanel = new Panel(dialogContentWrapper);
         dialogContentPanel.addStyleName("borderless");
@@ -40,6 +41,7 @@ public abstract class Dialog {
         if (buttons != null && buttons.length > 0) {
             initDialogButtons(buttons);
         }
+        buttonWrapper = new HorizontalLayout();
         dialog.setContent(wrapper);
         dialog.addAttachListener(attachEvent -> {
             Page.getCurrent().addBrowserWindowResizeListener(browserWindowResizeEvent -> dialog.center());
@@ -47,14 +49,12 @@ public abstract class Dialog {
     }
 
     private void initDialogButtons(Button... buttons) {
-        buttonWrapper = new HorizontalLayout();
         wrapper.addComponent(buttonWrapper);
         buttonWrapper.setWidth(100, Sizeable.Unit.PERCENTAGE);
-
+        buttonWrapper.setMargin(true);
         buttonOrientationWrapper = new HorizontalLayout();
         buttonWrapper.addComponent(buttonOrientationWrapper);
         buttonOrientationWrapper.setSpacing(true);
-
         buttonWrapper.setComponentAlignment(buttonOrientationWrapper, alignment);
         if (buttons != null) {
             for (Button button : buttons) {
