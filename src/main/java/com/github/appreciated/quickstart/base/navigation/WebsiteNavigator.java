@@ -57,19 +57,27 @@ public class WebsiteNavigator extends Navigator {
             if (subpageComponent instanceof ContainerSubpage) {
                 navigateTo((ContainerSubpage) subpageComponent);
             } else {
-                setComponent(subpageComponent);
+                setComponent(subpageComponent, false);
             }
         }
     }
 
     public void navigateTo(ContainerSubpage component) {
         NavigationContainerView container = new NavigationContainerView();
+        if (component.hasPadding()) {
+            container.getContentHolder().addStyleName("container-padding");
+        }
+        boolean hasPercentageHeight = component instanceof HasPercentageHeight;
+        if (hasPercentageHeight) {
+            container.setSizeFull();
+            container.getContentHolder().setSizeFull();
+        }
         container.getContentHolder().addComponent(component);
-        setComponent(container);
+        setComponent(container, hasPercentageHeight);
     }
 
-    public void setComponent(Component component) {
-        navigatorView.allowPercentagePageHeight(component instanceof HasPercentageHeight);
+    public void setComponent(Component component, boolean setPercentageHeight) {
+        navigatorView.allowPercentagePageHeight(component instanceof HasPercentageHeight || setPercentageHeight);
         holder.removeAllComponents();
         onNavigate();
         currentComponent = component;
