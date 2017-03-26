@@ -83,10 +83,7 @@ public class WebsiteNavigator extends Navigator {
     }
 
     public void navigateTo(Class<? extends Subpage> classKey) {
-        Subpage page = null;
-        if (navigationElements.containsKey(classKey)) {
-            page = navigationElements.get(classKey);
-        } else {
+        if (!navigationElements.containsKey(classKey)) {
             try {
                 Subpage instance = classKey.getConstructor().newInstance();
                 navigationElements.put(classKey, instance);
@@ -100,7 +97,7 @@ public class WebsiteNavigator extends Navigator {
                 e.printStackTrace();
             }
         }
-        navigateTo(page);
+        navigateTo(navigationElements.get(classKey));
     }
 
     public NavigationDesignInterface getNavigationDesign() {
