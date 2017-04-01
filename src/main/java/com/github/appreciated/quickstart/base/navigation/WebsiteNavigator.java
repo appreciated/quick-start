@@ -147,6 +147,14 @@ public class WebsiteNavigator extends Navigator {
         }
     }
 
+    private Subpage getCurrentPage() {
+        return currentView;
+    }
+
+    public static Subpage getCurrentSubpage() {
+        return WebApplicationUI.getNavigation().getCurrentPage();
+    }
+
     public void initNavigationElements(Stream<Subpage> subpages) {
         subpages.forEach(subpage -> addNavigation(subpage));
     }
