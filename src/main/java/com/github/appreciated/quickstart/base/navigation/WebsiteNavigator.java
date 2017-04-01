@@ -48,11 +48,16 @@ public class WebsiteNavigator extends Navigator {
     }
 
     public void navigateTo(Subpage subpageComponent) {
+
+
         if (currentView != subpageComponent) {
             currentView = subpageComponent;
             navigatorView.setPageTitleVisibility(subpageComponent.showTitle());
             navigatorView.setCurrentSearchNavigable(subpageComponent instanceof HasSearch ? (HasSearch) subpageComponent : null);
             navigatorView.setCurrentActions(subpageComponent instanceof HasContextActions ? (HasContextActions) subpageComponent : null);
+            if (subpageComponent instanceof HasContextActions) {
+                ((HasContextActions) subpageComponent).setContextActionListener(() -> navigatorView.setCurrentActions((HasContextActions) subpageComponent));
+            }
             navigatorView.setCurrentContainerLabel(subpageComponent.getNavigationName());
             if (subpageComponent instanceof ContainerSubpage) {
                 navigateTo((ContainerSubpage) subpageComponent);

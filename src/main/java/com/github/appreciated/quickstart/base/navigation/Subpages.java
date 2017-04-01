@@ -24,4 +24,8 @@ public class Subpages {
     public LinkedList<Subpage> getSubpages() {
         return subpages;
     }
+
+    public Subpage first() {
+        return subpages.get(0);
+    }
 }
