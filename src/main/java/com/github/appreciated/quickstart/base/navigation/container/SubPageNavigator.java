@@ -20,6 +20,8 @@ public abstract class SubPageNavigator extends VerticalLayout implements Subpage
     private MenuBar menuBar;
     private List<Action> subpageActions = new ArrayList<>();
     private Map<Subpage, MenuBar.MenuItem> menuBarItems = new HashMap<>();
+    private String standardStyle;
+
 
     public SubPageNavigator() {
         menuBar = new MenuBar();
@@ -30,7 +32,7 @@ public abstract class SubPageNavigator extends VerticalLayout implements Subpage
         setCurrentSubpage(getPagingElements().first());
     }
 
-    private void setCurrentSubpage(Subpage page) {
+    public void setCurrentSubpage(Subpage page) {
         this.removeAllComponents();
         subpageActions.clear();
         if (page instanceof HasContextActions) {
@@ -52,6 +54,7 @@ public abstract class SubPageNavigator extends VerticalLayout implements Subpage
             this.addComponent(page);
         }
         updateContextActions();
+        menuBarItems.forEach((subpage, menuItem) -> menuItem.setStyleName(page.equals(subpage) ? getStyleName() + "active" : standardStyle));
     }
 
     @Override
@@ -69,6 +72,7 @@ public abstract class SubPageNavigator extends VerticalLayout implements Subpage
 
     public void addSubpage(Subpage page) {
         MenuBar.MenuItem item = menuBar.addItem(page.getNavigationName(), page.getNavigationIcon(), (MenuBar.Command) menuItem -> setCurrentSubpage(page));
+        standardStyle = item.getStyleName();
         menuBarItems.put(page, item);
     }
 
