@@ -68,7 +68,6 @@ public class Upload {
     }
 
     private static void fileAsStream(com.vaadin.ui.Upload upload, OutputStream stream, com.vaadin.ui.Upload.FinishedListener listener) {
-        System.out.println("fileAsStream");
         upload.setReceiver((com.vaadin.ui.Upload.Receiver) (s, s1) -> stream);
         upload.addFinishedListener(listener);
     }
