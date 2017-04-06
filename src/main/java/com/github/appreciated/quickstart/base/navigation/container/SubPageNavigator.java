@@ -80,4 +80,8 @@ public abstract class SubPageNavigator extends VerticalLayout implements Subpage
         menuBar.removeItem(menuBarItems.get(page));
         menuBarItems.remove(page);
     }
+
+    public void setCaption(Subpage page, String name) {
+        menuBarItems.get(page).setText(name);
+    }
 }
