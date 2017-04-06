@@ -8,9 +8,8 @@ import com.vaadin.ui.MenuBar;
 import com.vaadin.ui.VerticalLayout;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.SortedMap;
-import java.util.TreeMap;
 
 /**
  * Created by Johannes on 01.04.2017.
@@ -19,7 +18,7 @@ public abstract class SubPageNavigator extends VerticalLayout implements Subpage
 
     private MenuBar menuBar;
     private List<Action> subpageActions = new ArrayList<>();
-    private SortedMap<Subpage, MenuBar.MenuItem> menuBarItems = new TreeMap<>();
+    private LinkedHashMap<Subpage, MenuBar.MenuItem> menuBarItems = new LinkedHashMap<>();
     private String standardStyle;
 
 
@@ -29,7 +28,7 @@ public abstract class SubPageNavigator extends VerticalLayout implements Subpage
                 .forEach(subpage -> addSubpage(subpage));
         this.setMargin(false);
         menuBar.setStyleName("borderless navigation-bar");
-        setCurrentSubpage(menuBarItems.firstKey());
+        setCurrentSubpage(menuBarItems.entrySet().stream().map(entry -> entry.getKey()).findFirst().get());
     }
 
     public void setCurrentSubpage(Subpage page) {
