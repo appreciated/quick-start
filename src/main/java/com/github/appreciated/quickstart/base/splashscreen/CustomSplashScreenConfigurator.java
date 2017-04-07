@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * Modified by appreciated on 07.04.2017.
  */
-public class CustomSplashScreenConfigurator implements SplashScreenConfigurator {
+public class CustomSplashScreenConfigurator implements Configurator {
     public CustomSplashScreenConfigurator() {
     }
 
