@@ -12,7 +12,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 /**
- * Created by Johannes on 01.04.2017.
+ * Created by appreciated on 01.04.2017.
  */
 public abstract class SubPageNavigator extends VerticalLayout implements Subpage, HasSubpages, HasContextActions {
 

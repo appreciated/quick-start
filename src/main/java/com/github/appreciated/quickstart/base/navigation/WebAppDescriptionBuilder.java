@@ -8,7 +8,7 @@ import com.github.appreciated.quickstart.base.navigation.interfaces.Subpage;
 import java.util.AbstractMap;
 
 /**
- * Created by Johannes on 11.03.2017.
+ * Created by appreciated on 11.03.2017.
  */
 public class WebAppDescriptionBuilder {
     WebAppDescription description = new WebAppDescription();
