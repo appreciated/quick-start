@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.appreciated</groupId>
     <artifactId>quick-start-base</artifactId>
-    <version>0.8.4</version>
+    <version>0.8.5</version>
     <packaging>jar</packaging>
     <properties>
         <vaadin.version>8.0.5</vaadin.version>
@@ -35,6 +35,11 @@
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-webapp</artifactId>
             <version>9.3.14.v20161028</version>
+        </dependency>
+        <dependency>
+            <groupId>org.vaadin.leif</groupId>
+            <artifactId>splashscreen</artifactId>
+            <version>0.3-SNAPSHOT</version>
         </dependency>
     </dependencies>
     <build>

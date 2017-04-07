@@ -32,7 +32,7 @@ public abstract class WebApplicationUI extends UI {
     }
 
     @Override
-    public final void init(VaadinRequest vaadinRequest) {
+    protected void init(VaadinRequest vaadinRequest) {
         try {
             websiteDescription = initWebAppDescription().init(isMobile());
             setLocale(vaadinRequest.getLocale());
