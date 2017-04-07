@@ -21,10 +21,10 @@ import com.vaadin.ui.UI;
 public abstract class WebApplicationUI extends UI {
 
     private NavigationDesignInterface navigation;
-    private NavigationDesignInterface mobileNavigationView;
-    private NavigationDesignInterface defaultNavigationView;
-    private LoginPage loginNavigable;
-    private WebAppDescription websiteDescription;
+    private NavigationDesignInterface mobileView;
+    private NavigationDesignInterface defaultView;
+    private LoginPage loginPage;
+    private WebAppDescription description;
     private WebsiteNavigator navigator;
 
     public static String getUsername() {
@@ -34,15 +34,15 @@ public abstract class WebApplicationUI extends UI {
     @Override
     protected void init(VaadinRequest vaadinRequest) {
         try {
-            websiteDescription = initWebAppDescription().init(isMobile());
+            description = initWebAppDescription().init(isMobile());
             setLocale(vaadinRequest.getLocale());
-            getPage().setTitle(websiteDescription.getTitle());
-            defaultNavigationView = websiteDescription.getDefaultView();
-            mobileNavigationView = websiteDescription.getMobileView();
-            loginNavigable = websiteDescription.getLoginNavigable();
-            if (loginNavigable != null && !getWebsiteDescription().getAccessControl().isUserSignedIn()) {
-                loginNavigable.initWithLoginListener(() -> showMainView());
-                setContent(loginNavigable);
+            getPage().setTitle(description.getTitle());
+            defaultView = description.getDefaultView();
+            mobileView = description.getMobileView();
+            loginPage = description.getLoginNavigable();
+            if (loginPage != null && !getWebsiteDescription().getAccessControl().isUserSignedIn()) {
+                loginPage.initWithLoginListener(() -> showMainView());
+                setContent(loginPage);
             } else {
                 showMainView();
             }
@@ -53,12 +53,12 @@ public abstract class WebApplicationUI extends UI {
     }
 
     protected void showMainView() {
-        if (mobileNavigationView != null && isMobile()) {
-            navigation = mobileNavigationView;
+        if (mobileView != null && isMobile()) {
+            navigation = mobileView;
         } else {
-            navigation = defaultNavigationView;
+            navigation = defaultView;
         }
-        if (loginNavigable == null) {
+        if (loginPage == null) {
             navigation.disableLogout();
         }
         navigator = new WebsiteNavigator(navigation);
@@ -92,22 +92,22 @@ public abstract class WebApplicationUI extends UI {
         return browser.isAndroid() || browser.isIOS() || browser.isWindowsPhone();
     }
 
-    public void setMobileNavigationView(NavigationDesignInterface mobileNavigationView) {
-        this.mobileNavigationView = mobileNavigationView;
+    public void setMobileView(NavigationDesignInterface mobileView) {
+        this.mobileView = mobileView;
     }
 
-    public void setDefaultNavigationView(NavigationDesignInterface defaultNavigationView) {
-        this.defaultNavigationView = defaultNavigationView;
+    public void setDefaultView(NavigationDesignInterface defaultView) {
+        this.defaultView = defaultView;
     }
 
-    public void setLoginNavigable(LoginPage loginNavigable) {
-        this.loginNavigable = loginNavigable;
+    public void setLoginPage(LoginPage loginPage) {
+        this.loginPage = loginPage;
     }
 
     public abstract WebAppDescription initWebAppDescription() throws InvalidWebDescriptionException;
 
     public static WebAppDescription getWebsiteDescription() {
-        return get().websiteDescription;
+        return get().description;
     }
 
     public static boolean isUserSignedIn() {
