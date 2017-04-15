@@ -64,7 +64,7 @@ public abstract class ProgressStepPager extends VerticalLayout implements Subpag
         Component actualContent = null;
         if (content instanceof ContainerSubpage) {
             NavigationContainerView container = new NavigationContainerView();
-            container.getContentHolder().addComponent(content);
+            container.addComponent(content);
             actualContent = container;
         } else {
             actualContent = content;

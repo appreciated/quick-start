@@ -37,19 +37,23 @@ public abstract class SubPageNavigator extends VerticalLayout implements Subpage
         if (page instanceof HasContextActions) {
             subpageActions.addAll(((HasContextActions) page).getContextActions());
         }
+        boolean hasPercentageHeight = page instanceof HasPercentageHeight;
         if (page instanceof ContainerSubpage) {
             NavigationContainerView container = new NavigationContainerView();
             if (((ContainerSubpage) page).hasPadding()) {
-                container.getContentHolder().addStyleName("container-padding");
+                container.addStyleName("container-padding");
             }
-            boolean hasPercentageHeight = page instanceof HasPercentageHeight;
             if (hasPercentageHeight) {
                 container.setSizeFull();
-                container.getContentHolder().setSizeFull();
+                this.setSizeFull();
             }
-            container.getContentHolder().addComponent(page);
+            container.addComponent(page);
             this.addComponent(container);
         } else {
+            if (hasPercentageHeight) {
+                page.setSizeFull();
+                this.setSizeFull();
+            }
             this.addComponent(page);
         }
         updateContextActions();

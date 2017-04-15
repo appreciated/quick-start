@@ -70,14 +70,14 @@ public class WebsiteNavigator extends Navigator {
     public void navigateTo(ContainerSubpage component) {
         NavigationContainerView container = new NavigationContainerView();
         if (component.hasPadding()) {
-            container.getContentHolder().addStyleName("container-padding");
+            container.addStyleName("container-padding");
         }
         boolean hasPercentageHeight = component instanceof HasPercentageHeight;
         if (hasPercentageHeight) {
             container.setSizeFull();
-            container.getContentHolder().setSizeFull();
+            container.setSizeFull();
         }
-        container.getContentHolder().addComponent(component);
+        container.addComponent(component);
         setComponent(container, hasPercentageHeight);
     }
 
