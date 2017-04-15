@@ -75,7 +75,6 @@ public class WebsiteNavigator extends Navigator {
         boolean hasPercentageHeight = component instanceof HasPercentageHeight;
         if (hasPercentageHeight) {
             container.setSizeFull();
-            container.setSizeFull();
         }
         container.addComponent(component);
         setComponent(container, hasPercentageHeight);
