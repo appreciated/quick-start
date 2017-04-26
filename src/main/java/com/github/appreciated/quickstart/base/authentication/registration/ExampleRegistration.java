@@ -9,7 +9,6 @@ import com.github.appreciated.quickstart.base.navigation.RegistrationControl;
 public class ExampleRegistration implements RegistrationControl<ExampleUser> {
     @Override
     public RegistrationResult checkUserRegistrationValidity(ExampleUser user) {
-        System.out.println("checkUserRegistrationValidity:" + user.toString());
         return new RegistrationResult(true);
     }
 
