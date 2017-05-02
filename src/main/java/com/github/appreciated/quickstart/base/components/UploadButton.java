@@ -10,6 +10,7 @@ import com.vaadin.ui.Upload;
 public class UploadButton extends Upload {
 
     public UploadButton(UploadAction action) {
+
         if (WebApplicationUI.isMobile()) {
             //addStyleName("context-button");
             setCaption("");
@@ -18,10 +19,10 @@ public class UploadButton extends Upload {
             addStyleName("mobile-upload-inline-icon");
         } else {
             addStyleName("upload-inline-icon");
-            addStyleName("tab");
+            addStyleName("borderless tab");
             setButtonCaption(action.getName());
         }
-
+        addStyleName("borderless-upload-button");
         getButtonCaption();
         setImmediateMode(true);
         setIcon(action.getResource());
