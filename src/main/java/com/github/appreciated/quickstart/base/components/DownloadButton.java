@@ -16,7 +16,7 @@ public class DownloadButton extends Button {
             addStyleName("mobile-context-button");
         } else {
             addStyleName("tab");
-            this.addStyleName("borderless");
+            addStyleName("borderless contrast");
             setCaption(action.getName());
         }
         action.getDownload().createDownloadButton(this);
