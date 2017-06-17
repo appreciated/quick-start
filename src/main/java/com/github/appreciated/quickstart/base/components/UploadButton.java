@@ -19,7 +19,7 @@ public class UploadButton extends Upload {
             addStyleName("mobile-upload-inline-icon");
         } else {
             addStyleName("upload-inline-icon");
-            addStyleName("borderless contrast tab");
+            addStyleName("borderless custom");
             setButtonCaption(action.getName());
         }
         addStyleName("borderless-upload-button");

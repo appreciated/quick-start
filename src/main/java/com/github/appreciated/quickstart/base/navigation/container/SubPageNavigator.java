@@ -27,7 +27,7 @@ public abstract class SubPageNavigator extends VerticalLayout implements Subpage
         getPagingElements().getSubpages()
                 .forEach(subpage -> addSubpage(subpage));
         this.setMargin(false);
-        menuBar.setStyleName("borderless tab-bar");
+        menuBar.setStyleName("borderless custom");
         setCurrentSubpage(menuBarItems.entrySet().stream().map(entry -> entry.getKey()).findFirst().get());
     }
 
