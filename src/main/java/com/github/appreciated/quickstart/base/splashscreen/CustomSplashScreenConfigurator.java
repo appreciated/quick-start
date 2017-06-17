@@ -23,7 +23,7 @@ public class CustomSplashScreenConfigurator implements Configurator {
 
     public SplashScreenConfiguration getConfiguration(SplashScreenEnvironment environment) {
         Class<? extends UI> uiClass = environment.getUiClass();
-        SplashScreen splashScreen = (SplashScreen)uiClass.getAnnotation(SplashScreen.class);
+        SplashScreen splashScreen = uiClass.getAnnotation(SplashScreen.class);
         if(splashScreen == null) {
             return null;
         } else {

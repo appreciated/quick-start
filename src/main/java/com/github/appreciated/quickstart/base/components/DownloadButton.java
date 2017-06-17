@@ -13,9 +13,8 @@ public class DownloadButton extends Button {
 
         setIcon(action.getResource());
         if (WebApplicationUI.isMobile()) {
-            addStyleName("mobile-context-button");
+            addStyleName("floating-action");
         } else {
-            addStyleName("tab");
             addStyleName("borderless custom");
             setCaption(action.getName());
         }

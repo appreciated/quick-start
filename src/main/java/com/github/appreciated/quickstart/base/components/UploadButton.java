@@ -16,13 +16,12 @@ public class UploadButton extends Upload {
             setCaption("");
             setButtonCaption("");
             setSizeFull();
-            addStyleName("mobile-upload-inline-icon");
+            addStyleName("floating-action");
         } else {
             addStyleName("upload-inline-icon");
             addStyleName("borderless custom");
             setButtonCaption(action.getName());
         }
-        addStyleName("borderless-upload-button");
         getButtonCaption();
         setImmediateMode(true);
         setIcon(action.getResource());
