@@ -1,14 +1,11 @@
 package com.github.appreciated.quickstart.base.navigation;
 
-import com.github.appreciated.quickstart.base.navigation.container.NavigationContainerView;
+import com.github.appreciated.quickstart.base.navigation.container.NavigationContainerFactory;
 import com.github.appreciated.quickstart.base.navigation.container.Pager;
 import com.github.appreciated.quickstart.base.navigation.interfaces.*;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.server.Sizeable;
-import com.vaadin.ui.AbstractOrderedLayout;
-import com.vaadin.ui.Alignment;
-import com.vaadin.ui.Component;
-import com.vaadin.ui.UI;
+import com.vaadin.ui.*;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
@@ -68,7 +65,7 @@ public class WebsiteNavigator extends Navigator {
     }
 
     public void navigateTo(ContainerSubpage component) {
-        NavigationContainerView container = new NavigationContainerView();
+        Layout container = NavigationContainerFactory.getNavigationContainer();
         if (component.hasPadding()) {
             container.addStyleName("container-padding");
         }

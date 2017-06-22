@@ -11,6 +11,7 @@ import com.vaadin.annotations.Push;
 import com.vaadin.annotations.Viewport;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.WebBrowser;
+import com.vaadin.ui.Layout;
 import com.vaadin.ui.UI;
 
 /**
@@ -113,4 +114,6 @@ public abstract class WebApplicationUI extends UI {
     public static boolean isUserSignedIn() {
         return getWebsiteDescription().getAccessControl().isUserSignedIn();
     }
+
+    public abstract Layout getNavigationContainer();
 }

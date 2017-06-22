@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.appreciated</groupId>
     <artifactId>quick-start-base</artifactId>
-    <version>0.9.8</version>
+    <version>0.9.10</version>
     <packaging>jar</packaging>
     <properties>
         <vaadin.version>8.0.6</vaadin.version>
@@ -40,7 +40,7 @@
         <dependency>
             <groupId>org.vaadin.leif</groupId>
             <artifactId>splashscreen</artifactId>
-            <version>0.3</version>
+            <version>0.3.1</version>
         </dependency>
     </dependencies>
     <build>
