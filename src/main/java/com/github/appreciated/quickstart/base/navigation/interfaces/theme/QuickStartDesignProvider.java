@@ -21,6 +21,8 @@ public interface QuickStartDesignProvider {
 
     Class<? extends QuickStartNavigationView> getDesktopDesign();
 
+    QuickStartLoginView getLoginView();
+
     Layout getNavigationContainer(ContainerSubpage page);
 
     ComponentSubpage getSubPageNavigator(SubpageNavigator subpages);

@@ -34,6 +34,7 @@ public class WebAppDescription {
     private RegistrationControl registrationControl;
     private Subpages navigationDescription;
     private Class<? extends QuickStartDesignProvider> designProvider;
+    private boolean loginPage;
 
     public Class<? extends Subpage> getDefaultPage() {
         return defaultPage;
@@ -80,6 +81,7 @@ public class WebAppDescription {
         if (designProvider == null) {
             throw new InvalidWebDescriptionException("No Design Provider defined!");
         }
+
         if (loginClass != null && accessControl == null) {
             throw new InvalidWebDescriptionException("No accessControl defined!");
         }
@@ -104,8 +106,8 @@ public class WebAppDescription {
         } else {
             mobileView = (QuickStartNavigationView) createInstance(provider.getMobileDesign());
         }
-        loginNavigable = (QuickStartLoginView) createInstance(loginClass);
-        if (loginNavigable != null) {
+        if (loginPage) {
+            loginNavigable = provider.getLoginView();
             loginNavigable.initTitle(title);
         }
         if (accessControl != null) {
@@ -140,10 +142,6 @@ public class WebAppDescription {
         this.mobileClass = mobileClass;
     }
 
-    public void setLoginClass(Class<? extends QuickStartLoginView> loginClass) {
-        this.loginClass = loginClass;
-    }
-
     public void setTitle(String title) {
         this.title = title;
     }
@@ -170,5 +168,9 @@ public class WebAppDescription {
 
     public void setProvider(Class<? extends QuickStartDesignProvider> designProvider) {
         this.designProvider = designProvider;
+    }
+
+    public void setLoginPage(boolean loginPage) {
+        this.loginPage = loginPage;
     }
 }

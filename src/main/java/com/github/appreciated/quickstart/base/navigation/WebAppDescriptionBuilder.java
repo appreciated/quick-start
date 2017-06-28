@@ -4,7 +4,6 @@ import com.github.appreciated.quickstart.base.authentication.login.AccessControl
 import com.github.appreciated.quickstart.base.authentication.registration.RegistrationControl;
 import com.github.appreciated.quickstart.base.navigation.interfaces.base.Subpage;
 import com.github.appreciated.quickstart.base.navigation.interfaces.theme.QuickStartDesignProvider;
-import com.github.appreciated.quickstart.base.navigation.interfaces.theme.QuickStartLoginView;
 
 import java.util.AbstractMap;
 
@@ -19,8 +18,8 @@ public class WebAppDescriptionBuilder {
         return this;
     }
 
-    public WebAppDescriptionBuilder withLoginPage(Class<? extends QuickStartLoginView> loginClass) {
-        description.setLoginClass(loginClass);
+    public WebAppDescriptionBuilder withLoginPage() {
+        description.setLoginPage(true);
         return this;
     }
 
