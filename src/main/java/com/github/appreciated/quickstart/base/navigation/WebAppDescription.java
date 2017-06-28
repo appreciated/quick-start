@@ -81,7 +81,6 @@ public class WebAppDescription {
         if (designProvider == null) {
             throw new InvalidWebDescriptionException("No Design Provider defined!");
         }
-
         if (loginClass != null && accessControl == null) {
             throw new InvalidWebDescriptionException("No accessControl defined!");
         }
