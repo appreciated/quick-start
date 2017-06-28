@@ -19,14 +19,14 @@ public abstract class Dialog {
     private String title;
     private Button[] buttons;
 
-    public void setPositiveButton(Button button, Button.ClickListener listener) {
+    public void addPositiveButton(Button button, Button.ClickListener listener) {
         if (listener != null) {
             button.addClickListener(listener);
         }
         buttonOrientationWrapper.addComponent(button);
     }
 
-    public void setNegativeButton(Button button, Button.ClickListener listener) {
+    public void addNegativeButton(Button button, Button.ClickListener listener) {
         if (listener != null) {
             button.addClickListener(listener);
         }
@@ -62,7 +62,7 @@ public abstract class Dialog {
         Panel dialogContentPanel = new Panel(dialogContentWrapper);
         dialogContentPanel.addStyleName("borderless");
         wrapper.addComponent(dialogContentPanel);
-        if (buttons != null && buttons.length > 0) {
+        if (buttonOrientationWrapper.getComponentCount() > 0 || (buttons != null && buttons.length > 0)) {
             initDialogButtons();
         }
         dialog.setContent(wrapper);

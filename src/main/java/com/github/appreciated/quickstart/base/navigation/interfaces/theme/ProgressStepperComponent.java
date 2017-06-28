@@ -6,7 +6,7 @@ import com.github.appreciated.quickstart.base.navigation.interfaces.attributes.H
 import com.github.appreciated.quickstart.base.navigation.interfaces.base.ComponentSubpage;
 
 /**
- * Created by Johannes on 28.06.2017.
+ * Created by appreciated on 28.06.2017.
  */
 public interface ProgressStepperComponent extends ComponentSubpage, HasContextActions, NavigationListener, Finishable.FinishListener {
 }

@@ -4,7 +4,7 @@ import com.github.appreciated.quickstart.base.navigation.interfaces.NavigationLi
 import com.github.appreciated.quickstart.base.navigation.interfaces.attributes.HasFinishableSubpages;
 
 /**
- * Created by Johannes on 22.06.2017.
+ * Created by appreciated on 22.06.2017.
  */
 public interface ProgressStepper extends HasFinishableSubpages, NavigationListener {
 }

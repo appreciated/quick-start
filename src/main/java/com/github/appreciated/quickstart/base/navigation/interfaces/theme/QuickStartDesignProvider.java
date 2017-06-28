@@ -14,7 +14,7 @@ import org.vaadin.leif.splashscreen.SplashScreen;
 import java.security.InvalidParameterException;
 
 /**
- * Created by Johannes on 27.06.2017.
+ * Created by appreciated on 27.06.2017.
  */
 public interface QuickStartDesignProvider {
     Class<? extends QuickStartNavigationView> getMobileDesign();

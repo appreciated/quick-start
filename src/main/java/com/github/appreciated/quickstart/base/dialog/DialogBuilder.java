@@ -6,14 +6,14 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
 
 /**
- * Created by Johannes on 28.06.2017.
+ * Created by appreciated on 28.06.2017.
  */
 public class DialogBuilder {
 
     Dialog dialog = QuickStartUI.getProvider().getDialog();
 
     public DialogBuilder withPositiveButton(Button button, Button.ClickListener listener) {
-        dialog.setPositiveButton(button, listener);
+        dialog.addPositiveButton(button, listener);
         return this;
     }
 
@@ -30,7 +30,7 @@ public class DialogBuilder {
     }
 
     public DialogBuilder withNegativeButton(Button button, Button.ClickListener listener) {
-        dialog.setNegativeButton(button, listener);
+        dialog.addNegativeButton(button, listener);
         return this;
     }
 
