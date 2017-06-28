@@ -63,13 +63,13 @@ public abstract class Dialog {
         dialogContentPanel.addStyleName("borderless");
         wrapper.addComponent(dialogContentPanel);
         if (buttons != null && buttons.length > 0) {
-            initDialogButtons(buttons);
+            initDialogButtons();
         }
         dialog.setContent(wrapper);
         dialog.addAttachListener(attachEvent -> Page.getCurrent().addBrowserWindowResizeListener(browserWindowResizeEvent -> dialog.center()));
     }
 
-    private void initDialogButtons(Button... buttons) {
+    public void initDialogButtons() {
         wrapper.addComponent(buttonWrapper);
         buttonWrapper.setWidth(100, Sizeable.Unit.PERCENTAGE);
         buttonWrapper.setMargin(true);
