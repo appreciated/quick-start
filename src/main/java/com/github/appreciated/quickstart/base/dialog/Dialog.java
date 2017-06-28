@@ -9,21 +9,19 @@ import com.vaadin.ui.*;
  */
 public abstract class Dialog {
 
-    private VerticalLayout wrapper;
+    private VerticalLayout wrapper = new VerticalLayout();
     private Window dialog;
     private VerticalLayout dialogContentWrapper;
     private Component content;
-    private HorizontalLayout buttonOrientationWrapper;
-    private HorizontalLayout buttonWrapper;
+    private HorizontalLayout buttonOrientationWrapper = new HorizontalLayout();
+    private HorizontalLayout buttonWrapper = new HorizontalLayout();
     private Alignment alignment = Alignment.MIDDLE_RIGHT;
     private String title;
+    private Button[] buttons;
 
     public void setPositiveButton(Button button, Button.ClickListener listener) {
         if (listener != null) {
             button.addClickListener(listener);
-        }
-        if (buttonOrientationWrapper == null) {
-            initDialogButtons(null);
         }
         buttonOrientationWrapper.addComponent(button);
     }
@@ -32,25 +30,31 @@ public abstract class Dialog {
         if (listener != null) {
             button.addClickListener(listener);
         }
-        if (buttonOrientationWrapper == null) {
-            initDialogButtons(null);
-        }
         buttonOrientationWrapper.addComponentAsFirst(button);
     }
 
-    public Dialog(){}
-
-    public Dialog(String title, Component component) {
-        this(title, component, null);
+    public Dialog() {
     }
 
-    public Dialog(String title, Component component, Button... buttons) {
-        dialog = new Window(title);
-        Button[] buttons1 = buttons;
-        content = component;
+    public Dialog(String title, Component content) {
+        this(title, content, null);
+    }
+
+    public Dialog(String title, Component content, Button... buttons) {
+        initDialog(title, content, buttons);
+    }
+
+    public void initDialog(String title, Component content, Button... buttons) {
+        this.title = title;
+        this.content = content;
+        this.buttons = buttons;
+        initDialog();
+    }
+
+    public void initDialog() {
+        dialog.setCaption(title);
         HorizontalLayout componentWrapper = new HorizontalLayout(content);
         componentWrapper.setId("window-component-wrapper");
-        wrapper = new VerticalLayout();
         wrapper.setMargin(false);
         wrapper.setSpacing(false);
         dialogContentWrapper = new VerticalLayout(componentWrapper);
@@ -60,7 +64,6 @@ public abstract class Dialog {
         if (buttons != null && buttons.length > 0) {
             initDialogButtons(buttons);
         }
-        buttonWrapper = new HorizontalLayout();
         dialog.setContent(wrapper);
         dialog.addAttachListener(attachEvent -> {
             Page.getCurrent().addBrowserWindowResizeListener(browserWindowResizeEvent -> dialog.center());
@@ -71,7 +74,6 @@ public abstract class Dialog {
         wrapper.addComponent(buttonWrapper);
         buttonWrapper.setWidth(100, Sizeable.Unit.PERCENTAGE);
         buttonWrapper.setMargin(true);
-        buttonOrientationWrapper = new HorizontalLayout();
         buttonWrapper.addComponent(buttonOrientationWrapper);
         buttonOrientationWrapper.setSpacing(true);
         buttonWrapper.setComponentAlignment(buttonOrientationWrapper, alignment);
@@ -90,8 +92,10 @@ public abstract class Dialog {
         return buttonOrientationWrapper;
     }
 
-
     public Dialog show() {
+        if (dialog == null) {
+            initDialog();
+        }
         UI.getCurrent().addWindow(dialog);
         return this;
     }
@@ -125,5 +129,13 @@ public abstract class Dialog {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public Button[] getButtons() {
+        return buttons;
+    }
+
+    public String getTitle() {
+        return title;
     }
 }

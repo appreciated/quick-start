@@ -10,11 +10,7 @@ import com.vaadin.ui.Component;
  */
 public class DialogBuilder {
 
-    Dialog dialog;
-
-    public DialogBuilder() {
-        dialog = QuickStartUI.getProvider().getDialog();
-    }
+    Dialog dialog = QuickStartUI.getProvider().getDialog();
 
     public DialogBuilder withPositiveButton(Button button, Button.ClickListener listener) {
         dialog.setPositiveButton(button, listener);
@@ -43,7 +39,6 @@ public class DialogBuilder {
         return this;
     }
 
-
     public DialogBuilder withTitle(String test) {
         dialog.setTitle(test);
         return this;
@@ -55,6 +50,6 @@ public class DialogBuilder {
     }
 
     public void show() {
-        dialog.show();
+       dialog.show();
     }
 }
