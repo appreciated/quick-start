@@ -52,6 +52,7 @@ public abstract class Dialog {
     }
 
     public void initDialog() {
+        dialog = new Window();
         dialog.setCaption(title);
         HorizontalLayout componentWrapper = new HorizontalLayout(content);
         componentWrapper.setId("window-component-wrapper");
@@ -65,9 +66,7 @@ public abstract class Dialog {
             initDialogButtons(buttons);
         }
         dialog.setContent(wrapper);
-        dialog.addAttachListener(attachEvent -> {
-            Page.getCurrent().addBrowserWindowResizeListener(browserWindowResizeEvent -> dialog.center());
-        });
+        dialog.addAttachListener(attachEvent -> Page.getCurrent().addBrowserWindowResizeListener(browserWindowResizeEvent -> dialog.center()));
     }
 
     private void initDialogButtons(Button... buttons) {
