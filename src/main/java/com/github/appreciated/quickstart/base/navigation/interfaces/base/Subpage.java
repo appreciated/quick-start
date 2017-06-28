@@ -1,16 +1,15 @@
-package com.github.appreciated.quickstart.base.navigation.interfaces;
+package com.github.appreciated.quickstart.base.navigation.interfaces.base;
 
 import com.github.appreciated.quickstart.base.navigation.SubpageDescription;
-import com.github.appreciated.quickstart.base.navigation.WebApplicationUI;
+import com.github.appreciated.quickstart.base.ui.QuickStartUI;
 import com.vaadin.server.Resource;
-import com.vaadin.ui.Component;
 
 import javax.xml.ws.Holder;
 
 /**
  * Created by appreciated on 08.12.2016.
  */
-public interface Subpage extends Component {
+public interface Subpage {
     Holder<Resource> resourceHolder = new Holder<>();
 
     default String getNavigationName() {
@@ -34,6 +33,6 @@ public interface Subpage extends Component {
     }
 
     default void navigateTo() {
-        WebApplicationUI.getNavigation().navigateTo(this);
+        QuickStartUI.getNavigation().navigateTo(this);
     }
 }

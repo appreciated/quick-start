@@ -1,5 +1,6 @@
 package com.github.appreciated.quickstart.base.splashscreen;
 
+import com.github.appreciated.quickstart.base.ui.QuickStartUI;
 import com.vaadin.ui.UI;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -22,24 +23,24 @@ public class CustomSplashScreenConfigurator implements Configurator {
     }
 
     public SplashScreenConfiguration getConfiguration(SplashScreenEnvironment environment) {
-        Class<? extends UI> uiClass = environment.getUiClass();
-        SplashScreen splashScreen = uiClass.getAnnotation(SplashScreen.class);
-        if(splashScreen == null) {
+
+        SplashScreen splashScreen = QuickStartUI.getProvider() != null ? QuickStartUI.getProvider().getAnnotation() : null;
+        if (splashScreen == null) {
             return null;
         } else {
-            SplashScreenConfiguration splashScreenConfiguration = new SplashScreenConfiguration();
+            SplashScreenConfiguration config = new SplashScreenConfiguration();
             String fileName = splashScreen.value();
-            splashScreenConfiguration.setContents(getSplashContents(uiClass, fileName));
-            splashScreenConfiguration.setWidth(splashScreen.width());
-            splashScreenConfiguration.setHeight(splashScreen.height());
-            splashScreenConfiguration.setAutohide(splashScreen.autohide());
-            return splashScreenConfiguration;
+            config.setContents(getSplashContents(UI.getCurrent().getClass(), fileName));
+            config.setWidth(splashScreen.width());
+            config.setHeight(splashScreen.height());
+            config.setAutohide(splashScreen.autohide());
+            return config;
         }
     }
 
     public static List<Node> getSplashContents(Class<? extends UI> uiClass, String fileName) {
-        if(!fileName.endsWith(".html") && !fileName.endsWith(".htm")) {
-            if(!fileName.endsWith(".png") && !fileName.endsWith(".jpg") && !fileName.endsWith(".jpeg")) {
+        if (!fileName.endsWith(".html") && !fileName.endsWith(".htm")) {
+            if (!fileName.endsWith(".png") && !fileName.endsWith(".jpg") && !fileName.endsWith(".jpeg")) {
                 throw new RuntimeException("Unsupported file extension for: " + fileName);
             } else {
                 return getSplashContentsImage(fileName);
@@ -63,13 +64,9 @@ public class CustomSplashScreenConfigurator implements Configurator {
                 throw new RuntimeException("Couldn't find splash screen file "
                         + fileName + " for " + uiClass.getName());
             }
-
             Document parse = Jsoup.parse(splashResource, "UTF-8", "");
-
             List<Node> contents = new ArrayList<>(parse.head().childNodes());
-
             contents.addAll(parse.body().childNodes());
-
             return contents;
         } catch (IOException e) {
             throw new RuntimeException("Couldn't read splash screen file "

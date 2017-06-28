@@ -1,4 +1,4 @@
-package com.github.appreciated.quickstart.base.navigation.interfaces;
+package com.github.appreciated.quickstart.base.navigation.interfaces.attributes;
 
 import com.github.appreciated.quickstart.base.navigation.actions.Action;
 

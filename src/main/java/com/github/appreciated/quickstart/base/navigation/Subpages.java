@@ -1,6 +1,6 @@
 package com.github.appreciated.quickstart.base.navigation;
 
-import com.github.appreciated.quickstart.base.navigation.interfaces.Subpage;
+import com.github.appreciated.quickstart.base.navigation.interfaces.base.Subpage;
 
 import java.util.Arrays;
 import java.util.LinkedList;

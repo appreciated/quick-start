@@ -17,7 +17,7 @@ public class CustomAction extends Action {
     public CustomAction(Component component) {
         super(null, null);
         this.desktopComponent = component;
-        alignment = Alignment.TOP_LEFT;
+        alignment = Alignment.MIDDLE_LEFT;
         insertLeft = false;
     }
 

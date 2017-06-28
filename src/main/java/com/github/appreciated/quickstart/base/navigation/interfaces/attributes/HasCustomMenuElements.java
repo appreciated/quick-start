@@ -1,4 +1,4 @@
-package com.github.appreciated.quickstart.base.navigation.interfaces;
+package com.github.appreciated.quickstart.base.navigation.interfaces.attributes;
 
 import com.vaadin.ui.Component;
 

@@ -1,11 +1,14 @@
-package com.github.appreciated.quickstart.base.authentication.login;
+package com.github.appreciated.quickstart.base.authentication.login.example;
+
+import com.github.appreciated.quickstart.base.authentication.login.AccessControl;
+import com.github.appreciated.quickstart.base.authentication.login.CurrentUser;
 
 /**
  * Example implementation of {@link AccessControl}. This implementation
  * accepts any User, but only one password, the user "admin" as the only
  * administrator.
  */
-public class ExampleAccess implements AccessControl {
+public class ExampleAccessControl implements AccessControl {
     @Override
     public boolean signIn(String username, String password) {
         if (username == null || username.isEmpty())

@@ -1,8 +1,15 @@
 package com.github.appreciated.quickstart.base.navigation;
 
-import com.github.appreciated.quickstart.base.navigation.container.NavigationContainerFactory;
-import com.github.appreciated.quickstart.base.navigation.container.Pager;
-import com.github.appreciated.quickstart.base.navigation.interfaces.*;
+import com.github.appreciated.quickstart.base.navigation.interfaces.OnNavigateListener;
+import com.github.appreciated.quickstart.base.navigation.interfaces.attributes.HasContextActions;
+import com.github.appreciated.quickstart.base.navigation.interfaces.attributes.HasPercentageHeight;
+import com.github.appreciated.quickstart.base.navigation.interfaces.attributes.HasSearch;
+import com.github.appreciated.quickstart.base.navigation.interfaces.base.ContainerSubpage;
+import com.github.appreciated.quickstart.base.navigation.interfaces.base.Subpage;
+import com.github.appreciated.quickstart.base.navigation.interfaces.theme.QuickStartDesignProvider;
+import com.github.appreciated.quickstart.base.navigation.interfaces.theme.QuickStartNavigationView;
+import com.github.appreciated.quickstart.base.navigation.interfaces.theme.QuickStartPager;
+import com.github.appreciated.quickstart.base.ui.QuickStartUI;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.server.Sizeable;
 import com.vaadin.ui.*;
@@ -20,7 +27,8 @@ import java.util.stream.Stream;
  */
 public class WebsiteNavigator extends Navigator {
 
-    private final NavigationDesignInterface navigatorView;
+    private final QuickStartNavigationView navigatorView;
+    private QuickStartDesignProvider provider;
     private Subpage currentView = null;
     private AbstractOrderedLayout holder = null;
 
@@ -31,13 +39,14 @@ public class WebsiteNavigator extends Navigator {
     /**
      * @param navigatorView The Component in which the User can navigate
      */
-    public WebsiteNavigator(NavigationDesignInterface navigatorView) {
+    public WebsiteNavigator(QuickStartNavigationView navigatorView, QuickStartDesignProvider provider) {
         this.holder = navigatorView.getHolder();
         this.navigatorView = navigatorView;
+        this.provider = provider;
     }
 
     public void navigateToDefaultPage() {
-        navigateTo(WebApplicationUI.getWebsiteDescription().getDefaultPage());
+        navigateTo(QuickStartUI.getWebsiteDescription().getDefaultPage());
     }
 
     public void addNavigation(Subpage navigation) {
@@ -45,8 +54,6 @@ public class WebsiteNavigator extends Navigator {
     }
 
     public void navigateTo(Subpage subpageComponent) {
-
-
         if (currentView != subpageComponent) {
             currentView = subpageComponent;
             navigatorView.setPageTitleVisibility(subpageComponent.showTitle());
@@ -59,21 +66,21 @@ public class WebsiteNavigator extends Navigator {
             if (subpageComponent instanceof ContainerSubpage) {
                 navigateTo((ContainerSubpage) subpageComponent);
             } else {
-                setComponent(subpageComponent, false);
+                setComponent(provider.getComponent(subpageComponent), false);
             }
         }
     }
 
-    public void navigateTo(ContainerSubpage component) {
-        Layout container = NavigationContainerFactory.getNavigationContainer();
-        if (component.hasPadding()) {
+    public void navigateTo(ContainerSubpage subpage) {
+        Layout container = QuickStartUI.getProvider().getNavigationContainer(subpage);
+        if (subpage.hasPadding()) {
             container.addStyleName("container-padding");
         }
-        boolean hasPercentageHeight = component instanceof HasPercentageHeight;
+        boolean hasPercentageHeight = subpage instanceof HasPercentageHeight;
         if (hasPercentageHeight) {
             container.setSizeFull();
         }
-        container.addComponent(component);
+        container.addComponent(subpage);
         setComponent(container, hasPercentageHeight);
     }
 
@@ -83,7 +90,7 @@ public class WebsiteNavigator extends Navigator {
         onNavigate();
         currentComponent = component;
         holder.addComponent(currentComponent);
-        if (!WebApplicationUI.isMobile()) {
+        if (!QuickStartUI.isMobile()) {
             holder.setSizeFull();
         } else {
             holder.setWidth(100, Sizeable.Unit.PERCENTAGE);
@@ -109,27 +116,27 @@ public class WebsiteNavigator extends Navigator {
         navigateTo(navigationElements.get(classKey));
     }
 
-    public NavigationDesignInterface getNavigationDesign() {
+    public QuickStartNavigationView getNavigationDesign() {
         return navigatorView;
     }
 
     public static void next() {
-        ((WebApplicationUI) UI.getCurrent()).getNavigation().nextPagerView();
+        ((QuickStartUI) UI.getCurrent()).getNavigation().nextPagerView();
     }
 
     public static void last() {
-        ((WebApplicationUI) UI.getCurrent()).getNavigation().lastPagerView();
+        ((QuickStartUI) UI.getCurrent()).getNavigation().lastPagerView();
     }
 
     public void nextPagerView() {
-        if (currentComponent instanceof Pager) {
-            ((Pager) currentComponent).next();
+        if (currentComponent instanceof QuickStartPager) {
+            ((QuickStartPager) currentComponent).next();
         }
     }
 
     public void lastPagerView() {
-        if (currentComponent instanceof Pager) {
-            ((Pager) currentComponent).last();
+        if (currentComponent instanceof QuickStartPager) {
+            ((QuickStartPager) currentComponent).last();
         }
     }
 
@@ -148,7 +155,7 @@ public class WebsiteNavigator extends Navigator {
     }
 
     public static Subpage getCurrentSubpage() {
-        return WebApplicationUI.getNavigation().getCurrentPage();
+        return QuickStartUI.getNavigation().getCurrentPage();
     }
 
     public void initNavigationElements(Stream<Subpage> subpages) {

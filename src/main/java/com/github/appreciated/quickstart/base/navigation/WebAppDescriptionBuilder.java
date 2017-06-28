@@ -1,9 +1,10 @@
 package com.github.appreciated.quickstart.base.navigation;
 
 import com.github.appreciated.quickstart.base.authentication.login.AccessControl;
-import com.github.appreciated.quickstart.base.navigation.interfaces.LoginPage;
-import com.github.appreciated.quickstart.base.navigation.interfaces.NavigationDesignInterface;
-import com.github.appreciated.quickstart.base.navigation.interfaces.Subpage;
+import com.github.appreciated.quickstart.base.authentication.registration.RegistrationControl;
+import com.github.appreciated.quickstart.base.navigation.interfaces.base.Subpage;
+import com.github.appreciated.quickstart.base.navigation.interfaces.theme.QuickStartDesignProvider;
+import com.github.appreciated.quickstart.base.navigation.interfaces.theme.QuickStartLoginView;
 
 import java.util.AbstractMap;
 
@@ -13,17 +14,12 @@ import java.util.AbstractMap;
 public class WebAppDescriptionBuilder {
     WebAppDescription description = new WebAppDescription();
 
-    public WebAppDescriptionBuilder withDesign(Class<? extends NavigationDesignInterface> desktopClass) {
-        description.setDefaultClass(desktopClass);
+    public WebAppDescriptionBuilder withDesignProvider(Class<? extends QuickStartDesignProvider> desktopClass) {
+        description.setProvider(desktopClass);
         return this;
     }
 
-    public WebAppDescriptionBuilder withMobileDesign(Class<? extends NavigationDesignInterface> mobileClass) {
-        description.setMobileClass(mobileClass);
-        return this;
-    }
-
-    public WebAppDescriptionBuilder withLoginPage(Class<? extends LoginPage> loginClass) {
+    public WebAppDescriptionBuilder withLoginPage(Class<? extends QuickStartLoginView> loginClass) {
         description.setLoginClass(loginClass);
         return this;
     }
@@ -53,12 +49,12 @@ public class WebAppDescriptionBuilder {
         return this;
     }
 
-    public WebAppDescriptionBuilder withRegistration(RegistrationControl registrationControl) {
+    public WebAppDescriptionBuilder withRegistrationControl(RegistrationControl registrationControl) {
         description.setRegistrationControl(registrationControl);
         return this;
     }
 
-    public WebAppDescriptionBuilder withLogin(AccessControl accessControl) {
+    public WebAppDescriptionBuilder withAccessControl(AccessControl accessControl) {
         description.setAccessControl(accessControl);
         return this;
     }

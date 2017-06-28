@@ -9,17 +9,36 @@ import com.vaadin.ui.*;
  */
 public abstract class Dialog {
 
-    private final VerticalLayout wrapper;
-    private final Window dialog;
-    private final VerticalLayout dialogContentWrapper;
-    private final Component content;
+    private VerticalLayout wrapper;
+    private Window dialog;
+    private VerticalLayout dialogContentWrapper;
+    private Component content;
     private HorizontalLayout buttonOrientationWrapper;
     private HorizontalLayout buttonWrapper;
     private Alignment alignment = Alignment.MIDDLE_RIGHT;
+    private String title;
 
-    public interface DialogListener {
-        void onClick(Window dialog);
+    public void setPositiveButton(Button button, Button.ClickListener listener) {
+        if (listener != null) {
+            button.addClickListener(listener);
+        }
+        if (buttonOrientationWrapper == null) {
+            initDialogButtons(null);
+        }
+        buttonOrientationWrapper.addComponent(button);
     }
+
+    public void setNegativeButton(Button button, Button.ClickListener listener) {
+        if (listener != null) {
+            button.addClickListener(listener);
+        }
+        if (buttonOrientationWrapper == null) {
+            initDialogButtons(null);
+        }
+        buttonOrientationWrapper.addComponentAsFirst(button);
+    }
+
+    public Dialog(){}
 
     public Dialog(String title, Component component) {
         this(title, component, null);
@@ -71,48 +90,6 @@ public abstract class Dialog {
         return buttonOrientationWrapper;
     }
 
-    public Dialog withPositiveButton(Button button, DialogListener listener) {
-        if (listener != null) {
-            button.addClickListener(clickEvent -> listener.onClick(dialog));
-        }
-        if (buttonOrientationWrapper == null) {
-            initDialogButtons(null);
-        }
-        buttonOrientationWrapper.addComponent(button);
-        return this;
-    }
-
-    public Dialog withPositiveButton(String buttonCaption, DialogListener listener) {
-        return withPositiveButton(new Button(buttonCaption), listener);
-    }
-
-    public Dialog withNegativeButton(String buttonCaption) {
-        return withNegativeButton(new Button(buttonCaption), clickEvent -> dialog.close());
-    }
-
-
-    public Dialog withNegativeButton(String buttonCaption, Button.ClickListener listener) {
-        return withNegativeButton(new Button(buttonCaption), listener);
-    }
-
-    public Dialog withNegativeButton(Button button, Button.ClickListener listener) {
-        if (listener != null) {
-            button.addClickListener(listener);
-        }
-        if (buttonOrientationWrapper == null) {
-            initDialogButtons(null);
-        }
-        buttonOrientationWrapper.addComponentAsFirst(button);
-        return this;
-    }
-
-    public Dialog withButtonOrientation(Alignment alignment) {
-        this.alignment = alignment;
-        if (buttonWrapper != null) {
-            buttonWrapper.setComponentAlignment(buttonOrientationWrapper, alignment);
-        }
-        return this;
-    }
 
     public Dialog show() {
         UI.getCurrent().addWindow(dialog);
@@ -133,5 +110,20 @@ public abstract class Dialog {
 
     public VerticalLayout getDialogContentWrapper() {
         return dialogContentWrapper;
+    }
+
+    public void setButtonOrientation(Alignment buttonOrientation) {
+        this.alignment = alignment;
+        if (buttonWrapper != null) {
+            buttonWrapper.setComponentAlignment(buttonOrientationWrapper, alignment);
+        }
+    }
+
+    public void setContent(Component content) {
+        this.content = content;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

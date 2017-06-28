@@ -1,5 +1,7 @@
 package com.github.appreciated.quickstart.base.navigation.interfaces;
 
+import com.github.appreciated.quickstart.base.navigation.interfaces.base.Subpage;
+
 import javax.xml.ws.Holder;
 
 /**

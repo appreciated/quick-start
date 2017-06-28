@@ -1,8 +1,5 @@
-package com.github.appreciated.quickstart.base.navigation;
+package com.github.appreciated.quickstart.base.authentication.registration;
 
-import com.github.appreciated.quickstart.base.authentication.registration.Field;
-import com.github.appreciated.quickstart.base.authentication.registration.FieldPropertySet;
-import com.github.appreciated.quickstart.base.authentication.registration.RegistrationResult;
 import com.vaadin.data.Binder;
 import com.vaadin.data.HasValue;
 import com.vaadin.data.ValidationResult;
