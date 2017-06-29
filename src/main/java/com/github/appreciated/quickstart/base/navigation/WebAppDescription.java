@@ -96,7 +96,7 @@ public class WebAppDescription {
         this.navigationElements = navigationDescription.getSubpages();
         for (Subpage navigationElement : navigationElements) {
             if (navigationElement.getNavigationName() == null) {
-                throw new InvalidWebDescriptionException("No navigationName defined!");
+                throw new InvalidWebDescriptionException(navigationElement.getClass().getSimpleName() + " has no SubpageDescription!");
             }
         }
         provider = (QuickStartDesignProvider) createInstance(designProvider);
