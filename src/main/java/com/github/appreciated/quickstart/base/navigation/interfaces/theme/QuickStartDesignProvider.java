@@ -17,11 +17,11 @@ import java.security.InvalidParameterException;
  * Created by appreciated on 27.06.2017.
  */
 public interface QuickStartDesignProvider {
-    Class<? extends QuickStartNavigationView> getMobileDesign();
+    Class<? extends NavigationView> getMobileDesign();
 
-    Class<? extends QuickStartNavigationView> getDesktopDesign();
+    Class<? extends NavigationView> getDesktopDesign();
 
-    QuickStartLoginView getLoginView();
+    LoginImplementationView getLoginView();
 
     Layout getNavigationContainer(ContainerSubpage page);
 

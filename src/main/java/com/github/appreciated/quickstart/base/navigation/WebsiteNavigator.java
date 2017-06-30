@@ -6,9 +6,9 @@ import com.github.appreciated.quickstart.base.navigation.interfaces.attributes.H
 import com.github.appreciated.quickstart.base.navigation.interfaces.attributes.HasSearch;
 import com.github.appreciated.quickstart.base.navigation.interfaces.base.ContainerSubpage;
 import com.github.appreciated.quickstart.base.navigation.interfaces.base.Subpage;
+import com.github.appreciated.quickstart.base.navigation.interfaces.theme.NavigationView;
+import com.github.appreciated.quickstart.base.navigation.interfaces.theme.PagerImplementation;
 import com.github.appreciated.quickstart.base.navigation.interfaces.theme.QuickStartDesignProvider;
-import com.github.appreciated.quickstart.base.navigation.interfaces.theme.QuickStartNavigationView;
-import com.github.appreciated.quickstart.base.navigation.interfaces.theme.QuickStartPager;
 import com.github.appreciated.quickstart.base.ui.QuickStartUI;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.server.Sizeable;
@@ -30,7 +30,7 @@ import java.util.stream.Stream;
  */
 public class WebsiteNavigator extends Navigator {
 
-    private final QuickStartNavigationView navigatorView;
+    private final NavigationView navigatorView;
     private QuickStartDesignProvider provider;
     private Subpage currentView = null;
     private AbstractOrderedLayout holder = null;
@@ -42,7 +42,7 @@ public class WebsiteNavigator extends Navigator {
     /**
      * @param navigatorView The Component in which the User can navigate
      */
-    public WebsiteNavigator(QuickStartNavigationView navigatorView, QuickStartDesignProvider provider) {
+    public WebsiteNavigator(NavigationView navigatorView, QuickStartDesignProvider provider) {
         this.holder = navigatorView.getHolder();
         this.navigatorView = navigatorView;
         this.provider = provider;
@@ -111,7 +111,7 @@ public class WebsiteNavigator extends Navigator {
         navigateTo(navigationElements.get(classKey));
     }
 
-    public QuickStartNavigationView getNavigationDesign() {
+    public NavigationView getNavigationDesign() {
         return navigatorView;
     }
 
@@ -124,14 +124,14 @@ public class WebsiteNavigator extends Navigator {
     }
 
     public void nextPagerView() {
-        if (currentComponent instanceof QuickStartPager) {
-            ((QuickStartPager) currentComponent).next();
+        if (currentComponent instanceof PagerImplementation) {
+            ((PagerImplementation) currentComponent).next();
         }
     }
 
     public void lastPagerView() {
-        if (currentComponent instanceof QuickStartPager) {
-            ((QuickStartPager) currentComponent).last();
+        if (currentComponent instanceof PagerImplementation) {
+            ((PagerImplementation) currentComponent).last();
         }
     }
 

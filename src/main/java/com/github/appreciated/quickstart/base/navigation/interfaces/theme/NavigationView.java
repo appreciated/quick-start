@@ -17,7 +17,7 @@ import java.util.stream.Stream;
 /**
  * Created by appreciated on 10.12.2016.
  */
-public interface QuickStartNavigationView extends Component {
+public interface NavigationView extends Component {
 
     default void initWithConfiguration(Stream<AbstractMap.SimpleEntry<String, Boolean>> configurations) {}
 

@@ -4,9 +4,9 @@ import com.github.appreciated.quickstart.base.authentication.login.AccessControl
 import com.github.appreciated.quickstart.base.authentication.registration.RegistrationControl;
 import com.github.appreciated.quickstart.base.navigation.exception.InvalidWebDescriptionException;
 import com.github.appreciated.quickstart.base.navigation.interfaces.base.Subpage;
+import com.github.appreciated.quickstart.base.navigation.interfaces.theme.LoginImplementationView;
+import com.github.appreciated.quickstart.base.navigation.interfaces.theme.NavigationView;
 import com.github.appreciated.quickstart.base.navigation.interfaces.theme.QuickStartDesignProvider;
-import com.github.appreciated.quickstart.base.navigation.interfaces.theme.QuickStartLoginView;
-import com.github.appreciated.quickstart.base.navigation.interfaces.theme.QuickStartNavigationView;
 import com.vaadin.ui.UI;
 
 import java.lang.reflect.InvocationTargetException;
@@ -19,14 +19,14 @@ import java.util.stream.Stream;
  * Created by appreciated on 01.01.2017.
  */
 public class WebAppDescription {
-    private Class<? extends QuickStartNavigationView> defaultClass;
-    private Class<? extends QuickStartNavigationView> mobileClass;
-    private Class<? extends QuickStartLoginView> loginClass;
+    private Class<? extends NavigationView> defaultClass;
+    private Class<? extends NavigationView> mobileClass;
+    private Class<? extends LoginImplementationView> loginClass;
 
     private QuickStartDesignProvider provider;
-    private QuickStartNavigationView defaultView;
-    private QuickStartNavigationView mobileView;
-    private QuickStartLoginView loginNavigable;
+    private NavigationView defaultView;
+    private NavigationView mobileView;
+    private LoginImplementationView loginNavigable;
     private String title;
     private List<AbstractMap.SimpleEntry<String, Boolean>> configuration = new ArrayList<>();
     private List<Subpage> navigationElements = new ArrayList<>();
@@ -41,15 +41,15 @@ public class WebAppDescription {
         return defaultPage;
     }
 
-    public QuickStartNavigationView getDefaultView() {
+    public NavigationView getDefaultView() {
         return defaultView;
     }
 
-    public QuickStartNavigationView getMobileView() {
+    public NavigationView getMobileView() {
         return mobileView;
     }
 
-    public QuickStartLoginView getLoginNavigable() {
+    public LoginImplementationView getLoginNavigable() {
         return loginNavigable;
     }
 
@@ -102,9 +102,9 @@ public class WebAppDescription {
         }
         provider = (QuickStartDesignProvider) createInstance(designProvider);
         if (!isMobile) {
-            defaultView = (QuickStartNavigationView) createInstance(provider.getDesktopDesign());
+            defaultView = (NavigationView) createInstance(provider.getDesktopDesign());
         } else {
-            mobileView = (QuickStartNavigationView) createInstance(provider.getMobileDesign());
+            mobileView = (NavigationView) createInstance(provider.getMobileDesign());
         }
         if (loginPage) {
             loginNavigable = provider.getLoginView();
@@ -134,11 +134,11 @@ public class WebAppDescription {
         return registrationControl;
     }
 
-    public void setDefaultClass(Class<? extends QuickStartNavigationView> defaultClass) {
+    public void setDefaultClass(Class<? extends NavigationView> defaultClass) {
         this.defaultClass = defaultClass;
     }
 
-    public void setMobileClass(Class<? extends QuickStartNavigationView> mobileClass) {
+    public void setMobileClass(Class<? extends NavigationView> mobileClass) {
         this.mobileClass = mobileClass;
     }
 

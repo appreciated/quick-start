@@ -6,6 +6,6 @@ import com.vaadin.ui.Component;
 /**
  * Created by appreciated on 15.12.2016.
  */
-public interface QuickStartLoginView extends Component, Subpage, QuickStartLogin {
+public interface LoginImplementationView extends Component, Subpage, LoginImplementation {
     void initTitle(String title);
 }

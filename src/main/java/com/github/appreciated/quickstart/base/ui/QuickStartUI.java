@@ -7,9 +7,9 @@ import com.github.appreciated.quickstart.base.navigation.WebAppDescription;
 import com.github.appreciated.quickstart.base.navigation.WebsiteNavigator;
 import com.github.appreciated.quickstart.base.navigation.exception.InvalidWebDescriptionException;
 import com.github.appreciated.quickstart.base.navigation.interfaces.base.Subpage;
+import com.github.appreciated.quickstart.base.navigation.interfaces.theme.LoginImplementationView;
+import com.github.appreciated.quickstart.base.navigation.interfaces.theme.NavigationView;
 import com.github.appreciated.quickstart.base.navigation.interfaces.theme.QuickStartDesignProvider;
-import com.github.appreciated.quickstart.base.navigation.interfaces.theme.QuickStartLoginView;
-import com.github.appreciated.quickstart.base.navigation.interfaces.theme.QuickStartNavigationView;
 import com.github.appreciated.quickstart.base.splashscreen.CustomSplashScreenConfigurator;
 import com.vaadin.annotations.Push;
 import com.vaadin.annotations.Viewport;
@@ -31,10 +31,10 @@ import javax.servlet.ServletException;
 public abstract class QuickStartUI extends UI {
 
     QuickStartDesignProvider provider;
-    private QuickStartNavigationView navigation;
-    private QuickStartNavigationView mobileView;
-    private QuickStartNavigationView defaultView;
-    private QuickStartLoginView quickStartLogin;
+    private NavigationView navigation;
+    private NavigationView mobileView;
+    private NavigationView defaultView;
+    private LoginImplementationView quickStartLogin;
     private WebAppDescription description;
     private WebsiteNavigator navigator;
 
@@ -91,7 +91,7 @@ public abstract class QuickStartUI extends UI {
         return get().navigator;
     }
 
-    public static QuickStartNavigationView getNavigationView() {
+    public static NavigationView getNavigationView() {
         return get().navigation;
     }
 

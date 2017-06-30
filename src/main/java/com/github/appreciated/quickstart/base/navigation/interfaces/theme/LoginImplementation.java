@@ -7,8 +7,8 @@ import com.github.appreciated.quickstart.base.authentication.registration.Regist
 /**
  * Created by appreciated on 21.03.2017.
  */
-public interface QuickStartLogin {
-    QuickStartLogin initWithLoginListener(LoginListener loginListener);
-    QuickStartLogin initWithAccessControl(AccessControl accessControl);
-    QuickStartLogin initRegistrationControl(RegistrationControl registrationControl);
+public interface LoginImplementation {
+    LoginImplementation initWithLoginListener(LoginListener loginListener);
+    LoginImplementation initWithAccessControl(AccessControl accessControl);
+    LoginImplementation initRegistrationControl(RegistrationControl registrationControl);
 }

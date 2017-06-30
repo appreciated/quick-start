@@ -8,5 +8,5 @@ import com.github.appreciated.quickstart.base.navigation.interfaces.base.Compone
 /**
  * Created by appreciated on 28.06.2017.
  */
-public interface ProgressStepperComponent extends ComponentSubpage, HasContextActions, NavigationListener, Finishable.FinishListener {
+public interface ProgressStepperImplementation extends ComponentSubpage, HasContextActions, NavigationListener, Finishable.FinishListener {
 }

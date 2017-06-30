@@ -6,5 +6,5 @@ import com.github.appreciated.quickstart.base.navigation.interfaces.base.Compone
 /**
  * Created by appreciated on 28.06.2017.
  */
-public interface SubpagerComponent extends ComponentSubpage,  HasContextActions {
+public interface SubpagerImplementation extends ComponentSubpage,  HasContextActions {
 }
