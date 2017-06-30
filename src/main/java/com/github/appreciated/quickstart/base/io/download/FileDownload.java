@@ -15,8 +15,6 @@ import java.nio.file.Paths;
  * Created by appreciated on 30.06.2017.
  */
 public class FileDownload extends Download {
-    private ByteDownload byteListener;
-    private StringDownload stringListener;
     private FileDownloadResource fileListener;
 
     @FunctionalInterface
