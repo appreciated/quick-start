@@ -1,6 +1,6 @@
-package com.github.appreciated.quickstart.base.navigation.interfaces.base;
+package com.github.appreciated.quickstart.base.pages;
 
-import com.github.appreciated.quickstart.base.navigation.SubpageDescription;
+import com.github.appreciated.quickstart.base.navigation.description.SubpageDescription;
 import com.github.appreciated.quickstart.base.ui.QuickStartUI;
 import com.vaadin.server.Resource;
 

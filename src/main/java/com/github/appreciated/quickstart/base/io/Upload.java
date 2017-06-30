@@ -1,4 +1,4 @@
-package com.github.appreciated.quickstart.base.navigation.upload;
+package com.github.appreciated.quickstart.base.io;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;

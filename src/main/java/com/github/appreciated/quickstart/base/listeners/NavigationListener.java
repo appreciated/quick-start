@@ -1,6 +1,6 @@
-package com.github.appreciated.quickstart.base.navigation.interfaces;
+package com.github.appreciated.quickstart.base.listeners;
 
-import com.github.appreciated.quickstart.base.navigation.interfaces.base.Subpage;
+import com.github.appreciated.quickstart.base.pages.Subpage;
 
 /**
  * Created by appreciated on 28.06.2017.

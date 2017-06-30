@@ -1,12 +1,7 @@
 package com.github.appreciated.quickstart.base.navigation.interfaces.theme;
 
 import com.github.appreciated.quickstart.base.dialog.Dialog;
-import com.github.appreciated.quickstart.base.navigation.interfaces.base.ComponentSubpage;
-import com.github.appreciated.quickstart.base.navigation.interfaces.base.ContainerSubpage;
-import com.github.appreciated.quickstart.base.navigation.interfaces.base.Subpage;
-import com.github.appreciated.quickstart.base.navigation.interfaces.components.Pager;
-import com.github.appreciated.quickstart.base.navigation.interfaces.components.ProgressStepper;
-import com.github.appreciated.quickstart.base.navigation.interfaces.components.SubpageNavigator;
+import com.github.appreciated.quickstart.base.pages.*;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Layout;
 import org.vaadin.leif.splashscreen.SplashScreen;

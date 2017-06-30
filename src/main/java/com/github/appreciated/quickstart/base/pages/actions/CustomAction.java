@@ -1,4 +1,4 @@
-package com.github.appreciated.quickstart.base.navigation.actions;
+package com.github.appreciated.quickstart.base.pages.actions;
 
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Component;

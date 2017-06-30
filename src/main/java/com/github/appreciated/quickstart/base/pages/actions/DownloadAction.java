@@ -1,6 +1,6 @@
-package com.github.appreciated.quickstart.base.navigation.actions;
+package com.github.appreciated.quickstart.base.pages.actions;
 
-import com.github.appreciated.quickstart.base.navigation.download.Download;
+import com.github.appreciated.quickstart.base.io.Download;
 import com.vaadin.server.Resource;
 
 /**

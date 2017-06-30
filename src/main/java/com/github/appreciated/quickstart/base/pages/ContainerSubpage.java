@@ -1,4 +1,4 @@
-package com.github.appreciated.quickstart.base.navigation.interfaces.base;
+package com.github.appreciated.quickstart.base.pages;
 
 /**
  * Created by appreciated on 06.12.2016.

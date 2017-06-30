@@ -1,9 +1,9 @@
 package com.github.appreciated.quickstart.base.navigation.interfaces.theme;
 
-import com.github.appreciated.quickstart.base.navigation.interfaces.Finishable;
-import com.github.appreciated.quickstart.base.navigation.interfaces.NavigationListener;
-import com.github.appreciated.quickstart.base.navigation.interfaces.attributes.HasContextActions;
-import com.github.appreciated.quickstart.base.navigation.interfaces.base.ComponentSubpage;
+import com.github.appreciated.quickstart.base.listeners.NavigationListener;
+import com.github.appreciated.quickstart.base.pages.ComponentSubpage;
+import com.github.appreciated.quickstart.base.pages.Finishable;
+import com.github.appreciated.quickstart.base.pages.attributes.HasContextActions;
 
 /**
  * Created by appreciated on 28.06.2017.

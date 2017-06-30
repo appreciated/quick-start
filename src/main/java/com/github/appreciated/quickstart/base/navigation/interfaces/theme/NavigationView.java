@@ -2,10 +2,10 @@ package com.github.appreciated.quickstart.base.navigation.interfaces.theme;
 
 import com.github.appreciated.quickstart.base.authentication.login.AccessControl;
 import com.github.appreciated.quickstart.base.authentication.registration.RegistrationControl;
-import com.github.appreciated.quickstart.base.navigation.WebAppDescription;
-import com.github.appreciated.quickstart.base.navigation.interfaces.attributes.HasContextActions;
-import com.github.appreciated.quickstart.base.navigation.interfaces.attributes.HasSearch;
-import com.github.appreciated.quickstart.base.navigation.interfaces.base.Subpage;
+import com.github.appreciated.quickstart.base.navigation.description.WebAppDescription;
+import com.github.appreciated.quickstart.base.pages.Subpage;
+import com.github.appreciated.quickstart.base.pages.attributes.HasContextActions;
+import com.github.appreciated.quickstart.base.pages.attributes.HasSearch;
 import com.vaadin.ui.AbstractOrderedLayout;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Layout;

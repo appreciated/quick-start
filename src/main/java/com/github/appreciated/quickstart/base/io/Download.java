@@ -1,4 +1,4 @@
-package com.github.appreciated.quickstart.base.navigation.download;
+package com.github.appreciated.quickstart.base.io;
 
 import com.vaadin.server.FileDownloader;
 import com.vaadin.server.StreamResource;

@@ -1,6 +1,6 @@
 package com.github.appreciated.quickstart.base.navigation.interfaces.theme;
 
-import com.github.appreciated.quickstart.base.navigation.interfaces.base.Subpage;
+import com.github.appreciated.quickstart.base.pages.Subpage;
 import com.vaadin.ui.Component;
 
 /**

@@ -1,4 +1,4 @@
-package com.github.appreciated.quickstart.base.navigation;
+package com.github.appreciated.quickstart.base.navigation.description;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

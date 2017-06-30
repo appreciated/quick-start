@@ -1,6 +1,5 @@
-package com.github.appreciated.quickstart.base.navigation.interfaces;
+package com.github.appreciated.quickstart.base.pages;
 
-import com.github.appreciated.quickstart.base.navigation.interfaces.base.Subpage;
 import com.github.appreciated.quickstart.base.ui.QuickStartUI;
 
 /**

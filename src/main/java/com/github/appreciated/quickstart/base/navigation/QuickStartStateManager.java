@@ -1,15 +1,15 @@
 package com.github.appreciated.quickstart.base.navigation;
 
 import com.github.appreciated.quickstart.base.components.Helper;
-import com.github.appreciated.quickstart.base.navigation.interfaces.Finishable;
-import com.github.appreciated.quickstart.base.navigation.interfaces.OnNavigateListener;
-import com.github.appreciated.quickstart.base.navigation.interfaces.attributes.HasContextActions;
-import com.github.appreciated.quickstart.base.navigation.interfaces.attributes.HasSearch;
-import com.github.appreciated.quickstart.base.navigation.interfaces.base.ContainerSubpage;
-import com.github.appreciated.quickstart.base.navigation.interfaces.base.Subpage;
+import com.github.appreciated.quickstart.base.listeners.OnNavigateListener;
 import com.github.appreciated.quickstart.base.navigation.interfaces.theme.NavigationView;
 import com.github.appreciated.quickstart.base.navigation.interfaces.theme.PagerView;
 import com.github.appreciated.quickstart.base.navigation.interfaces.theme.QuickStartDesignProvider;
+import com.github.appreciated.quickstart.base.pages.ContainerSubpage;
+import com.github.appreciated.quickstart.base.pages.Finishable;
+import com.github.appreciated.quickstart.base.pages.Subpage;
+import com.github.appreciated.quickstart.base.pages.attributes.HasContextActions;
+import com.github.appreciated.quickstart.base.pages.attributes.HasSearch;
 import com.github.appreciated.quickstart.base.ui.QuickStartUI;
 import com.vaadin.server.Sizeable;
 import com.vaadin.ui.AbstractOrderedLayout;

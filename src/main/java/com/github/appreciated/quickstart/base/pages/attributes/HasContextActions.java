@@ -1,6 +1,6 @@
-package com.github.appreciated.quickstart.base.navigation.interfaces.attributes;
+package com.github.appreciated.quickstart.base.pages.attributes;
 
-import com.github.appreciated.quickstart.base.navigation.actions.Action;
+import com.github.appreciated.quickstart.base.pages.actions.Action;
 
 import javax.xml.ws.Holder;
 import java.util.List;
