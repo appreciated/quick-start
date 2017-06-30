@@ -80,8 +80,11 @@ public class QuickStartStateManager implements Finishable.FinishListener {
 
     public void setComponent(Component component) {
         Helper.prepareContainerForComponent(navigatorView.getContainerView(), component);
-        if (component instanceof HasContextActions) {
-            ((HasContextActions) component).setContextActionListener(() -> navigatorView.setCurrentActions((HasContextActions) component));
+        if (component instanceof Subpage) {
+            if (component instanceof HasContextActions) {
+                ((HasContextActions) component).setContextActionListener(() -> navigatorView.setCurrentActions((HasContextActions) component));
+            }
+            navigatorView.setPageTitleVisibility(((Subpage) component).showTitle());
         }
         navigatorView.allowPercentagePageHeight(Helper.requiresPercentageHeight(component));
         holder.removeAllComponents();
