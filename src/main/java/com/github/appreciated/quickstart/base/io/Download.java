@@ -16,34 +16,34 @@ import java.nio.file.Paths;
  */
 public class Download {
     private String filename;
-    private ByteDownloadListener byteListener;
-    private StringDownloadListener stringListener;
-    private FileDownloadListener fileListener;
+    private ByteDownload byteListener;
+    private StringDownload stringListener;
+    private FileDownload fileListener;
 
-    public interface StringDownloadListener {
+    public interface StringDownload {
         String onDownload();
     }
 
-    public interface FileDownloadListener {
+    public interface FileDownload {
         File onDownload();
     }
 
-    public interface ByteDownloadListener {
+    public interface ByteDownload {
         byte[] onDownload();
     }
 
-    public Download(String filename, StringDownloadListener listener) {
+    public Download(String filename, StringDownload string) {
         this.filename = filename;
-        this.stringListener = listener;
+        this.stringListener = string;
     }
 
-    public Download(String filename, ByteDownloadListener listener) {
+    public Download(String filename, ByteDownload bytes) {
         this.filename = filename;
-        byteListener = listener;
+        byteListener = bytes;
     }
 
-    public Download(FileDownloadListener fileDownloadListener) {
-        fileListener = fileDownloadListener;
+    public Download(FileDownload file) {
+        fileListener = file;
     }
 
     public void createDownloadButton(Button button) {
@@ -56,7 +56,7 @@ public class Download {
         }
     }
 
-    public static FileDownloader createFileDownloadButton(FileDownloadListener file, Button button) {
+    public static FileDownloader createFileDownloadButton(FileDownload file, Button button) {
         Holder<File> fileHolder = new Holder<>();
         final StreamResource stream = new StreamResource(
                 (StreamResource.StreamSource) () -> {
@@ -73,17 +73,17 @@ public class Download {
         return downloader;
     }
 
-    public static FileDownloader createStringDownloadButton(StringDownloadListener listener, String fileName, Button button) {
+    public static FileDownloader createStringDownloadButton(StringDownload string, String fileName, Button button) {
         final StreamResource stream = new StreamResource(
-                (StreamResource.StreamSource) () -> new ByteArrayInputStream(listener.onDownload().getBytes()), fileName);
+                (StreamResource.StreamSource) () -> new ByteArrayInputStream(string.onDownload().getBytes()), fileName);
         FileDownloader downloader = new FileDownloader(stream);
         downloader.extend(button);
         return downloader;
     }
 
-    public static FileDownloader createByteDownloadButton(ByteDownloadListener listener, String fileName, Button button) {
+    public static FileDownloader createByteDownloadButton(ByteDownload bytes, String fileName, Button button) {
         final StreamResource stream = new StreamResource(
-                (StreamResource.StreamSource) () -> new ByteArrayInputStream(listener.onDownload()), fileName);
+                (StreamResource.StreamSource) () -> new ByteArrayInputStream(bytes.onDownload()), fileName);
         FileDownloader downloader = new FileDownloader(stream);
         downloader.extend(button);
         return downloader;

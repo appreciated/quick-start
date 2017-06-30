@@ -18,8 +18,8 @@ public class DownloadAction extends Action {
         this(name, null, download);
     }
 
-    public DownloadAction(String name, Resource resource, Download download) {
-        super(resource, name);
+    public DownloadAction(String title, Resource iconResource, Download download) {
+        super(iconResource, title);
         this.download = download;
     }
 

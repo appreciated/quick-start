@@ -7,20 +7,20 @@ import com.vaadin.server.Resource;
  */
 public abstract class Action {
 
-    private final Resource resource;
-    private final String name;
+    private final Resource iconResource;
+    private final String title;
 
-    public Action(Resource resource, String name) {
-        this.resource = resource;
-        this.name = name;
+    public Action(Resource icon, String title) {
+        this.iconResource = icon;
+        this.title = title;
     }
 
-    public Resource getResource() {
-        return resource;
+    public Resource getIconResource() {
+        return iconResource;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
 
