@@ -57,7 +57,7 @@ public class DialogBuilder {
         dialog.show();
     }
 
-    interface DialogClickListener {
+    public interface DialogClickListener {
         void onClick(Dialog dialog);
     }
 
