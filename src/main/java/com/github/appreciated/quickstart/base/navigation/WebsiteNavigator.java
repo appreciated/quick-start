@@ -1,8 +1,8 @@
 package com.github.appreciated.quickstart.base.navigation;
 
+import com.github.appreciated.quickstart.base.components.Helper;
 import com.github.appreciated.quickstart.base.navigation.interfaces.OnNavigateListener;
 import com.github.appreciated.quickstart.base.navigation.interfaces.attributes.HasContextActions;
-import com.github.appreciated.quickstart.base.navigation.interfaces.attributes.HasPercentageHeight;
 import com.github.appreciated.quickstart.base.navigation.interfaces.attributes.HasSearch;
 import com.github.appreciated.quickstart.base.navigation.interfaces.base.ContainerSubpage;
 import com.github.appreciated.quickstart.base.navigation.interfaces.base.Subpage;
@@ -12,7 +12,10 @@ import com.github.appreciated.quickstart.base.navigation.interfaces.theme.QuickS
 import com.github.appreciated.quickstart.base.ui.QuickStartUI;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.server.Sizeable;
-import com.vaadin.ui.*;
+import com.vaadin.ui.AbstractOrderedLayout;
+import com.vaadin.ui.Alignment;
+import com.vaadin.ui.Component;
+import com.vaadin.ui.UI;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
@@ -23,7 +26,7 @@ import java.util.stream.Stream;
  * Created by appreciated on 10.12.2016.
  * <p>
  * <p>
- * The WebsiteNavigator stores the instances of all the elements the were already called once and allows the programmer to only use one method
+ * The WebsiteNavigator stores the instances of all elements the were already called once and allows the programmer to only use one method
  */
 public class WebsiteNavigator extends Navigator {
 
@@ -66,26 +69,18 @@ public class WebsiteNavigator extends Navigator {
             if (subpageComponent instanceof ContainerSubpage) {
                 navigateTo((ContainerSubpage) subpageComponent);
             } else {
-                setComponent(provider.getComponent(subpageComponent), false);
+                setComponent(provider.getComponent(subpageComponent));
             }
         }
     }
 
     public void navigateTo(ContainerSubpage subpage) {
-        Layout container = QuickStartUI.getProvider().getNavigationContainer(subpage);
-        if (subpage.hasPadding()) {
-            container.addStyleName("container-padding");
-        }
-        boolean hasPercentageHeight = subpage instanceof HasPercentageHeight;
-        if (hasPercentageHeight) {
-            container.setSizeFull();
-        }
-        container.addComponent(subpage);
-        setComponent(container, hasPercentageHeight);
+        setComponent(QuickStartUI.getProvider().getComponent(subpage));
     }
 
-    public void setComponent(Component component, boolean setPercentageHeight) {
-        navigatorView.allowPercentagePageHeight(component instanceof HasPercentageHeight || setPercentageHeight);
+    public void setComponent(Component component) {
+        Helper.prepareContainerForComponent(navigatorView.getContainerView(), component);
+        navigatorView.allowPercentagePageHeight(Helper.requiresPercentageHeight(component));
         holder.removeAllComponents();
         onNavigate();
         currentComponent = component;

@@ -20,8 +20,8 @@ public interface Finishable extends Subpage {
         }
     }
 
-    public interface FinishListener {
-        public void onFinish();
+    interface FinishListener {
+        void onFinish();
     }
 }
 

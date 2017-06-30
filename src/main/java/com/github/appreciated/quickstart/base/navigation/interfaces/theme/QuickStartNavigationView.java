@@ -8,6 +8,7 @@ import com.github.appreciated.quickstart.base.navigation.interfaces.attributes.H
 import com.github.appreciated.quickstart.base.navigation.interfaces.base.Subpage;
 import com.vaadin.ui.AbstractOrderedLayout;
 import com.vaadin.ui.Component;
+import com.vaadin.ui.Layout;
 
 import java.util.AbstractMap;
 import java.util.List;
@@ -45,4 +46,6 @@ public interface QuickStartNavigationView extends Component {
     void initWithAccessControl(AccessControl accessControl);
 
     void initRegistrationControl(RegistrationControl registrationControl);
+
+    Layout getContainerView();
 }
