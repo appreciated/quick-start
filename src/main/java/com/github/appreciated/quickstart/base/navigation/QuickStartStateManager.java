@@ -85,6 +85,9 @@ public class QuickStartStateManager implements Finishable.FinishListener {
         currentComponent = component;
 
         holder.addComponent(currentComponent);
+        navigatorView.onComponentAdded(currentComponent);
+
+
         if (!QuickStartUI.isMobile()) {
             holder.setSizeFull();
         } else {

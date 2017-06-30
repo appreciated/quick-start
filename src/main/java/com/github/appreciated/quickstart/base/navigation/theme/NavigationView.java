@@ -56,4 +56,6 @@ public interface NavigationView extends Component {
 
     default void onNavigate(Component subpageComponent) {
     }
+
+    default void onComponentAdded(Component currentComponent){}
 }
