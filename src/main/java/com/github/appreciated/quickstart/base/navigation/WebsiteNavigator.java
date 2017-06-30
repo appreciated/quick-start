@@ -149,8 +149,12 @@ public class WebsiteNavigator extends Navigator implements Finishable.FinishList
         }
     }
 
-    private Subpage getCurrentPage() {
+    public Subpage getCurrentPage() {
         return currentView;
+    }
+
+    public Component getCurrentComponent() {
+        return currentComponent;
     }
 
     public static Subpage getCurrentSubpage() {
@@ -162,8 +166,8 @@ public class WebsiteNavigator extends Navigator implements Finishable.FinishList
     }
 
     public void onFinish() {
-        if (this.currentView instanceof Finishable.FinishListener) {
-            ((Finishable.FinishListener) this.currentView).onFinish();
+        if (this.currentComponent instanceof Finishable.FinishListener) {
+            ((Finishable.FinishListener) this.currentComponent).onFinish();
         }
     }
 }
