@@ -7,7 +7,7 @@ import com.github.appreciated.quickstart.base.navigation.interfaces.attributes.H
 import com.github.appreciated.quickstart.base.navigation.interfaces.base.ContainerSubpage;
 import com.github.appreciated.quickstart.base.navigation.interfaces.base.Subpage;
 import com.github.appreciated.quickstart.base.navigation.interfaces.theme.NavigationView;
-import com.github.appreciated.quickstart.base.navigation.interfaces.theme.PagerImplementation;
+import com.github.appreciated.quickstart.base.navigation.interfaces.theme.PagerView;
 import com.github.appreciated.quickstart.base.navigation.interfaces.theme.QuickStartDesignProvider;
 import com.github.appreciated.quickstart.base.ui.QuickStartUI;
 import com.vaadin.navigator.Navigator;
@@ -80,6 +80,9 @@ public class WebsiteNavigator extends Navigator {
 
     public void setComponent(Component component) {
         Helper.prepareContainerForComponent(navigatorView.getContainerView(), component);
+        if (component instanceof HasContextActions) {
+            ((HasContextActions) component).setContextActionListener(() -> navigatorView.setCurrentActions((HasContextActions) component));
+        }
         navigatorView.allowPercentagePageHeight(Helper.requiresPercentageHeight(component));
         holder.removeAllComponents();
         onNavigate();
@@ -124,14 +127,14 @@ public class WebsiteNavigator extends Navigator {
     }
 
     public void nextPagerView() {
-        if (currentComponent instanceof PagerImplementation) {
-            ((PagerImplementation) currentComponent).next();
+        if (currentComponent instanceof PagerView) {
+            ((PagerView) currentComponent).next();
         }
     }
 
     public void lastPagerView() {
-        if (currentComponent instanceof PagerImplementation) {
-            ((PagerImplementation) currentComponent).last();
+        if (currentComponent instanceof PagerView) {
+            ((PagerView) currentComponent).last();
         }
     }
 

@@ -5,8 +5,7 @@ import com.github.appreciated.quickstart.base.navigation.interfaces.base.Compone
 /**
  * Created by appreciated on 22.06.2017.
  */
-public interface PagerImplementation extends ComponentSubpage{
-    public void next();
-    public void last();
-    public void onFinish();
+public interface PagerView extends ComponentSubpage{
+    void next();
+    void last();
 }
