@@ -28,6 +28,14 @@ public interface QuickStartDesignProvider {
 
     Dialog getDialog();
 
+    /**
+     * getComponent returns depending on the paremter different Values.
+     *
+     * If the Parameter is not a Component Subpage, it will return either a //TODO
+     *
+     * @param subpage
+     * @return
+     */
     default Component getComponent(Subpage subpage) {
         if (subpage instanceof ContainerSubpage) {
             return getNavigationContainer((ContainerSubpage) subpage);

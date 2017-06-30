@@ -19,7 +19,8 @@ import java.util.stream.Stream;
  */
 public interface NavigationView extends Component {
 
-    default void initWithConfiguration(Stream<AbstractMap.SimpleEntry<String, Boolean>> configurations) {}
+    default void initWithConfiguration(Stream<AbstractMap.SimpleEntry<String, Boolean>> configurations) {
+    }
 
     void initNavigationElements(Stream<Subpage> pages);
 
@@ -39,7 +40,8 @@ public interface NavigationView extends Component {
 
     void allowPercentagePageHeight(boolean allow);
 
-    default void setPageTitleVisibility(boolean hide) {}
+    default void setPageTitleVisibility(boolean hide) {
+    }
 
     void setCurrentSearchNavigable(HasSearch navigable);
 
@@ -48,4 +50,10 @@ public interface NavigationView extends Component {
     void initRegistrationControl(RegistrationControl registrationControl);
 
     Layout getContainerView();
+
+    default void onNavigate(Subpage subpageComponent) {
+    }
+
+    default void onNavigate(Component subpageComponent) {
+    }
 }

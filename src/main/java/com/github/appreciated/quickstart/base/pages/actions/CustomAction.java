@@ -34,10 +34,6 @@ public class CustomAction extends Action {
         return false;
     }
 
-    public boolean insertLeft() {
-        return insertLeft;
-    }
-
     public Component getDesktopComponent() {
         return desktopComponent;
     }

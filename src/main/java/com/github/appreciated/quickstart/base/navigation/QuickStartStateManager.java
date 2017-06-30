@@ -5,7 +5,6 @@ import com.github.appreciated.quickstart.base.listeners.OnNavigateListener;
 import com.github.appreciated.quickstart.base.navigation.theme.NavigationView;
 import com.github.appreciated.quickstart.base.navigation.theme.PagerView;
 import com.github.appreciated.quickstart.base.navigation.theme.QuickStartDesignProvider;
-import com.github.appreciated.quickstart.base.pages.ContainerSubpage;
 import com.github.appreciated.quickstart.base.pages.Finishable;
 import com.github.appreciated.quickstart.base.pages.Subpage;
 import com.github.appreciated.quickstart.base.pages.attributes.HasContextActions;
@@ -59,6 +58,7 @@ public class QuickStartStateManager implements Finishable.FinishListener {
     public void navigateTo(Subpage subpageComponent) {
         if (currentView != subpageComponent) {
             currentView = subpageComponent;
+            navigatorView.onNavigate(subpageComponent);
             navigatorView.setPageTitleVisibility(subpageComponent.showTitle());
             navigatorView.setCurrentSearchNavigable(subpageComponent instanceof HasSearch ? (HasSearch) subpageComponent : null);
             navigatorView.setCurrentActions(subpageComponent instanceof HasContextActions ? (HasContextActions) subpageComponent : null);
@@ -66,22 +66,15 @@ public class QuickStartStateManager implements Finishable.FinishListener {
                 ((HasContextActions) subpageComponent).setContextActionListener(() -> navigatorView.setCurrentActions((HasContextActions) subpageComponent));
             }
             navigatorView.setCurrentContainerLabel(subpageComponent.getNavigationName());
-            if (subpageComponent instanceof ContainerSubpage) {
-                navigateTo((ContainerSubpage) subpageComponent);
-            } else {
-                setComponent(provider.getComponent(subpageComponent));
-            }
+            setComponent(provider.getComponent(subpageComponent));
         }
-    }
-
-    public void navigateTo(ContainerSubpage subpage) {
-        setComponent(QuickStartUI.getProvider().getComponent(subpage));
     }
 
     public void setComponent(Component component) {
         Helper.prepareContainerForComponent(navigatorView.getContainerView(), component);
         if (component instanceof Subpage) {
             if (component instanceof HasContextActions) {
+                navigatorView.setCurrentActions(component instanceof HasContextActions ? (HasContextActions) component : null);
                 ((HasContextActions) component).setContextActionListener(() -> navigatorView.setCurrentActions((HasContextActions) component));
             }
             navigatorView.setPageTitleVisibility(((Subpage) component).showTitle());
@@ -90,6 +83,7 @@ public class QuickStartStateManager implements Finishable.FinishListener {
         holder.removeAllComponents();
         onNavigate();
         currentComponent = component;
+
         holder.addComponent(currentComponent);
         if (!QuickStartUI.isMobile()) {
             holder.setSizeFull();
