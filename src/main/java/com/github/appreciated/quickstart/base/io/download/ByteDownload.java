@@ -12,6 +12,11 @@ import java.io.ByteArrayInputStream;
 public class ByteDownload extends Download {
     private ByteDownloadResource byteListener;
 
+    @Override
+    public void createDownloadButton(Button downloadButton) {
+        createByteDownloadButton(byteListener,filename,downloadButton);
+    }
+
     @FunctionalInterface
     public interface ByteDownloadResource {
         byte[] onDownload();

@@ -5,4 +5,6 @@ package com.github.appreciated.quickstart.base.io.download;
  */
 public abstract class Download {
     protected String filename;
+
+    public abstract void createDownloadButton(com.vaadin.ui.Button downloadButton);
 }
