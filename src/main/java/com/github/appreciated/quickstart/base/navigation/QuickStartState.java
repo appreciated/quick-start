@@ -27,9 +27,9 @@ import java.util.stream.Stream;
  * Created by appreciated on 10.12.2016.
  * <p>
  * <p>
- * The WebsiteNavigator stores the instances of all elements the were already called once and allows the programmer to only use one method
+ * The QuickStartState stores the instances of all elements the were already called once and allows the programmer to only use one method
  */
-public class WebsiteNavigator extends Navigator implements Finishable.FinishListener {
+public class QuickStartState extends Navigator implements Finishable.FinishListener {
 
     private final NavigationView navigatorView;
     private QuickStartDesignProvider provider;
@@ -43,7 +43,7 @@ public class WebsiteNavigator extends Navigator implements Finishable.FinishList
     /**
      * @param navigatorView The Component in which the User can navigate
      */
-    public WebsiteNavigator(NavigationView navigatorView, QuickStartDesignProvider provider) {
+    public QuickStartState(NavigationView navigatorView, QuickStartDesignProvider provider) {
         this.holder = navigatorView.getHolder();
         this.navigatorView = navigatorView;
         this.provider = provider;

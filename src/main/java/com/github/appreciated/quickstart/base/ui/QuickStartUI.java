@@ -3,8 +3,8 @@ package com.github.appreciated.quickstart.base.ui;
 
 import com.github.appreciated.quickstart.base.authentication.login.CurrentUser;
 import com.github.appreciated.quickstart.base.error.ErrorPageDesign;
+import com.github.appreciated.quickstart.base.navigation.QuickStartState;
 import com.github.appreciated.quickstart.base.navigation.WebAppDescription;
-import com.github.appreciated.quickstart.base.navigation.WebsiteNavigator;
 import com.github.appreciated.quickstart.base.navigation.exception.InvalidWebDescriptionException;
 import com.github.appreciated.quickstart.base.navigation.interfaces.base.Subpage;
 import com.github.appreciated.quickstart.base.navigation.interfaces.theme.LoginImplementationView;
@@ -36,7 +36,7 @@ public abstract class QuickStartUI extends UI {
     private NavigationView defaultView;
     private LoginImplementationView quickStartLogin;
     private WebAppDescription description;
-    private WebsiteNavigator navigator;
+    private QuickStartState navigator;
 
     public static String getUsername() {
         return CurrentUser.get();
@@ -73,7 +73,7 @@ public abstract class QuickStartUI extends UI {
         if (quickStartLogin == null) {
             navigation.disableLogout();
         }
-        navigator = new WebsiteNavigator(navigation,getProvider());
+        navigator = new QuickStartState(navigation,getProvider());
         navigator.initNavigationElements(getWebsiteDescription().getSubpages());
         navigation.initNavigationElements(getWebsiteDescription().getSubpages());
         navigation.initUserFunctionality(getWebsiteDescription());
@@ -88,11 +88,11 @@ public abstract class QuickStartUI extends UI {
     }
 
     @Override
-    public WebsiteNavigator getNavigator() {
+    public QuickStartState getNavigator() {
         return navigator;
     }
 
-    public static WebsiteNavigator getNavigation() {
+    public static QuickStartState getNavigation() {
         return get().navigator;
     }
 
