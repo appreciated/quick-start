@@ -4,7 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 
 /**
- * Created by Johannes on 30.06.2017.
+ * Created by appreciated on 30.06.2017.
  */
 public class ByteUpload extends Upload {
     private File file;

@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 
 /**
- * Created by Johannes on 30.06.2017.
+ * Created by appreciated on 30.06.2017.
  */
 public class FileUpload extends Upload {
     private File file;

@@ -4,7 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.nio.charset.StandardCharsets;
 
 /**
- * Created by Johannes on 30.06.2017.
+ * Created by appreciated on 30.06.2017.
  */
 public class StringUpload extends Upload {
     private StringUploadListener stringUploadListener;

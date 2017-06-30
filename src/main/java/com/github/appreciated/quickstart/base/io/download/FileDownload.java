@@ -12,7 +12,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 /**
- * Created by Johannes on 30.06.2017.
+ * Created by appreciated on 30.06.2017.
  */
 public class FileDownload extends Download {
     private ByteDownload byteListener;
