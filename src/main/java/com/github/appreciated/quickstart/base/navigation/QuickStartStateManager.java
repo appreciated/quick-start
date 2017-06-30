@@ -60,17 +60,50 @@ public class QuickStartStateManager implements Finishable.FinishListener, Contex
         if (currentView != subpageComponent) {
             currentView = subpageComponent;
             navigatorView.onNavigate(subpageComponent);
-            navigatorView.setPageTitleVisibility(subpageComponent.showTitle());
+            setPageTitleVisibility(subpageComponent.showTitle());
             navigatorView.setCurrentSearchNavigable(subpageComponent instanceof HasSearch ? (HasSearch) subpageComponent : null);
-            navigatorView.setCurrentActions(subpageComponent instanceof HasContextActions ? (HasContextActions) subpageComponent : null);
+            setContextActions(subpageComponent instanceof HasContextActions ? (HasContextActions) subpageComponent : null);
             navigatorView.setCurrentContainerLabel(subpageComponent.getNavigationName());
             setComponent(provider.getComponent(subpageComponent));
         }
     }
 
+    /**
+     * @param component
+     */
+    public void onNavigate(Component component) {
+        navigatorView.onNavigate(component);
+    }
+
+    /**
+     * @param subpage
+     */
+    public void onNavigate(Subpage subpage) {
+        navigatorView.onNavigate(subpage);
+    }
+
+    /**
+     *
+     */
+    public void setPageTitleVisibility(boolean visibility) {
+        navigatorView.setPageTitleVisibility(visibility);
+    }
+
+    /**
+     *
+     * @param contextActions
+     */
+    public void setContextActions(HasContextActions contextActions) {
+        navigatorView.setCurrentActions(contextActions);
+    }
+
     public void setComponent(Component component) {
+        setComponent(component, false);
+    }
+
+    public void setComponent(Component component, boolean ignoreContextActions) {
         Helper.prepareContainerForComponent(navigatorView.getContainerView(), component);
-        if (component instanceof Subpage) {
+        if (component instanceof Subpage && !ignoreContextActions) {
             if (component instanceof HasContextActions) {
                 navigatorView.setCurrentActions(component instanceof HasContextActions ? (HasContextActions) component : null);
             }
