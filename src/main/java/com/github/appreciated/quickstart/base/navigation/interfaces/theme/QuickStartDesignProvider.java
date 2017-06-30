@@ -25,7 +25,7 @@ public interface QuickStartDesignProvider {
 
     Layout getNavigationContainer(ContainerSubpage page);
 
-    ComponentSubpage getSubPageNavigator(SubpageNavigator subpages);
+    ComponentSubpage getSubpageNavigator(SubpageNavigator subpages);
 
     ComponentSubpage getProgressStepper(ProgressStepper subpages);
 
@@ -36,17 +36,13 @@ public interface QuickStartDesignProvider {
     default Component getComponent(Subpage subpage) {
         if (subpage instanceof ContainerSubpage) {
             return getNavigationContainer((ContainerSubpage) subpage);
-        }
-        if (subpage instanceof Pager) {
+        } else if (subpage instanceof Pager) {
             return getPager((Pager) subpage);
-        }
-        if (subpage instanceof ProgressStepper) {
+        } else if (subpage instanceof ProgressStepper) {
             return getProgressStepper((ProgressStepper) subpage);
-        }
-        if (subpage instanceof SubpageNavigator) {
-            return getSubPageNavigator((SubpageNavigator) subpage);
-        }
-        if (subpage instanceof Component) {
+        } else if (subpage instanceof SubpageNavigator) {
+            return getSubpageNavigator((SubpageNavigator) subpage);
+        } else if (subpage instanceof Component) {
             return (Component) subpage;
         }
         throw new InvalidParameterException("Subpage must not be a instance of " + subpage.getClass().getName());

@@ -87,6 +87,11 @@ public abstract class QuickStartUI extends UI {
         return (QuickStartUI) UI.getCurrent();
     }
 
+    @Override
+    public WebsiteNavigator getNavigator() {
+        return navigator;
+    }
+
     public static WebsiteNavigator getNavigation() {
         return get().navigator;
     }

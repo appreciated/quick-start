@@ -6,5 +6,5 @@ import com.github.appreciated.quickstart.base.navigation.interfaces.attributes.H
 /**
  * Created by appreciated on 28.06.2017.
  */
-public interface ProgressStepper extends HasFinishableSubpages, NavigationListener {
+public abstract class ProgressStepper implements HasFinishableSubpages, NavigationListener {
 }

@@ -1,6 +1,7 @@
 package com.github.appreciated.quickstart.base.navigation;
 
 import com.github.appreciated.quickstart.base.components.Helper;
+import com.github.appreciated.quickstart.base.navigation.interfaces.Finishable;
 import com.github.appreciated.quickstart.base.navigation.interfaces.OnNavigateListener;
 import com.github.appreciated.quickstart.base.navigation.interfaces.attributes.HasContextActions;
 import com.github.appreciated.quickstart.base.navigation.interfaces.attributes.HasSearch;
@@ -28,7 +29,7 @@ import java.util.stream.Stream;
  * <p>
  * The WebsiteNavigator stores the instances of all elements the were already called once and allows the programmer to only use one method
  */
-public class WebsiteNavigator extends Navigator {
+public class WebsiteNavigator extends Navigator implements Finishable.FinishListener {
 
     private final NavigationView navigatorView;
     private QuickStartDesignProvider provider;
@@ -158,5 +159,11 @@ public class WebsiteNavigator extends Navigator {
 
     public void initNavigationElements(Stream<Subpage> subpages) {
         subpages.forEach(subpage -> addNavigation(subpage));
+    }
+
+    public void onFinish() {
+        if (this.currentView instanceof Finishable.FinishListener) {
+            ((Finishable.FinishListener) this.currentView).onFinish();
+        }
     }
 }
