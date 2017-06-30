@@ -1,6 +1,6 @@
 package com.github.appreciated.quickstart.base.pages.actions;
 
-import com.github.appreciated.quickstart.base.navigation.upload.Upload;
+import com.github.appreciated.quickstart.base.io.Upload;
 import com.vaadin.server.Resource;
 
 /**
