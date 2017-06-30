@@ -12,12 +12,12 @@ public class DialogBuilder {
 
     Dialog dialog = QuickStartUI.getProvider().getDialog();
 
-    public DialogBuilder withPositiveButton(Button button, Button.ClickListener listener) {
-        dialog.addPositiveButton(button, listener);
+    public DialogBuilder withPositiveButton(Button button, DialogClickListener listener) {
+        dialog.addPositiveButton(button, clickEvent -> listener.onClick(dialog));
         return this;
     }
 
-    public DialogBuilder withPositiveButton(String buttonCaption, Button.ClickListener listener) {
+    public DialogBuilder withPositiveButton(String buttonCaption, DialogClickListener listener) {
         return withPositiveButton(new Button(buttonCaption), listener);
     }
 
@@ -25,12 +25,12 @@ public class DialogBuilder {
         return withNegativeButton(new Button(buttonCaption), clickEvent -> dialog.close());
     }
 
-    public DialogBuilder withNegativeButton(String buttonCaption, Button.ClickListener listener) {
+    public DialogBuilder withNegativeButton(String buttonCaption, DialogClickListener listener) {
         return withNegativeButton(new Button(buttonCaption), listener);
     }
 
-    public DialogBuilder withNegativeButton(Button button, Button.ClickListener listener) {
-        dialog.addNegativeButton(button, listener);
+    public DialogBuilder withNegativeButton(Button button, DialogClickListener listener) {
+        dialog.addNegativeButton(button, clickEvent -> listener.onClick(dialog));
         return this;
     }
 
@@ -56,4 +56,9 @@ public class DialogBuilder {
     public void show() {
         dialog.show();
     }
+
+    interface DialogClickListener {
+        void onClick(Dialog dialog);
+    }
+
 }
