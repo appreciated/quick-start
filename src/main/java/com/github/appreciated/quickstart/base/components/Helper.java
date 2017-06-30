@@ -5,7 +5,7 @@ import com.vaadin.ui.Component;
 import com.vaadin.ui.Layout;
 
 /**
- * Created by Johannes on 30.06.2017.
+ * Created by appreciated on 30.06.2017.
  */
 public class Helper {
     public static void prepareContainerForComponent(Layout container, Component component) {
