@@ -49,7 +49,11 @@ public class DialogBuilder {
         return this;
     }
 
+    public Dialog build() {
+        return dialog;
+    }
+
     public void show() {
-       dialog.show();
+        dialog.show();
     }
 }
