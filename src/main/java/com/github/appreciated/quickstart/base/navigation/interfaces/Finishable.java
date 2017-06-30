@@ -9,7 +9,7 @@ import com.github.appreciated.quickstart.base.ui.QuickStartUI;
 public interface Finishable extends Subpage {
 
     default void finish() {
-        QuickStartUI.get().getNavigator().onFinish();
+        QuickStartUI.get().getStateManager().onFinish();
     }
 
     interface FinishListener {

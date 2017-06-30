@@ -3,7 +3,7 @@ package com.github.appreciated.quickstart.base.ui;
 
 import com.github.appreciated.quickstart.base.authentication.login.CurrentUser;
 import com.github.appreciated.quickstart.base.error.ErrorPageDesign;
-import com.github.appreciated.quickstart.base.navigation.QuickStartState;
+import com.github.appreciated.quickstart.base.navigation.QuickStartStateManager;
 import com.github.appreciated.quickstart.base.navigation.WebAppDescription;
 import com.github.appreciated.quickstart.base.navigation.exception.InvalidWebDescriptionException;
 import com.github.appreciated.quickstart.base.navigation.interfaces.base.Subpage;
@@ -36,7 +36,7 @@ public abstract class QuickStartUI extends UI {
     private NavigationView defaultView;
     private LoginImplementationView quickStartLogin;
     private WebAppDescription description;
-    private QuickStartState navigator;
+    private QuickStartStateManager navigator;
 
     public static String getUsername() {
         return CurrentUser.get();
@@ -73,7 +73,7 @@ public abstract class QuickStartUI extends UI {
         if (quickStartLogin == null) {
             navigation.disableLogout();
         }
-        navigator = new QuickStartState(navigation,getProvider());
+        navigator = new QuickStartStateManager(navigation,getProvider());
         navigator.initNavigationElements(getWebsiteDescription().getSubpages());
         navigation.initNavigationElements(getWebsiteDescription().getSubpages());
         navigation.initUserFunctionality(getWebsiteDescription());
@@ -87,12 +87,7 @@ public abstract class QuickStartUI extends UI {
         return (QuickStartUI) UI.getCurrent();
     }
 
-    @Override
-    public QuickStartState getNavigator() {
-        return navigator;
-    }
-
-    public static QuickStartState getNavigation() {
+    public static QuickStartStateManager getStateManager() {
         return get().navigator;
     }
 
@@ -101,7 +96,7 @@ public abstract class QuickStartUI extends UI {
     }
 
     public static void navigateTo(Class<? extends Subpage> page) {
-        getNavigation().navigateTo(page);
+        getStateManager().navigateTo(page);
     }
 
     public static boolean isMobile() {

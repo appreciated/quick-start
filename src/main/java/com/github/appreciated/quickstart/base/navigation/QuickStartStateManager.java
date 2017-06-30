@@ -11,7 +11,6 @@ import com.github.appreciated.quickstart.base.navigation.interfaces.theme.Naviga
 import com.github.appreciated.quickstart.base.navigation.interfaces.theme.PagerView;
 import com.github.appreciated.quickstart.base.navigation.interfaces.theme.QuickStartDesignProvider;
 import com.github.appreciated.quickstart.base.ui.QuickStartUI;
-import com.vaadin.navigator.Navigator;
 import com.vaadin.server.Sizeable;
 import com.vaadin.ui.AbstractOrderedLayout;
 import com.vaadin.ui.Alignment;
@@ -27,9 +26,9 @@ import java.util.stream.Stream;
  * Created by appreciated on 10.12.2016.
  * <p>
  * <p>
- * The QuickStartState stores the instances of all elements the were already called once and allows the programmer to only use one method
+ * The QuickStartStateManager stores the instances of all elements the were already called once and allows the programmer to only use one method
  */
-public class QuickStartState extends Navigator implements Finishable.FinishListener {
+public class QuickStartStateManager implements Finishable.FinishListener {
 
     private final NavigationView navigatorView;
     private QuickStartDesignProvider provider;
@@ -43,7 +42,7 @@ public class QuickStartState extends Navigator implements Finishable.FinishListe
     /**
      * @param navigatorView The Component in which the User can navigate
      */
-    public QuickStartState(NavigationView navigatorView, QuickStartDesignProvider provider) {
+    public QuickStartStateManager(NavigationView navigatorView, QuickStartDesignProvider provider) {
         this.holder = navigatorView.getHolder();
         this.navigatorView = navigatorView;
         this.provider = provider;
@@ -120,11 +119,11 @@ public class QuickStartState extends Navigator implements Finishable.FinishListe
     }
 
     public static void next() {
-        ((QuickStartUI) UI.getCurrent()).getNavigation().nextPagerView();
+        ((QuickStartUI) UI.getCurrent()).getStateManager().nextPagerView();
     }
 
     public static void last() {
-        ((QuickStartUI) UI.getCurrent()).getNavigation().lastPagerView();
+        ((QuickStartUI) UI.getCurrent()).getStateManager().lastPagerView();
     }
 
     public void nextPagerView() {
@@ -158,7 +157,7 @@ public class QuickStartState extends Navigator implements Finishable.FinishListe
     }
 
     public static Subpage getCurrentSubpage() {
-        return QuickStartUI.getNavigation().getCurrentPage();
+        return QuickStartUI.getStateManager().getCurrentPage();
     }
 
     public void initNavigationElements(Stream<Subpage> subpages) {

@@ -33,6 +33,6 @@ public interface Subpage {
     }
 
     default void navigateTo() {
-        QuickStartUI.getNavigation().navigateTo(this);
+        QuickStartUI.getStateManager().navigateTo(this);
     }
 }
