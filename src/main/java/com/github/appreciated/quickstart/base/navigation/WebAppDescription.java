@@ -7,6 +7,7 @@ import com.github.appreciated.quickstart.base.navigation.interfaces.base.Subpage
 import com.github.appreciated.quickstart.base.navigation.interfaces.theme.QuickStartDesignProvider;
 import com.github.appreciated.quickstart.base.navigation.interfaces.theme.QuickStartLoginView;
 import com.github.appreciated.quickstart.base.navigation.interfaces.theme.QuickStartNavigationView;
+import com.vaadin.ui.UI;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.AbstractMap;
@@ -79,16 +80,16 @@ public class WebAppDescription {
 
     public WebAppDescription init(boolean isMobile) throws InvalidWebDescriptionException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         if (designProvider == null) {
-            throw new InvalidWebDescriptionException("No Design Provider defined!");
+            throw new InvalidWebDescriptionException("The WebDescription in "+ UI.getCurrent().getClass().getSimpleName()+".java has no DesignProvider defined add one by using WebAppDescriptionBuilder::withDesignProvider(...)!");
         }
         if (loginClass != null && accessControl == null) {
-            throw new InvalidWebDescriptionException("No accessControl defined!");
+            throw new InvalidWebDescriptionException("The WebDescription in "+ UI.getCurrent().getClass().getSimpleName()+".java has no AccessControl but a LoginPage defined, add one by using WebAppDescriptionBuilder::withAccessControl(...)!");
         }
         if (title == null) {
-            throw new InvalidWebDescriptionException("No title defined!");
+            throw new InvalidWebDescriptionException("The WebDescription in "+ UI.getCurrent().getClass().getSimpleName()+".java has no title defined, add one by using WebAppDescriptionBuilder::withTitle(...)!");
         }
         if (navigationDescription.getSubpages().size() == 0) {
-            throw new InvalidWebDescriptionException("No navigation elements defined defined!");
+            throw new InvalidWebDescriptionException("The WebDescription in "+ UI.getCurrent().getClass().getSimpleName()+".java has no navigation elements defined, add them by using WebAppDescriptionBuilder::withSubpages(...)");
         }
         if (defaultPage == null) {
             defaultPage = navigationDescription.getSubpages().getFirst().getClass();
@@ -96,7 +97,7 @@ public class WebAppDescription {
         this.navigationElements = navigationDescription.getSubpages();
         for (Subpage navigationElement : navigationElements) {
             if (navigationElement.getNavigationName() == null) {
-                throw new InvalidWebDescriptionException(navigationElement.getClass().getSimpleName() + " has no SubpageDescription!");
+                throw new InvalidWebDescriptionException("The class " + navigationElement.getClass().getSimpleName() + ".java has no SubpageDescription Annotation, please add one!");
             }
         }
         provider = (QuickStartDesignProvider) createInstance(designProvider);
