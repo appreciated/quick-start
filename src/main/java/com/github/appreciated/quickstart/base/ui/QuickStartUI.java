@@ -6,9 +6,9 @@ import com.github.appreciated.quickstart.base.error.ErrorPageDesign;
 import com.github.appreciated.quickstart.base.navigation.QuickStartStateManager;
 import com.github.appreciated.quickstart.base.navigation.description.WebAppDescription;
 import com.github.appreciated.quickstart.base.navigation.exception.InvalidWebDescriptionException;
-import com.github.appreciated.quickstart.base.navigation.interfaces.theme.LoginImplementationView;
-import com.github.appreciated.quickstart.base.navigation.interfaces.theme.NavigationView;
-import com.github.appreciated.quickstart.base.navigation.interfaces.theme.QuickStartDesignProvider;
+import com.github.appreciated.quickstart.base.navigation.theme.LoginView;
+import com.github.appreciated.quickstart.base.navigation.theme.NavigationView;
+import com.github.appreciated.quickstart.base.navigation.theme.QuickStartDesignProvider;
 import com.github.appreciated.quickstart.base.pages.Subpage;
 import com.github.appreciated.quickstart.base.splashscreen.CustomSplashScreenConfigurator;
 import com.vaadin.annotations.Push;
@@ -34,7 +34,7 @@ public abstract class QuickStartUI extends UI {
     private NavigationView navigation;
     private NavigationView mobileView;
     private NavigationView defaultView;
-    private LoginImplementationView quickStartLogin;
+    private LoginView quickStartLogin;
     private WebAppDescription description;
     private QuickStartStateManager navigator;
 

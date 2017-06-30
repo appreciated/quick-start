@@ -3,9 +3,9 @@ package com.github.appreciated.quickstart.base.navigation.description;
 import com.github.appreciated.quickstart.base.authentication.login.AccessControl;
 import com.github.appreciated.quickstart.base.authentication.registration.RegistrationControl;
 import com.github.appreciated.quickstart.base.navigation.exception.InvalidWebDescriptionException;
-import com.github.appreciated.quickstart.base.navigation.interfaces.theme.LoginImplementationView;
-import com.github.appreciated.quickstart.base.navigation.interfaces.theme.NavigationView;
-import com.github.appreciated.quickstart.base.navigation.interfaces.theme.QuickStartDesignProvider;
+import com.github.appreciated.quickstart.base.navigation.theme.LoginView;
+import com.github.appreciated.quickstart.base.navigation.theme.NavigationView;
+import com.github.appreciated.quickstart.base.navigation.theme.QuickStartDesignProvider;
 import com.github.appreciated.quickstart.base.pages.Subpage;
 import com.vaadin.ui.UI;
 
@@ -21,12 +21,12 @@ import java.util.stream.Stream;
 public class WebAppDescription {
     private Class<? extends NavigationView> defaultClass;
     private Class<? extends NavigationView> mobileClass;
-    private Class<? extends LoginImplementationView> loginClass;
+    private Class<? extends LoginView> loginClass;
 
     private QuickStartDesignProvider provider;
     private NavigationView defaultView;
     private NavigationView mobileView;
-    private LoginImplementationView loginNavigable;
+    private LoginView loginNavigable;
     private String title;
     private List<AbstractMap.SimpleEntry<String, Boolean>> configuration = new ArrayList<>();
     private List<Subpage> navigationElements = new ArrayList<>();
@@ -49,7 +49,7 @@ public class WebAppDescription {
         return mobileView;
     }
 
-    public LoginImplementationView getLoginNavigable() {
+    public LoginView getLoginNavigable() {
         return loginNavigable;
     }
 

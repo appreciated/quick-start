@@ -2,9 +2,9 @@ package com.github.appreciated.quickstart.base.navigation;
 
 import com.github.appreciated.quickstart.base.components.Helper;
 import com.github.appreciated.quickstart.base.listeners.OnNavigateListener;
-import com.github.appreciated.quickstart.base.navigation.interfaces.theme.NavigationView;
-import com.github.appreciated.quickstart.base.navigation.interfaces.theme.PagerView;
-import com.github.appreciated.quickstart.base.navigation.interfaces.theme.QuickStartDesignProvider;
+import com.github.appreciated.quickstart.base.navigation.theme.NavigationView;
+import com.github.appreciated.quickstart.base.navigation.theme.PagerView;
+import com.github.appreciated.quickstart.base.navigation.theme.QuickStartDesignProvider;
 import com.github.appreciated.quickstart.base.pages.ContainerSubpage;
 import com.github.appreciated.quickstart.base.pages.Finishable;
 import com.github.appreciated.quickstart.base.pages.Subpage;

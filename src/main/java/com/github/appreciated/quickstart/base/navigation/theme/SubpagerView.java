@@ -1,4 +1,4 @@
-package com.github.appreciated.quickstart.base.navigation.interfaces.theme;
+package com.github.appreciated.quickstart.base.navigation.theme;
 
 import com.github.appreciated.quickstart.base.pages.ComponentSubpage;
 import com.github.appreciated.quickstart.base.pages.attributes.HasContextActions;

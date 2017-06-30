@@ -1,4 +1,4 @@
-package com.github.appreciated.quickstart.base.navigation.interfaces.theme;
+package com.github.appreciated.quickstart.base.navigation.theme;
 
 import com.github.appreciated.quickstart.base.authentication.login.AccessControl;
 import com.github.appreciated.quickstart.base.authentication.registration.RegistrationControl;

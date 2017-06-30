@@ -1,4 +1,4 @@
-package com.github.appreciated.quickstart.base.navigation.interfaces.theme;
+package com.github.appreciated.quickstart.base.navigation.theme;
 
 import com.github.appreciated.quickstart.base.dialog.Dialog;
 import com.github.appreciated.quickstart.base.pages.*;
@@ -16,7 +16,7 @@ public interface QuickStartDesignProvider {
 
     Class<? extends NavigationView> getDesktopDesign();
 
-    LoginImplementationView getLoginView();
+    LoginView getLoginView();
 
     Layout getNavigationContainer(ContainerSubpage page);
 
