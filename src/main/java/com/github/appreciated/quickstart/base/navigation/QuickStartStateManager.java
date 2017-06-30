@@ -86,8 +86,6 @@ public class QuickStartStateManager implements Finishable.FinishListener {
 
         holder.addComponent(currentComponent);
         navigatorView.onComponentAdded(currentComponent);
-
-
         if (!QuickStartUI.isMobile()) {
             holder.setSizeFull();
         } else {
@@ -111,7 +109,9 @@ public class QuickStartStateManager implements Finishable.FinishListener {
                 e.printStackTrace();
             }
         }
-        navigateTo(navigationElements.get(classKey));
+        Subpage element = navigationElements.get(classKey);
+        navigateTo(element);
+        navigatorView.onNavigate(element);
     }
 
     public NavigationView getNavigationDesign() {
