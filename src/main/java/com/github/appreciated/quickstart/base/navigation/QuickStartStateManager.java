@@ -5,15 +5,14 @@ import com.github.appreciated.quickstart.base.listeners.OnNavigateListener;
 import com.github.appreciated.quickstart.base.navigation.theme.NavigationView;
 import com.github.appreciated.quickstart.base.navigation.theme.PagerView;
 import com.github.appreciated.quickstart.base.navigation.theme.QuickStartDesignProvider;
+import com.github.appreciated.quickstart.base.pages.CustomPage;
 import com.github.appreciated.quickstart.base.pages.Finishable;
 import com.github.appreciated.quickstart.base.pages.Subpage;
 import com.github.appreciated.quickstart.base.pages.attributes.HasContextActions;
 import com.github.appreciated.quickstart.base.pages.attributes.HasContextActions.ContextActionListener;
 import com.github.appreciated.quickstart.base.pages.attributes.HasSearch;
 import com.github.appreciated.quickstart.base.ui.QuickStartUI;
-import com.vaadin.server.Sizeable;
 import com.vaadin.ui.AbstractOrderedLayout;
-import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.UI;
 
@@ -32,7 +31,7 @@ public class QuickStartStateManager implements Finishable.FinishListener, Contex
 
     private final NavigationView navigatorView;
     private QuickStartDesignProvider provider;
-    private Subpage currentView = null;
+    private Subpage currentSubpage = null;
     private AbstractOrderedLayout holder = null;
 
     private Map<Class<? extends Subpage>, Subpage> navigationElements = new HashMap<>();
@@ -57,14 +56,23 @@ public class QuickStartStateManager implements Finishable.FinishListener, Contex
     }
 
     public void navigateTo(Subpage subpageComponent) {
-        if (currentView != subpageComponent) {
-            currentView = subpageComponent;
-            navigatorView.onNavigate(subpageComponent);
-            setPageTitleVisibility(subpageComponent.showTitle());
-            navigatorView.setCurrentSearchNavigable(subpageComponent instanceof HasSearch ? (HasSearch) subpageComponent : null);
-            setContextActions(subpageComponent instanceof HasContextActions ? (HasContextActions) subpageComponent : null);
-            navigatorView.setCurrentContainerLabel(subpageComponent.getNavigationName());
-            setComponent(provider.getComponent(subpageComponent));
+        if (currentSubpage != subpageComponent) {
+            if (currentSubpage != null) {
+                currentSubpage.onSubpageFinish();
+            }
+            currentSubpage = subpageComponent;
+            if (!(currentSubpage instanceof CustomPage)) {
+                navigatorView.onNavigate(subpageComponent);
+                setPageTitleVisibility(subpageComponent.showTitle());
+                navigatorView.setCurrentSearchNavigable(subpageComponent instanceof HasSearch ? (HasSearch) subpageComponent : null);
+                setContextActions(subpageComponent instanceof HasContextActions ? (HasContextActions) subpageComponent : null);
+                navigatorView.setCurrentContainerLabel(subpageComponent.getNavigationName());
+            }
+            Component component = provider.getComponent(subpageComponent);
+            if (!(currentSubpage instanceof CustomPage)) {
+                setComponent(component);
+            }
+            currentSubpage.onSubpageLoaded();
         }
     }
 
@@ -90,7 +98,6 @@ public class QuickStartStateManager implements Finishable.FinishListener, Contex
     }
 
     /**
-     *
      * @param contextActions
      */
     public void setContextActions(HasContextActions contextActions) {
@@ -102,26 +109,21 @@ public class QuickStartStateManager implements Finishable.FinishListener, Contex
     }
 
     public void setComponent(Component component, boolean ignoreContextActions) {
-        Helper.prepareContainerForComponent(navigatorView.getContainerView(), component);
-        if (component instanceof Subpage && !ignoreContextActions) {
-            if (component instanceof HasContextActions) {
-                navigatorView.setCurrentActions(component instanceof HasContextActions ? (HasContextActions) component : null);
+        if (!(component instanceof CustomPage)) {
+            if (component instanceof Subpage && !ignoreContextActions) {
+                if (component instanceof HasContextActions) {
+                    navigatorView.setCurrentActions(component instanceof HasContextActions ? (HasContextActions) component : null);
+                }
+                navigatorView.setPageTitleVisibility(((Subpage) component).showTitle());
             }
-            navigatorView.setPageTitleVisibility(((Subpage) component).showTitle());
+            onNavigate();
+            currentComponent = component;
+            holder.removeAllComponents();
+            navigatorView.allowPercentagePageHeight(Helper.requiresPercentageHeight(component));
+            Helper.prepareContainerForComponent(holder, component);
+            holder.addComponent(currentComponent);
+            navigatorView.onComponentAdded(currentComponent);
         }
-        navigatorView.allowPercentagePageHeight(Helper.requiresPercentageHeight(component));
-        holder.removeAllComponents();
-        onNavigate();
-        currentComponent = component;
-
-        holder.addComponent(currentComponent);
-        navigatorView.onComponentAdded(currentComponent);
-        if (!QuickStartUI.isMobile()) {
-            holder.setSizeFull();
-        } else {
-            holder.setWidth(100, Sizeable.Unit.PERCENTAGE);
-        }
-        holder.setComponentAlignment(currentComponent, Alignment.MIDDLE_CENTER);
     }
 
     public void navigateTo(Class<? extends Subpage> classKey) {
@@ -141,7 +143,6 @@ public class QuickStartStateManager implements Finishable.FinishListener, Contex
         }
         Subpage element = navigationElements.get(classKey);
         navigateTo(element);
-        navigatorView.onNavigate(element);
     }
 
     public NavigationView getNavigationDesign() {
@@ -179,7 +180,7 @@ public class QuickStartStateManager implements Finishable.FinishListener, Contex
     }
 
     public Subpage getCurrentPage() {
-        return currentView;
+        return currentSubpage;
     }
 
     public Component getCurrentComponent() {

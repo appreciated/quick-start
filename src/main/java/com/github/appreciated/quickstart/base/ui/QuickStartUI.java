@@ -33,7 +33,7 @@ public abstract class QuickStartUI extends UI {
     QuickStartDesignProvider provider;
     private NavigationView navigation;
     private NavigationView mobileView;
-    private NavigationView defaultView;
+    private NavigationView desktopView;
     private LoginView quickStartLogin;
     private WebAppDescription description;
     private QuickStartStateManager navigator;
@@ -49,7 +49,7 @@ public abstract class QuickStartUI extends UI {
             setLocale(vaadinRequest.getLocale());
             getPage().setTitle(description.getTitle());
             provider = description.getProvider();
-            defaultView = description.getDefaultView();
+            desktopView = description.getDefaultView();
             mobileView = description.getMobileView();
             quickStartLogin = description.getLoginNavigable();
             if (quickStartLogin != null && !getWebsiteDescription().getAccessControl().isUserSignedIn()) {
@@ -68,7 +68,7 @@ public abstract class QuickStartUI extends UI {
         if (mobileView != null && isMobile()) {
             navigation = mobileView;
         } else {
-            navigation = defaultView;
+            navigation = desktopView;
         }
         if (quickStartLogin == null) {
             navigation.disableLogout();

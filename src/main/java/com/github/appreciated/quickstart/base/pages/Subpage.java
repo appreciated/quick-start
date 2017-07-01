@@ -35,4 +35,6 @@ public interface Subpage {
     default void navigateTo() {
         QuickStartUI.getStateManager().navigateTo(this);
     }
+    default void onSubpageLoaded(){}
+    default void onSubpageFinish(){}
 }
