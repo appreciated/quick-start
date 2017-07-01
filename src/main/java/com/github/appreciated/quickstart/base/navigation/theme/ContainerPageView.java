@@ -4,9 +4,7 @@ import com.github.appreciated.quickstart.base.pages.ComponentPage;
 import com.github.appreciated.quickstart.base.pages.attributes.PageManager;
 
 /**
- * Created by appreciated on 22.06.2017.
+ * Created by Johannes on 01.07.2017.
  */
-public interface PagerView extends ComponentPage, PageManager {
-    void next();
-    void last();
+public interface ContainerPageView extends ComponentPage, PageManager {
 }
