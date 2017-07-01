@@ -3,7 +3,7 @@
 This Project is still under construction! You can already use it for Experiments but be ready for extensive API changes even in minor versions.
 
 ### Description
->Plain Vaadin applications do not have normal web subpage navigation as they usually run on a single subpage, as all Ajax applications do. (https://vaadin.com/docs/-/part/framework/advanced/advanced-navigator.html)
+>Plain Vaadin applications do not have normal web page navigation as they usually run on a single page, as all Ajax applications do. (https://vaadin.com/docs/-/part/framework/advanced/advanced-navigator.html)
 
 This Library is for Webapplications which aim to look like modern Websites with Navigation.  
 It comes with a component which allows to archive something similar to the Vaadin Navigator Component (https://vaadin.com/docs/-/part/framework/advanced/advanced-navigator.html). 

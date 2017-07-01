@@ -3,7 +3,7 @@ package com.github.appreciated.quickstart.base.navigation.theme;
 import com.github.appreciated.quickstart.base.authentication.login.AccessControl;
 import com.github.appreciated.quickstart.base.authentication.registration.RegistrationControl;
 import com.github.appreciated.quickstart.base.navigation.description.WebAppDescription;
-import com.github.appreciated.quickstart.base.pages.Subpage;
+import com.github.appreciated.quickstart.base.pages.Page;
 import com.github.appreciated.quickstart.base.pages.attributes.HasContextActions;
 import com.github.appreciated.quickstart.base.pages.attributes.HasSearch;
 import com.vaadin.ui.AbstractOrderedLayout;
@@ -17,12 +17,12 @@ import java.util.stream.Stream;
 /**
  * Created by appreciated on 10.12.2016.
  */
-public interface NavigationView extends Component {
+public interface PageHolder extends Component {
 
     default void initWithConfiguration(Stream<AbstractMap.SimpleEntry<String, Boolean>> configurations) {
     }
 
-    void initNavigationElements(Stream<Subpage> pages);
+    void initNavigationElements(Stream<Page> pages);
 
     void initUserFunctionality(WebAppDescription description);
 
@@ -51,11 +51,5 @@ public interface NavigationView extends Component {
 
     Layout getContainerView();
 
-    default void onNavigate(Subpage subpageComponent) {
-    }
-
-    default void onNavigate(Component subpageComponent) {
-    }
-
-    default void onComponentAdded(Component currentComponent){}
+    void addPage(Page page);
 }

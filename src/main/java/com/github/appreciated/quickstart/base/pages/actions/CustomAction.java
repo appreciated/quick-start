@@ -51,7 +51,7 @@ public class CustomAction extends Action {
         return this;
     }
 
-    public CustomAction withInsertLeft(boolean insertLeft) {
+    public CustomAction insertLeft(boolean insertLeft) {
         this.insertLeft = insertLeft;
         return this;
     }

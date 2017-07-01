@@ -5,6 +5,6 @@ package com.github.appreciated.quickstart.base.pages;
  *
  * Self managing page
  */
-public interface CustomPage extends Subpage {
+public interface AutonomousPage extends Page {
 
 }

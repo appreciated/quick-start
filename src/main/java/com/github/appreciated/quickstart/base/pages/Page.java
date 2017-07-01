@@ -3,13 +3,14 @@ package com.github.appreciated.quickstart.base.pages;
 import com.github.appreciated.quickstart.base.navigation.description.SubpageDescription;
 import com.github.appreciated.quickstart.base.ui.QuickStartUI;
 import com.vaadin.server.Resource;
+import com.vaadin.ui.Component;
 
 import javax.xml.ws.Holder;
 
 /**
  * Created by appreciated on 08.12.2016.
  */
-public interface Subpage {
+public interface Page {
     Holder<Resource> resourceHolder = new Holder<>();
 
     default String getNavigationName() {
@@ -37,4 +38,6 @@ public interface Subpage {
     }
     default void onSubpageLoaded(){}
     default void onSubpageFinish(){}
+
+    Component getComponent();
 }

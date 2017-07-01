@@ -1,13 +1,12 @@
 package com.github.appreciated.quickstart.base.navigation;
 
-import com.github.appreciated.quickstart.base.components.Helper;
 import com.github.appreciated.quickstart.base.listeners.OnNavigateListener;
-import com.github.appreciated.quickstart.base.navigation.theme.NavigationView;
+import com.github.appreciated.quickstart.base.navigation.theme.PageHolder;
 import com.github.appreciated.quickstart.base.navigation.theme.PagerView;
 import com.github.appreciated.quickstart.base.navigation.theme.QuickStartDesignProvider;
-import com.github.appreciated.quickstart.base.pages.CustomPage;
-import com.github.appreciated.quickstart.base.pages.Finishable;
-import com.github.appreciated.quickstart.base.pages.Subpage;
+import com.github.appreciated.quickstart.base.pages.AutonomousPage;
+import com.github.appreciated.quickstart.base.pages.FinishablePage;
+import com.github.appreciated.quickstart.base.pages.Page;
 import com.github.appreciated.quickstart.base.pages.attributes.HasContextActions;
 import com.github.appreciated.quickstart.base.pages.attributes.HasContextActions.ContextActionListener;
 import com.github.appreciated.quickstart.base.pages.attributes.HasSearch;
@@ -27,21 +26,21 @@ import java.util.stream.Stream;
  * <p>
  * The QuickStartStateManager stores the instances of all elements the were already called once and allows the programmer to only use one method
  */
-public class QuickStartStateManager implements Finishable.FinishListener, ContextActionListener {
+public class QuickStartStateManager implements FinishablePage.FinishListener, ContextActionListener {
 
-    private final NavigationView navigatorView;
+    private final PageHolder navigatorView;
     private QuickStartDesignProvider provider;
-    private Subpage currentSubpage = null;
+    private Page currentPage = null;
     private AbstractOrderedLayout holder = null;
 
-    private Map<Class<? extends Subpage>, Subpage> navigationElements = new HashMap<>();
+    private Map<Class<? extends Page>, Page> navigationElements = new HashMap<>();
     private Component currentComponent;
     private OnNavigateListener listener;
 
     /**
      * @param navigatorView The Component in which the User can navigate
      */
-    public QuickStartStateManager(NavigationView navigatorView, QuickStartDesignProvider provider) {
+    public QuickStartStateManager(PageHolder navigatorView, QuickStartDesignProvider provider) {
         this.holder = navigatorView.getHolder();
         this.navigatorView = navigatorView;
         this.provider = provider;
@@ -51,43 +50,31 @@ public class QuickStartStateManager implements Finishable.FinishListener, Contex
         navigateTo(QuickStartUI.getWebsiteDescription().getDefaultPage());
     }
 
-    public void addNavigation(Subpage navigation) {
+    public void addNavigation(Page navigation) {
         navigationElements.put(navigation.getClass(), navigation);
     }
 
-    public void navigateTo(Subpage subpageComponent) {
-        if (currentSubpage != subpageComponent) {
-            if (currentSubpage != null) {
-                currentSubpage.onSubpageFinish();
+    public void navigateTo(Page page) {
+        if (currentPage != page) {
+            if (currentPage != null) {
+                currentPage.onSubpageFinish();
+                if (currentPage != currentComponent && currentComponent instanceof Page) {
+                    ((Page) currentComponent).onSubpageFinish();
+                }
             }
-            currentSubpage = subpageComponent;
-            if (!(currentSubpage instanceof CustomPage)) {
-                navigatorView.onNavigate(subpageComponent);
-                setPageTitleVisibility(subpageComponent.showTitle());
-                navigatorView.setCurrentSearchNavigable(subpageComponent instanceof HasSearch ? (HasSearch) subpageComponent : null);
-                setContextActions(subpageComponent instanceof HasContextActions ? (HasContextActions) subpageComponent : null);
-                navigatorView.setCurrentContainerLabel(subpageComponent.getNavigationName());
+            currentPage = page;
+            if (!(currentPage instanceof AutonomousPage)) {
+                setPageTitleVisibility(page.showTitle());
+                navigatorView.setCurrentSearchNavigable(page instanceof HasSearch ? (HasSearch) page : null);
+                setContextActions(page instanceof HasContextActions ? (HasContextActions) page : null);
+                navigatorView.setCurrentContainerLabel(page.getNavigationName());
             }
-            Component component = provider.getComponent(subpageComponent);
-            if (!(currentSubpage instanceof CustomPage)) {
-                setComponent(component);
+            navigatorView.addPage(page);
+            currentPage.onSubpageLoaded();
+            if (currentPage != currentComponent && currentComponent instanceof Page) {
+                ((Page) currentComponent).onSubpageLoaded();
             }
-            currentSubpage.onSubpageLoaded();
         }
-    }
-
-    /**
-     * @param component
-     */
-    public void onNavigate(Component component) {
-        navigatorView.onNavigate(component);
-    }
-
-    /**
-     * @param subpage
-     */
-    public void onNavigate(Subpage subpage) {
-        navigatorView.onNavigate(subpage);
     }
 
     /**
@@ -104,32 +91,10 @@ public class QuickStartStateManager implements Finishable.FinishListener, Contex
         navigatorView.setCurrentActions(contextActions);
     }
 
-    public void setComponent(Component component) {
-        setComponent(component, false);
-    }
-
-    public void setComponent(Component component, boolean ignoreContextActions) {
-        if (!(component instanceof CustomPage)) {
-            if (component instanceof Subpage && !ignoreContextActions) {
-                if (component instanceof HasContextActions) {
-                    navigatorView.setCurrentActions(component instanceof HasContextActions ? (HasContextActions) component : null);
-                }
-                navigatorView.setPageTitleVisibility(((Subpage) component).showTitle());
-            }
-            onNavigate();
-            currentComponent = component;
-            holder.removeAllComponents();
-            navigatorView.allowPercentagePageHeight(Helper.requiresPercentageHeight(component));
-            Helper.prepareContainerForComponent(holder, component);
-            holder.addComponent(currentComponent);
-            navigatorView.onComponentAdded(currentComponent);
-        }
-    }
-
-    public void navigateTo(Class<? extends Subpage> classKey) {
+    public void navigateTo(Class<? extends Page> classKey) {
         if (!navigationElements.containsKey(classKey)) {
             try {
-                Subpage instance = classKey.getConstructor().newInstance();
+                Page instance = classKey.getConstructor().newInstance();
                 navigationElements.put(classKey, instance);
             } catch (InstantiationException e) {
                 e.printStackTrace();
@@ -141,11 +106,11 @@ public class QuickStartStateManager implements Finishable.FinishListener, Contex
                 e.printStackTrace();
             }
         }
-        Subpage element = navigationElements.get(classKey);
+        Page element = navigationElements.get(classKey);
         navigateTo(element);
     }
 
-    public NavigationView getNavigationDesign() {
+    public PageHolder getPageHolder() {
         return navigatorView;
     }
 
@@ -179,26 +144,26 @@ public class QuickStartStateManager implements Finishable.FinishListener, Contex
         }
     }
 
-    public Subpage getCurrentPage() {
-        return currentSubpage;
+    public Page getCurrentPage() {
+        return currentPage;
     }
 
     public Component getCurrentComponent() {
         return currentComponent;
     }
 
-    public static Subpage getCurrentSubpage() {
+    public static Page getCurrentSubpage() {
         return QuickStartUI.getStateManager().getCurrentPage();
     }
 
-    public void initNavigationElements(Stream<Subpage> subpages) {
+    public void initNavigationElements(Stream<Page> subpages) {
         subpages.forEach(subpage -> addNavigation(subpage));
     }
 
     @Override
     public void onFinish() {
-        if (this.currentComponent instanceof Finishable.FinishListener) {
-            ((Finishable.FinishListener) this.currentComponent).onFinish();
+        if (this.currentComponent instanceof FinishablePage.FinishListener) {
+            ((FinishablePage.FinishListener) this.currentComponent).onFinish();
         }
     }
 

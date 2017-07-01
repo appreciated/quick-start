@@ -5,5 +5,9 @@ import com.vaadin.ui.Component;
 /**
  * Created by appreciated on 28.06.2017.
  */
-public interface ComponentSubpage extends Component, Subpage {
+public interface ComponentPage extends Component, Page {
+    @Override
+    default Component getComponent() {
+        return this;
+    }
 }

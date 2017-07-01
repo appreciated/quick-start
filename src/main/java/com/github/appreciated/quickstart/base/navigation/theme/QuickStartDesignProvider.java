@@ -1,9 +1,12 @@
 package com.github.appreciated.quickstart.base.navigation.theme;
 
 import com.github.appreciated.quickstart.base.dialog.Dialog;
-import com.github.appreciated.quickstart.base.pages.*;
-import com.vaadin.ui.Component;
-import com.vaadin.ui.Layout;
+import com.github.appreciated.quickstart.base.pages.PageNavigator;
+import com.github.appreciated.quickstart.base.pages.attributes.ManagedPage;
+import com.github.appreciated.quickstart.base.pages.attributes.PageManager;
+import com.github.appreciated.quickstart.base.pages.managed.ContainedPage;
+import com.github.appreciated.quickstart.base.pages.managed.HorizontalScrollPage;
+import com.github.appreciated.quickstart.base.pages.managed.ProgressStepper;
 import org.vaadin.leif.splashscreen.SplashScreen;
 
 import java.security.InvalidParameterException;
@@ -12,43 +15,40 @@ import java.security.InvalidParameterException;
  * Created by appreciated on 27.06.2017.
  */
 public interface QuickStartDesignProvider {
-    Class<? extends NavigationView> getMobileDesign();
+    Class<? extends PageHolder> getMobileDesign();
 
-    Class<? extends NavigationView> getDesktopDesign();
+    Class<? extends PageHolder> getDesktopDesign();
 
     LoginView getLoginView();
 
-    Layout getNavigationContainer(ContainerSubpage page);
+    PageManager getNavigationContainer(ContainedPage page);
 
-    ComponentSubpage getSubpageNavigator(SubpageNavigator subpages);
+    PageManager getSubpageNavigator(PageNavigator subpages);
 
-    ComponentSubpage getProgressStepper(ProgressStepper subpages);
+    PageManager getProgressStepper(ProgressStepper subpages);
 
-    ComponentSubpage getPager(Pager subpages);
+    PageManager getPager(HorizontalScrollPage subpages);
 
     Dialog getDialog();
 
     /**
-     * getComponent returns depending on the paremter different Values.
+     * addComponent returns depending on the paremter different Values.
      *
-     * If the Parameter is not a Component Subpage, it will return either a //TODO
      *
-     * @param subpage
+     * @param page
      * @return
      */
-    default Component getComponent(Subpage subpage) {
-        if (subpage instanceof ContainerSubpage) {
-            return getNavigationContainer((ContainerSubpage) subpage);
-        } else if (subpage instanceof Pager) {
-            return getPager((Pager) subpage);
-        } else if (subpage instanceof ProgressStepper) {
-            return getProgressStepper((ProgressStepper) subpage);
-        } else if (subpage instanceof SubpageNavigator) {
-            return getSubpageNavigator((SubpageNavigator) subpage);
-        } else if (subpage instanceof Component) {
-            return (Component) subpage;
+    default PageManager getPageManager(ManagedPage page) {
+        if (page instanceof ContainedPage) {
+            return getNavigationContainer((ContainedPage) page);
+        } else if (page instanceof HorizontalScrollPage) {
+            return getPager((HorizontalScrollPage) page);
+        } else if (page instanceof ProgressStepper) {
+            return getProgressStepper((ProgressStepper) page);
+        } else if (page instanceof PageNavigator) {
+            return getSubpageNavigator((PageNavigator) page);
         }
-        throw new InvalidParameterException("Subpage must not be a instance of " + subpage.getClass().getName());
+        throw new InvalidParameterException("Page must not be a instance of " + page.getClass().getName());
     }
 
     default SplashScreen getAnnotation() {

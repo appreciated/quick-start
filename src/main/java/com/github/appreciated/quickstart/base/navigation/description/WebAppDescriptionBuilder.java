@@ -3,7 +3,7 @@ package com.github.appreciated.quickstart.base.navigation.description;
 import com.github.appreciated.quickstart.base.authentication.login.AccessControl;
 import com.github.appreciated.quickstart.base.authentication.registration.RegistrationControl;
 import com.github.appreciated.quickstart.base.navigation.theme.QuickStartDesignProvider;
-import com.github.appreciated.quickstart.base.pages.Subpage;
+import com.github.appreciated.quickstart.base.pages.Page;
 
 import java.util.AbstractMap;
 
@@ -28,12 +28,12 @@ public class WebAppDescriptionBuilder {
         return this;
     }
 
-    public WebAppDescriptionBuilder withSubpages(Subpage... navigationDescription) {
+    public WebAppDescriptionBuilder withSubpages(Page... navigationDescription) {
         description.setNavigationDescription(new Subpages(navigationDescription));
         return this;
     }
 
-    public WebAppDescriptionBuilder withDefaultPage(Class<? extends Subpage> defaultPage) {
+    public WebAppDescriptionBuilder withDefaultPage(Class<? extends Page> defaultPage) {
         description.setDefaultPage(defaultPage);
         return this;
     }

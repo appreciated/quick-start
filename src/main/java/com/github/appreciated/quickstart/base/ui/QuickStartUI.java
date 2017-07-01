@@ -7,9 +7,9 @@ import com.github.appreciated.quickstart.base.navigation.QuickStartStateManager;
 import com.github.appreciated.quickstart.base.navigation.description.WebAppDescription;
 import com.github.appreciated.quickstart.base.navigation.exception.InvalidWebDescriptionException;
 import com.github.appreciated.quickstart.base.navigation.theme.LoginView;
-import com.github.appreciated.quickstart.base.navigation.theme.NavigationView;
+import com.github.appreciated.quickstart.base.navigation.theme.PageHolder;
 import com.github.appreciated.quickstart.base.navigation.theme.QuickStartDesignProvider;
-import com.github.appreciated.quickstart.base.pages.Subpage;
+import com.github.appreciated.quickstart.base.pages.Page;
 import com.github.appreciated.quickstart.base.splashscreen.CustomSplashScreenConfigurator;
 import com.vaadin.annotations.Push;
 import com.vaadin.annotations.Viewport;
@@ -31,9 +31,9 @@ import javax.servlet.ServletException;
 public abstract class QuickStartUI extends UI {
 
     QuickStartDesignProvider provider;
-    private NavigationView navigation;
-    private NavigationView mobileView;
-    private NavigationView desktopView;
+    private PageHolder navigation;
+    private PageHolder mobileView;
+    private PageHolder desktopView;
     private LoginView quickStartLogin;
     private WebAppDescription description;
     private QuickStartStateManager navigator;
@@ -91,11 +91,11 @@ public abstract class QuickStartUI extends UI {
         return get().navigator;
     }
 
-    public static NavigationView getNavigationView() {
+    public static PageHolder getNavigationView() {
         return get().navigation;
     }
 
-    public static void navigateTo(Class<? extends Subpage> page) {
+    public static void navigateTo(Class<? extends Page> page) {
         getStateManager().navigateTo(page);
     }
 
