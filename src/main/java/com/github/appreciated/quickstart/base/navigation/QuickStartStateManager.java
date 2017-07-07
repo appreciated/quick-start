@@ -1,6 +1,7 @@
 package com.github.appreciated.quickstart.base.navigation;
 
 import com.github.appreciated.quickstart.base.listeners.OnNavigateListener;
+import com.github.appreciated.quickstart.base.navigation.theme.ContainerPageView;
 import com.github.appreciated.quickstart.base.navigation.theme.PageHolder;
 import com.github.appreciated.quickstart.base.navigation.theme.ProgressStepperView;
 import com.github.appreciated.quickstart.base.navigation.theme.QuickStartDesignProvider;
@@ -62,17 +63,33 @@ public class QuickStartStateManager implements FinishablePage.FinishListener, Co
                 }
                 currentPage = page;
             }
+
             Page actualPage = provider.getPage(page);
             Component component = actualPage.getComponent();
             if (!(actualPage instanceof AutonomousPage)) {
-                setPageTitleVisibility(actualPage.showTitle());
-                navigatorView.setCurrentSearchNavigable(actualPage instanceof HasSearch ? (HasSearch) actualPage : null);
-                setContextActions(actualPage instanceof HasContextActions ? (HasContextActions) actualPage : null);
-                navigatorView.setCurrentContainerLabel(actualPage.getNavigationName());
-                if (currentComponent != component) {
-                    setComponent(actualPage.getComponent());
-                    currentComponent = component;
+                if (page instanceof ContainerPageView) {
+                    Page containedPage = ((ContainerPageView) page).getContainedPage();
+                    setPageTitleVisibility(containedPage.showTitle());
+                    navigatorView.setCurrentSearchNavigable(containedPage instanceof HasSearch ? (HasSearch) containedPage : null);
+                    setContextActions(containedPage instanceof HasContextActions ? (HasContextActions) containedPage : null);
+                    navigatorView.setCurrentContainerLabel(containedPage.getNavigationName());
+                    if (currentComponent != component) {
+                        setComponent(actualPage.getComponent());
+                        currentComponent = component;
+                    }
+                } else {
+                    setPageTitleVisibility(actualPage.showTitle());
+                    navigatorView.setCurrentSearchNavigable(actualPage instanceof HasSearch ? (HasSearch) actualPage : null);
+                    setContextActions(actualPage instanceof HasContextActions ? (HasContextActions) actualPage : null);
+                    navigatorView.setCurrentContainerLabel(actualPage.getNavigationName());
+                    if (currentComponent != component) {
+                        setComponent(actualPage.getComponent());
+                        currentComponent = component;
+                    }
                 }
+
+
+
             }
             actualPage.onSubpageLoaded();
         }
