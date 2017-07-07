@@ -51,5 +51,5 @@ public interface PageHolder extends Component {
 
     Layout getContainerView();
 
-    void addPage(Page page);
+    void addPage(Component page);
 }

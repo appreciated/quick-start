@@ -34,10 +34,14 @@ public interface Page {
     }
 
     default void navigateTo() {
-        QuickStartUI.getStateManager().navigateTo(this);
+        QuickStartUI.getStateManager().navigateTo(this.getClass());
     }
     default void onSubpageLoaded(){}
     default void onSubpageFinish(){}
 
     Component getComponent();
+
+    default void onUpdate() {
+        QuickStartUI.get().getStateManager().onUpdate();
+    }
 }

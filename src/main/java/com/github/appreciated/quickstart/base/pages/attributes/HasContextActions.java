@@ -2,7 +2,6 @@ package com.github.appreciated.quickstart.base.pages.attributes;
 
 import com.github.appreciated.quickstart.base.pages.Page;
 import com.github.appreciated.quickstart.base.pages.actions.Action;
-import com.github.appreciated.quickstart.base.ui.QuickStartUI;
 
 import java.util.List;
 
@@ -12,10 +11,6 @@ import java.util.List;
 public interface HasContextActions extends Page {
 
     List<Action> getContextActions();
-
-    default void updateContextActions() {
-            QuickStartUI.get().getStateManager().onUpdate();
-    }
 
     interface ContextActionListener {
         void onUpdate();

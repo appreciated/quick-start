@@ -1,4 +1,4 @@
-package com.github.appreciated.quickstart.base.pages.managed;
+package com.github.appreciated.quickstart.base.pages;
 
 import com.github.appreciated.quickstart.base.pages.attributes.HasSubpages;
 import com.github.appreciated.quickstart.base.pages.attributes.ManagedPage;
@@ -6,5 +6,5 @@ import com.github.appreciated.quickstart.base.pages.attributes.ManagedPage;
 /**
  * Created by appreciated on 28.06.2017.
  */
-public interface HorizontalScrollPage extends HasSubpages, ManagedPage {
+public interface NavigatorPage extends ManagedPage, HasSubpages {
 }
