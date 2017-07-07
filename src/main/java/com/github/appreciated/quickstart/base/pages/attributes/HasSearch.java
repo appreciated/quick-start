@@ -8,4 +8,8 @@ import com.vaadin.data.HasValue;
 public interface HasSearch extends HasValue.ValueChangeListener<String> {
     @Override
     void valueChange(HasValue.ValueChangeEvent<String> valueChangeEvent);
+
+    default String getPlaceholder() {
+        return null;
+    }
 }
