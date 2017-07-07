@@ -70,9 +70,9 @@ public class QuickStartStateManager implements FinishablePage.FinishListener, Co
                 if (page instanceof ContainerPageView) {
                     Page containedPage = ((ContainerPageView) page).getContainedPage();
                     setPageTitleVisibility(containedPage.showTitle());
+                    navigatorView.setCurrentContainerLabel(containedPage.getNavigationName());
                     navigatorView.setCurrentSearchNavigable(containedPage instanceof HasSearch ? (HasSearch) containedPage : null);
                     setContextActions(containedPage instanceof HasContextActions ? (HasContextActions) containedPage : null);
-                    navigatorView.setCurrentContainerLabel(containedPage.getNavigationName());
                     if (currentComponent != component) {
                         setComponent(actualPage.getComponent());
                         currentComponent = component;
@@ -80,8 +80,8 @@ public class QuickStartStateManager implements FinishablePage.FinishListener, Co
                 } else {
                     setPageTitleVisibility(actualPage.showTitle());
                     navigatorView.setCurrentSearchNavigable(actualPage instanceof HasSearch ? (HasSearch) actualPage : null);
-                    setContextActions(actualPage instanceof HasContextActions ? (HasContextActions) actualPage : null);
                     navigatorView.setCurrentContainerLabel(actualPage.getNavigationName());
+                    setContextActions(actualPage instanceof HasContextActions ? (HasContextActions) actualPage : null);
                     if (currentComponent != component) {
                         setComponent(actualPage.getComponent());
                         currentComponent = component;
