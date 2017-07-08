@@ -79,7 +79,7 @@ public class QuickStartStateManager implements FinishablePage.FinishListener, Co
                     }
                 } else {
                     setPageTitleVisibility(actualPage.showTitle());
-                    navigatorView.setCurrentSearchNavigable(actualPage instanceof HasSearch ? (HasSearch) actualPage : null);
+                    navigatorView.setCurrentSearchNavigable(actualPage instanceof HasSearch && ((HasSearch) actualPage).hasSearch() ? (HasSearch) actualPage : null);
                     navigatorView.setCurrentContainerLabel(actualPage.getNavigationName());
                     setContextActions(actualPage instanceof HasContextActions ? (HasContextActions) actualPage : null);
                     if (currentComponent != component) {
@@ -87,7 +87,6 @@ public class QuickStartStateManager implements FinishablePage.FinishListener, Co
                         currentComponent = component;
                     }
                 }
-
 
 
             }
@@ -153,7 +152,7 @@ public class QuickStartStateManager implements FinishablePage.FinishListener, Co
     @Override
     public void onFinish() {
         if (currentPage instanceof ProgressStepperView) {
-            ((ProgressStepperView)currentPage).onFinish();
+            ((ProgressStepperView) currentPage).onFinish();
         }
     }
 

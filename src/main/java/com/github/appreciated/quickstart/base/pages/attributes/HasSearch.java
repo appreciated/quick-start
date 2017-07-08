@@ -12,4 +12,8 @@ public interface HasSearch extends HasValue.ValueChangeListener<String> {
     default String getPlaceholder() {
         return null;
     }
+
+    default boolean hasSearch() {
+        return true;
+    }
 }
