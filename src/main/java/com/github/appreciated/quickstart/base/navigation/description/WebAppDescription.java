@@ -89,7 +89,7 @@ public class WebAppDescription {
             throw new InvalidWebDescriptionException("The WebDescription in "+ UI.getCurrent().getClass().getSimpleName()+".java has no title defined, add one by using WebAppDescriptionBuilder::withTitle(...)!");
         }
         if (navigationDescription.getPages().size() == 0) {
-            throw new InvalidWebDescriptionException("The WebDescription in "+ UI.getCurrent().getClass().getSimpleName()+".java has no navigation elements defined, add them by using WebAppDescriptionBuilder::withSubpages(...)");
+            throw new InvalidWebDescriptionException("The WebDescription in "+ UI.getCurrent().getClass().getSimpleName()+".java has no navigation elements defined, add them by using WebAppDescriptionBuilder::withNavigation(...)");
         }
         if (defaultPage == null) {
             defaultPage = navigationDescription.getPages().getFirst().getClass();

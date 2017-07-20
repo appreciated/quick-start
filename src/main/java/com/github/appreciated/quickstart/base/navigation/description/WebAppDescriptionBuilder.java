@@ -23,13 +23,23 @@ public class WebAppDescriptionBuilder {
         return this;
     }
 
-    public WebAppDescriptionBuilder withSubpages(Subpages navigationDescription) {
+    public WebAppDescriptionBuilder withNavigation(Subpages navigationDescription) {
         description.setNavigationDescription(navigationDescription);
         return this;
     }
 
-    public WebAppDescriptionBuilder withSubpages(Page... navigationDescription) {
+    public WebAppDescriptionBuilder withNavigation(Page... navigationDescription) {
         description.setNavigationDescription(new Subpages(navigationDescription));
+        return this;
+    }
+
+    /**
+     * The counter part to withNavigation(...) one will override the other, when using this you won't have a navigation, and will have to take care of this by your self.
+     *
+     * @param page
+     * @return
+     */
+    public WebAppDescriptionBuilder withPage(Page page) {
         return this;
     }
 
@@ -61,4 +71,6 @@ public class WebAppDescriptionBuilder {
     public WebAppDescription build() {
         return description;
     }
+
+
 }
