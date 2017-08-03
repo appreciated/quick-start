@@ -47,6 +47,11 @@ class FieldProperty<T> implements PropertyDefinition<T, Object> {
     }
 
     @Override
+    public Class<T> getPropertyHolderType() {
+        return (Class<T>) field.getType();
+    }
+
+    @Override
     public String getName() {
         return field.getName();
     }
