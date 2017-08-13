@@ -8,14 +8,14 @@ import java.util.LinkedList;
 /**
  * Created by appreciated on 07.03.2017.
  */
-public class Subpages {
+public class Pages {
     LinkedList<Page> pages = new LinkedList<>();
 
-    public Subpages(Page... pages) {
+    public Pages(Page... pages) {
         this.pages.addAll(Arrays.asList(pages));
     }
 
-    public Subpages add(Page page) {
+    public Pages add(Page page) {
         this.pages.add(page);
         return this;
     }

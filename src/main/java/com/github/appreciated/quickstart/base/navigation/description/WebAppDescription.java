@@ -33,7 +33,7 @@ public class WebAppDescription {
     private Class<? extends Page> defaultPage;
     private AccessControl accessControl;
     private RegistrationControl registrationControl;
-    private Subpages navigationDescription;
+    private Pages navigationDescription;
     private Class<? extends QuickStartDesignProvider> designProvider;
     private boolean loginPage;
 
@@ -89,7 +89,7 @@ public class WebAppDescription {
             throw new InvalidWebDescriptionException("The WebDescription in "+ UI.getCurrent().getClass().getSimpleName()+".java has no title defined, add one by using WebAppDescriptionBuilder::withTitle(...)!");
         }
         if (navigationDescription.getPages().size() == 0) {
-            throw new InvalidWebDescriptionException("The WebDescription in "+ UI.getCurrent().getClass().getSimpleName()+".java has no navigation elements defined, add them by using WebAppDescriptionBuilder::withNavigation(...)");
+            throw new InvalidWebDescriptionException("The WebDescription in "+ UI.getCurrent().getClass().getSimpleName()+".java has no navigation elements defined, add them by using WebAppDescriptionBuilder::withPages(...)");
         }
         if (defaultPage == null) {
             defaultPage = navigationDescription.getPages().getFirst().getClass();
@@ -158,7 +158,7 @@ public class WebAppDescription {
         this.registrationControl = registrationControl;
     }
 
-    public void setNavigationDescription(Subpages navigationDescription) {
+    public void setNavigationDescription(Pages navigationDescription) {
         this.navigationDescription = navigationDescription;
     }
 
