@@ -7,7 +7,6 @@ import com.github.appreciated.quickstart.base.pages.attributes.ManagedPage;
 import com.github.appreciated.quickstart.base.pages.attributes.PageManager;
 import com.github.appreciated.quickstart.base.pages.managed.ContainedPage;
 import com.github.appreciated.quickstart.base.pages.managed.Pager;
-import com.github.appreciated.quickstart.base.pages.managed.ProgressStepPage;
 import org.vaadin.leif.splashscreen.SplashScreen;
 
 import java.security.InvalidParameterException;
@@ -26,8 +25,6 @@ public interface QuickStartDesignProvider {
 
     PageManager getSubpageNavigator(NavigatorPage subpages);
 
-    PageManager getProgressStepper(ProgressStepPage subpages);
-
     PageManager getPager(Pager subpages);
 
     Dialog getDialog();
@@ -43,8 +40,6 @@ public interface QuickStartDesignProvider {
             return getNavigationContainer((ContainedPage) page);
         } else if (page instanceof Pager) {
             return getPager((Pager) page);
-        } else if (page instanceof ProgressStepPage) {
-            return getProgressStepper((ProgressStepPage) page);
         } else if (page instanceof NavigatorPage) {
             return getSubpageNavigator((NavigatorPage) page);
         }
