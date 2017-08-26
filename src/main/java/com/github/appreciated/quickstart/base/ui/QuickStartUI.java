@@ -1,7 +1,7 @@
 package com.github.appreciated.quickstart.base.ui;
 
 
-import com.github.appreciated.quickstart.base.authentication.login.CurrentUser;
+import com.github.appreciated.quickstart.base.authentication.login.User;
 import com.github.appreciated.quickstart.base.error.ErrorPageDesign;
 import com.github.appreciated.quickstart.base.navigation.QuickStartStateManager;
 import com.github.appreciated.quickstart.base.navigation.description.WebAppDescription;
@@ -39,7 +39,7 @@ public abstract class QuickStartUI extends UI {
     private QuickStartStateManager navigator;
 
     public static String getUsername() {
-        return CurrentUser.get();
+        return User.get();
     }
 
     @Override

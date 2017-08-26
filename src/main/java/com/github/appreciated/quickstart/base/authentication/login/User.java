@@ -4,22 +4,22 @@ import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinService;
 
 /**
- * "Stolen" from Vaadin Example
- *
+ * Taken from Vaadin Examples
+ * <p>
  * Class for retrieving and setting the name of the current user of the current
  * session (without using JAAS). All methods of this class require that a
  * {@link VaadinRequest} is bound to the current thread.
  *
  * @see VaadinService#getCurrentRequest()
  */
-public final class CurrentUser {
+public final class User {
 
     /**
      * The attribute key used to store the username in the session.
      */
-    public static final String CURRENT_USER_SESSION_ATTRIBUTE_KEY = CurrentUser.class.getCanonicalName();
+    public static final String CURRENT_USER_SESSION_ATTRIBUTE_KEY = User.class.getCanonicalName();
 
-    private CurrentUser() {
+    private User() {
     }
 
     /**
@@ -45,19 +45,16 @@ public final class CurrentUser {
      */
     public static void set(String currentUser) {
         if (currentUser == null) {
-            getCurrentRequest().getWrappedSession().removeAttribute(
-                    CURRENT_USER_SESSION_ATTRIBUTE_KEY);
+            getCurrentRequest().getWrappedSession().removeAttribute(CURRENT_USER_SESSION_ATTRIBUTE_KEY);
         } else {
-            getCurrentRequest().getWrappedSession().setAttribute(
-                    CURRENT_USER_SESSION_ATTRIBUTE_KEY, currentUser);
+            getCurrentRequest().getWrappedSession().setAttribute(CURRENT_USER_SESSION_ATTRIBUTE_KEY, currentUser);
         }
     }
 
     private static VaadinRequest getCurrentRequest() {
         VaadinRequest request = VaadinService.getCurrentRequest();
         if (request == null) {
-            throw new IllegalStateException(
-                    "No request bound to current thread");
+            throw new IllegalStateException("No request bound to current thread");
         }
         return request;
     }

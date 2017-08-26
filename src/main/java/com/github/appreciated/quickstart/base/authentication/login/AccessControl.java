@@ -7,7 +7,9 @@ import java.io.Serializable;
  */
 public interface AccessControl extends Serializable {
 
-    public boolean signIn(String username, String password);
+    public boolean checkCredentials(String username, String password);
+
+    public void onInvalidCredentials();
 
     public boolean isUserSignedIn();
 
