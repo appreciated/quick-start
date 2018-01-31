@@ -2,6 +2,7 @@ package com.github.appreciated.quickstart.base.pages;
 
 import com.github.appreciated.quickstart.base.navigation.description.SubpageDescription;
 import com.github.appreciated.quickstart.base.ui.QuickStartUI;
+import com.vaadin.navigator.View;
 import com.vaadin.server.Resource;
 import com.vaadin.ui.Component;
 
@@ -10,7 +11,7 @@ import javax.xml.ws.Holder;
 /**
  * Created by appreciated on 08.12.2016.
  */
-public interface Page {
+public interface Page extends View {
     Holder<Resource> resourceHolder = new Holder<>();
 
     default String getNavigationName() {
@@ -38,8 +39,6 @@ public interface Page {
     }
     default void onSubpageLoaded(){}
     default void onSubpageFinish(){}
-
-    Component getComponent();
 
     default void onUpdate() {
         QuickStartUI.get().getStateManager().onUpdate();

@@ -32,8 +32,6 @@ public abstract class QuickStartUI extends UI {
 
     QuickStartDesignProvider provider;
     private PageHolder navigation;
-    private PageHolder mobileView;
-    private PageHolder desktopView;
     private LoginView quickStartLogin;
     private WebAppDescription description;
     private QuickStartStateManager navigator;
@@ -45,12 +43,11 @@ public abstract class QuickStartUI extends UI {
     @Override
     protected void init(VaadinRequest vaadinRequest) {
         try {
-            description = initWebAppDescription().init(isMobile());
+            description = initWebAppDescription().init();
             setLocale(vaadinRequest.getLocale());
             getPage().setTitle(description.getTitle());
             provider = description.getProvider();
-            desktopView = description.getDefaultView();
-            mobileView = description.getMobileView();
+            navigation = provider.getDesktopDesign().newInstance();
             quickStartLogin = description.getLoginNavigable();
             if (quickStartLogin != null && !getWebsiteDescription().getAccessControl().isUserSignedIn()) {
                 quickStartLogin.initWithLoginListener(() -> showMainView());
@@ -65,11 +62,6 @@ public abstract class QuickStartUI extends UI {
     }
 
     protected void showMainView() {
-        if (mobileView != null && isMobile()) {
-            navigation = mobileView;
-        } else {
-            navigation = desktopView;
-        }
         if (quickStartLogin == null) {
             navigation.disableLogout();
         }
@@ -79,7 +71,6 @@ public abstract class QuickStartUI extends UI {
         navigation.initUserFunctionality(getWebsiteDescription());
         navigation.initWithTitle(getWebsiteDescription().getTitle());
         navigation.initWithConfiguration(getWebsiteDescription().getConfiguration().stream());
-        navigator.navigateToDefaultPage();
         setContent(navigation);
     }
 

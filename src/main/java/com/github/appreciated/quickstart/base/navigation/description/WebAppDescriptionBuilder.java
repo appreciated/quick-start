@@ -43,11 +43,6 @@ public class WebAppDescriptionBuilder {
         return this;
     }
 
-    public WebAppDescriptionBuilder withDefaultPage(Class<? extends Page> defaultPage) {
-        description.setDefaultPage(defaultPage);
-        return this;
-    }
-
     public WebAppDescriptionBuilder withTitle(String title) {
         description.setTitle(title);
         return this;

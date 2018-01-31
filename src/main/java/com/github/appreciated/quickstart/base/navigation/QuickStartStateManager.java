@@ -47,10 +47,6 @@ public class QuickStartStateManager implements FinishablePage.FinishListener, Co
         this.provider = provider;
     }
 
-    public void navigateToDefaultPage() {
-        navigateTo(QuickStartUI.getWebsiteDescription().getDefaultPage());
-    }
-
     public void addNavigation(Page navigation) {
         navigationElements.put(navigation.getClass(), provider.getPage(navigation));
     }
@@ -65,7 +61,7 @@ public class QuickStartStateManager implements FinishablePage.FinishListener, Co
             }
 
             Page actualPage = provider.getPage(page);
-            Component component = actualPage.getComponent();
+            Component component = actualPage.getViewComponent();
             if (!(actualPage instanceof AutonomousPage)) {
                 if (page instanceof ContainerPageView) {
                     Page containedPage = ((ContainerPageView) page).getContainedPage();
@@ -74,7 +70,7 @@ public class QuickStartStateManager implements FinishablePage.FinishListener, Co
                     navigatorView.setCurrentSearchNavigable(containedPage instanceof HasSearch ? (HasSearch) containedPage : null);
                     setContextActions(containedPage instanceof HasContextActions ? (HasContextActions) containedPage : null);
                     if (currentComponent != component) {
-                        setComponent(actualPage.getComponent());
+                        setComponent(actualPage.getViewComponent());
                         currentComponent = component;
                     }
                 } else {
@@ -83,7 +79,7 @@ public class QuickStartStateManager implements FinishablePage.FinishListener, Co
                     navigatorView.setCurrentContainerLabel(actualPage.getNavigationName());
                     setContextActions(actualPage instanceof HasContextActions ? (HasContextActions) actualPage : null);
                     if (currentComponent != component) {
-                        setComponent(actualPage.getComponent());
+                        setComponent(actualPage.getViewComponent());
                         currentComponent = component;
                     }
                 }
@@ -186,6 +182,6 @@ public class QuickStartStateManager implements FinishablePage.FinishListener, Co
 
 
     public void setComponent(Component component) {
-        navigatorView.addPage(currentPage.getComponent());
+        navigatorView.addPage(currentPage.getViewComponent());
     }
 }

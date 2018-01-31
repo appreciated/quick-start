@@ -11,9 +11,8 @@ public interface ContainedPage extends ManagedPage, Component {
         return true;
     }
 
-    @Override
-    default Component getComponent() {
-        return getPageManager().getComponent();
+    default Component getViewComponent() {
+        return getPageManager().getViewComponent();
     }
 
 }
