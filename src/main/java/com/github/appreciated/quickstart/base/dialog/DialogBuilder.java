@@ -1,5 +1,6 @@
 package com.github.appreciated.quickstart.base.dialog;
 
+import com.github.appreciated.quickstart.base.navigation.theme.QuickStartDesignProvider;
 import com.github.appreciated.quickstart.base.ui.QuickStartUI;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
@@ -10,7 +11,7 @@ import com.vaadin.ui.Component;
  */
 public class DialogBuilder {
 
-    Dialog dialog = QuickStartUI.getProvider().getDialog();
+    Dialog dialog = QuickStartDesignProvider.get().getDialog();
 
     public DialogBuilder withPositiveButton(Button button, DialogClickListener listener) {
         dialog.addPositiveButton(button, clickEvent -> listener.onClick(dialog));

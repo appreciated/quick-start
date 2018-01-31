@@ -25,7 +25,7 @@ public class ExampleAccessControl implements AccessControl {
 
     @Override
     public boolean isUserSignedIn() {
-        return !User.get().isEmpty();
+        return User.isSignedIn();
     }
 
     @Override

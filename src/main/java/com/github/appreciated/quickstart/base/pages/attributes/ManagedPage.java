@@ -1,6 +1,7 @@
 package com.github.appreciated.quickstart.base.pages.attributes;
 
 
+import com.github.appreciated.quickstart.base.navigation.theme.QuickStartDesignProvider;
 import com.github.appreciated.quickstart.base.pages.Page;
 import com.github.appreciated.quickstart.base.ui.QuickStartUI;
 import com.vaadin.ui.Component;
@@ -15,6 +16,6 @@ public interface ManagedPage extends Page {
     }
 
     default PageManager getPageManager() {
-        return QuickStartUI.getProvider().getPageManager(this);
+        return QuickStartDesignProvider.get().getPageManager(this);
     }
 }

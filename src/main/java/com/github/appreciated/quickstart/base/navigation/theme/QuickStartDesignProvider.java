@@ -7,6 +7,7 @@ import com.github.appreciated.quickstart.base.pages.attributes.ManagedPage;
 import com.github.appreciated.quickstart.base.pages.attributes.PageManager;
 import com.github.appreciated.quickstart.base.pages.managed.ContainedPage;
 import com.github.appreciated.quickstart.base.pages.managed.Pager;
+import com.vaadin.ui.UI;
 import org.vaadin.leif.splashscreen.SplashScreen;
 
 import java.security.InvalidParameterException;
@@ -15,6 +16,11 @@ import java.security.InvalidParameterException;
  * Created by appreciated on 27.06.2017.
  */
 public interface QuickStartDesignProvider {
+
+    static QuickStartDesignProvider get() {
+        return UI.getCurrent() != null ? UI.getCurrent().getSession().getAttribute(QuickStartDesignProvider.class) : null;
+    }
+
     Class<? extends PageHolder> getMobileDesign();
 
     Class<? extends PageHolder> getDesktopDesign();

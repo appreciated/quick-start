@@ -1,5 +1,6 @@
 package com.github.appreciated.quickstart.base.pages;
 
+import com.github.appreciated.quickstart.base.navigation.theme.QuickStartDesignProvider;
 import com.github.appreciated.quickstart.base.ui.QuickStartUI;
 
 /**
@@ -8,7 +9,7 @@ import com.github.appreciated.quickstart.base.ui.QuickStartUI;
 public interface FinishablePage extends Page {
 
     default void finish() {
-        QuickStartUI.get().getStateManager().onFinish();
+        //QuickStartDesignProvider.get().getStateManager().onFinish();
     }
 
     interface FinishListener {

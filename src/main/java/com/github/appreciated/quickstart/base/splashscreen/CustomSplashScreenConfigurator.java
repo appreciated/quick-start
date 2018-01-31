@@ -1,5 +1,6 @@
 package com.github.appreciated.quickstart.base.splashscreen;
 
+import com.github.appreciated.quickstart.base.navigation.theme.QuickStartDesignProvider;
 import com.github.appreciated.quickstart.base.ui.QuickStartUI;
 import com.vaadin.ui.UI;
 import org.jsoup.Jsoup;
@@ -24,7 +25,7 @@ public class CustomSplashScreenConfigurator implements Configurator {
 
     public SplashScreenConfiguration getConfiguration(SplashScreenEnvironment environment) {
 
-        SplashScreen splashScreen = QuickStartUI.getProvider() != null ? QuickStartUI.getProvider().getAnnotation() : null;
+        SplashScreen splashScreen = QuickStartDesignProvider.get() != null ? QuickStartDesignProvider.get().getAnnotation() : null;
         if (splashScreen == null) {
             return null;
         } else {

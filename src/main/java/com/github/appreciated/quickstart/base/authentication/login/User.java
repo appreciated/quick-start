@@ -58,4 +58,8 @@ public final class User {
         }
         return request;
     }
+
+    public static boolean isSignedIn() {
+        return !User.get().isEmpty();
+    }
 }
